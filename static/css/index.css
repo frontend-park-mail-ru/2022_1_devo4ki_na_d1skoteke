@@ -1,0 +1,36 @@
+.sidebar {
+    display: flex;
+    background: rgb(119,119,119);
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 20%;
+    height: 100%;
+}
+
+.top-panel {
+    display: flex;
+    background: whitesmoke;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 2%;
+    padding: 1% 0;
+}
+
+.notes {
+    display: flex;
+    background-color:black;
+    position: fixed;
+    top: 0;
+    left: 20%;
+    width: 80%;
+    height: 100%;
+    padding: 20px 0;
+}
+
+#root {
+    display: table;
+    background-color: brown;
+}
