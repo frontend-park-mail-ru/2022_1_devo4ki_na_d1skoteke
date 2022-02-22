@@ -14,6 +14,13 @@ const createInput = (type, text, name) => {
 	return input;
 }
 
+const createLabel = (text) => {
+    const label = document.createElement('label');
+    label.classList.add('my-label');
+    label.innerHTML = text;
+    return label;
+}
+
 const getLogInTitle = () => {
     const logInTitle = document.createElement('div');
     logInTitle.classList.add('login-title');
@@ -24,7 +31,7 @@ const getLogInTitle = () => {
 
 const createBadEmailDiv = () => {
     const badEmailDiv = document.createElement('div');
-    badEmailDiv.innerHTML = 'Please provide valid email';
+    badEmailDiv.innerHTML = 'please provide valid email';
     badEmailDiv.id = 'bad-email-div';
     badEmailDiv.style.display = 'none';
 
@@ -35,7 +42,10 @@ const createEmailInput = () => {
     const emailDiv = document.createElement('div');
     emailDiv.classList.add('form-div');
 
-    const emailInput = createInput('email', 'Email', 'email');
+    const emailInput = createInput('email', 'enter email', 'email');
+    emailInput.id = 'email-input';
+
+    emailDiv.appendChild(createLabel('Email'));
     emailDiv.appendChild(emailInput);
     emailDiv.appendChild(createBadEmailDiv());
 
@@ -54,22 +64,22 @@ const createPasswordInput = () => {
     const passwordDiv = document.createElement('div');
     passwordDiv.classList.add('form-div');
 
-    const passwordInput = createInput('password', 'Password', 'password');
+    const passwordInput = createInput('password', 'enter password', 'password');
+    passwordInput.id = 'password-input';
 
+    passwordDiv.appendChild(createLabel('Password'));
     passwordDiv.appendChild(passwordInput);
     return passwordDiv;
 }
 
 const createSubmitButton = () => {
-    const buttonDiv = document.createElement('div');
-    buttonDiv.classList.add('form-div');
-
-    const submitBtn = document.createElement('input');
+    const submitBtn = document.createElement('div');
+    submitBtn.tabIndex = 0;
+    submitBtn.id = 'login-submit-button';
     submitBtn.type = 'submit';
-    submitBtn.value = 'Login';
+    submitBtn.innerHTML = 'Login';
 
-    buttonDiv.appendChild(submitBtn);
-    return buttonDiv;
+    return submitBtn;
 }
 
 export const getLoginForm = () => {
@@ -95,6 +105,11 @@ export const Login = () => {
     loginDiv.classList.add('login-div');
     loginDiv.appendChild(getLogInTitle());
     loginDiv.appendChild(getLoginForm());
+
+    const terms = createLabel('By clicking “Login” above, you acknowledge that you have read and understood, and agree to Notion\'s terms & conditions and Privacy Policy .');
+    terms.style.textAlign = 'center';
+    terms.style.marginLeft = 'auto';
+    loginDiv.appendChild(terms);
 
     root.appendChild(loginDiv);
 }

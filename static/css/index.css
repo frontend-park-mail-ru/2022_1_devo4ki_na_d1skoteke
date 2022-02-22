@@ -41,30 +41,34 @@
     font-weight: 700;
     text-align: center;
     line-height: 1.1;
-    margin-bottom: 20%;
+    margin-bottom: 1%;
 }
 
 .login-div {
     display: table-cell;
     position: fixed;
-    width: 320px;
+    width: 900px;
     height: auto;
     top: 50%;
     left: 50%;
     margin-top: -160px;
-    margin-left: -160px;
+    margin-left: -450px;
 }
 
 input {
     box-sizing: border-box;
     font-size: inherit;
     width: 100%;
-    display: block;
-    resize: none;
     line-height: 26px;
     padding: 4px 10px;
-    margin: 3%;
-    box-shadow: rgba(15, 15, 15, 0.1) 0px 0px 0px 1px inset;
+    margin-top: 3%;
+    border: none;
+    outline: none;
+    background: rgba(201, 201, 201, 0.13);
+}
+
+input:focus {
+    opacity: 70%;
 }
 
 #root {
@@ -73,12 +77,45 @@ input {
 }
 
 .form-div {
-    width: 100%;
+    width: 40%;
 }
 
 #bad-email-div {
-    margin-left: 3%;
+    display: block;
+    margin-top: 3%;
     font-size: smaller;
     color: red;
     opacity: 75%;
+}
+
+#login-submit-button {
+    transition: background 20ms ease-in 0s;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    white-space: nowrap;
+    height: 36px;
+    border-radius: 5px;
+    color: rgb(235, 87, 87);
+    font-size: 14px;
+    line-height: 1;
+    font-weight: 500;
+    background: rgb(253, 245, 242) none repeat scroll 0% 0%;
+    box-shadow: rgba(15, 15, 15, 0.1) 0px 1px 2px, rgba(235, 87, 87, 0.3) 0px 0px 0px 1px inset;
+    width: 40%;
+    margin-top: 3%;
+}
+
+#login-submit-button:hover {
+    background: rgb(252, 230, 226) none repeat scroll 0% 0%;
+}
+
+.my-label {
+    display: block;
+    margin-top: 3%;
+    margin-bottom: 0;
+    padding-bottom: 0;
+    font-size: smaller;
+    color: black;
+    opacity: 50%;
 }
