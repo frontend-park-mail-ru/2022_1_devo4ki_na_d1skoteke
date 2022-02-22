@@ -15,10 +15,8 @@ const getMimeType = (filename) => {
     switch (filename.split('.').pop()) {
         case 'js':
             return 'javascript'
-            break
         case 'css':
             return 'css'
-            break
     }
 }
 
@@ -33,7 +31,6 @@ http.createServer(function(req, res) {
             res.writeHead(200, { 'Content-Type': 'text/html' });
             res.write(data); 
             res.end();
-            return;
         });
     } else if (staticPattern.test(req.url)) {
         fs.readFile(`${__dirname}${req.url}`, function (err, data) {
@@ -43,7 +40,6 @@ http.createServer(function(req, res) {
             res.writeHead(200, { 'Content-Type': `text/${getMimeType(req.url)}` });
             res.write(data);
             res.end();
-            return;
         });
     }
 }).listen(SERVER_PORT);
