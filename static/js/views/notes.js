@@ -1,14 +1,29 @@
-function leftPanel() {
+'use strict';
+
+const leftPanel = () => {
     const leftPanel = document.createElement('div');
     leftPanel.classList.add('sidebar');
+
+    return leftPanel;
 }
 
-export function Notes() {
+const notesTopPanel = () => {
+    const topPanel = document.createElement('div');
+    topPanel.classList.add('notes-top-panel');
+
+    return topPanel;
+}
+
+export const Notes = () => {
     const root = document.getElementById('root');
     root.innerHTML = '';
 
+    root.appendChild(leftPanel());
+
     const notes = document.createElement('div');
-    
-    leftPanel();
+    notes.classList.add('notes');
+    notes.appendChild(notesTopPanel());
+
+    root.append(notes);
 
 }
