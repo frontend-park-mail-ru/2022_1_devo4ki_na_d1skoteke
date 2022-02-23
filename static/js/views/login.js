@@ -72,6 +72,15 @@ const createPasswordInput = () => {
     return passwordDiv;
 }
 
+const createForgotPassword = () => {
+    const forgotPassword = document.createElement('a');
+    forgotPassword.classList.add('forgot-password');
+    forgotPassword.id = 'forgot-password';
+    forgotPassword.href = '#';
+    forgotPassword.innerHTML = 'Forgot password?';
+    return forgotPassword;
+}
+
 const createSubmitButton = () => {
     const submitBtn = document.createElement('div');
     submitBtn.tabIndex = 0;
@@ -92,6 +101,7 @@ export const getLoginForm = () => {
     loginForm.appendChild(createEmailInput());
     loginForm.appendChild(createPasswordInput());
     loginForm.appendChild(createSubmitButton());
+    loginForm.appendChild(createForgotPassword());
 
     return loginForm;
 }

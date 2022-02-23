@@ -56,6 +56,7 @@
 }
 
 input {
+    background: rgba(201, 201, 201, 0.6);
     box-sizing: border-box;
     font-size: inherit;
     width: 100%;
@@ -64,7 +65,7 @@ input {
     margin-top: 3%;
     border: none;
     outline: none;
-    background: rgba(201, 201, 201, 0.13);
+    opacity: 80%;
 }
 
 input:focus {
@@ -118,4 +119,11 @@ input:focus {
     font-size: smaller;
     color: black;
     opacity: 50%;
+}
+
+#forgot-password {
+    margin-top: 2%;
+    opacity: 50%;
+    font-size: smaller;
+    text-decoration: underline;
 }
