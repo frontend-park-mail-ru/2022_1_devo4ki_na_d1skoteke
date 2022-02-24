@@ -1,9 +1,7 @@
 'use strict';
 
 const http = require('http');
-const url = require('url');
 const fs = require('fs');
-const path = require('path');
 const debug = require('debug');
 
 const SERVER_PORT = 3000;

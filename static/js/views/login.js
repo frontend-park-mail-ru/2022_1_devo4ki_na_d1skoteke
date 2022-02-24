@@ -107,6 +107,7 @@ export const getLoginForm = () => {
 }
 
 export const Login = () => {
+    window.history.pushState(null, null, "/login");
     const root = document.getElementById('root');
     root.innerHTML = '';
 

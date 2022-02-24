@@ -15,6 +15,7 @@ const notesTopPanel = () => {
 }
 
 export const Notes = () => {
+    window.history.pushState(null, null, "/notes");
     const root = document.getElementById('root');
     root.innerHTML = '';
 
