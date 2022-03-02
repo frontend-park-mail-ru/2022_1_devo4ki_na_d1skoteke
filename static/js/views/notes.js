@@ -1,29 +1,26 @@
-'use strict';
-
 const leftPanel = () => {
-    const leftPanel = document.createElement('div');
-    leftPanel.classList.add('sidebar');
+  const leftPaneldiv = document.createElement('div');
+  leftPaneldiv.classList.add('sidebar');
 
-    return leftPanel;
-}
+  return leftPaneldiv;
+};
 
 const notesTopPanel = () => {
-    const topPanel = document.createElement('div');
-    topPanel.classList.add('notes-top-panel');
+  const topPanel = document.createElement('div');
+  topPanel.classList.add('notes-top-panel');
 
-    return topPanel;
-}
+  return topPanel;
+};
 
-export const Notes = () => {
-    const root = document.getElementById('root');
-    root.innerHTML = '';
+export default () => {
+  const root = document.getElementById('root');
+  root.innerHTML = '';
 
-    root.appendChild(leftPanel());
+  root.appendChild(leftPanel());
 
-    const notes = document.createElement('div');
-    notes.classList.add('notes');
-    notes.appendChild(notesTopPanel());
+  const notes = document.createElement('div');
+  notes.classList.add('notes');
+  notes.appendChild(notesTopPanel());
 
-    root.append(notes);
-
-}
+  root.append(notes);
+};

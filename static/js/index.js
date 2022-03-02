@@ -1,7 +1,5 @@
-'use strict';
+import Login from './views/login.js';
+import Signup from './views/signup.js';
 
-import {Notes} from './views/notes.js';
-import {Login} from './views/login.js';
-
-//Notes();
 Login();
+Signup();

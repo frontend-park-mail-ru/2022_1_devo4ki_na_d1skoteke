@@ -1,6 +1,6 @@
 .sidebar {
     display: flex;
-    background: rgb(119,119,119);
+    background: rgb(119, 119, 119);
     position: fixed;
     top: 0;
     left: 0;
@@ -21,7 +21,7 @@
 
 .notes {
     display: flex;
-    background-color:black;
+    background-color: black;
     position: fixed;
     top: 0;
     left: 20%;
@@ -30,13 +30,13 @@
     padding: 20px 0;
 }
 
-.login-form {
-    display: flex; 
+.login-form, .signup-form {
+    display: flex;
     flex-direction: column;
     align-items: center;
 }
 
-.login-title {
+.login-title, .signup-title {
     font-size: 50px;
     font-weight: 700;
     text-align: center;
@@ -44,7 +44,7 @@
     margin-bottom: 1%;
 }
 
-.login-div {
+.login-div, .signup-div {
     display: table-cell;
     position: fixed;
     width: 900px;
@@ -81,7 +81,7 @@ input:focus {
     width: 40%;
 }
 
-#bad-email-div {
+.bad-input-div {
     display: block;
     margin-top: 3%;
     font-size: smaller;
@@ -89,7 +89,7 @@ input:focus {
     opacity: 75%;
 }
 
-#login-submit-button {
+.submit-btn {
     transition: background 20ms ease-in 0s;
     display: inline-flex;
     align-items: center;
@@ -102,12 +102,13 @@ input:focus {
     line-height: 1;
     font-weight: 500;
     background: rgb(253, 245, 242) none repeat scroll 0% 0%;
-    box-shadow: rgba(15, 15, 15, 0.1) 0px 1px 2px, rgba(235, 87, 87, 0.3) 0px 0px 0px 1px inset;
+    box-shadow: rgba(250, 250, 250, 0.24) 0px 1px 2px, rgba(246, 142, 142, 0.3) 0px 0px 0px 1px inset;
     width: 40%;
     margin-top: 3%;
+    border-color: #d9d9d9;
 }
 
-#login-submit-button:hover {
+.submit-btn:hover {
     background: rgb(252, 230, 226) none repeat scroll 0% 0%;
 }
 
@@ -121,9 +122,11 @@ input:focus {
     opacity: 50%;
 }
 
-#forgot-password {
+.new-signup, .have-account {
     margin-top: 2%;
     opacity: 50%;
-    font-size: smaller;
+    /*font-size: smaller;*/
     text-decoration: underline;
+    color: #361919;
 }
+
