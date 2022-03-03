@@ -1,20 +1,6 @@
 'use strict';
 
-import { render } from "./note";
-
-const leftPanel = () => {
-    const leftPanel = document.createElement('div');
-    leftPanel.classList.add('sidebar');
-
-    return leftPanel;
-}
-
-const notesTopPanel = () => {
-    const topPanel = document.createElement('div');
-    topPanel.classList.add('notes-top-panel');
-
-    return topPanel;
-}
+import { render } from "./note.js";
 
 export const Notes = () => {
     window.history.pushState(null, null, "/notes");
