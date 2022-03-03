@@ -1,129 +1,364 @@
 .sidebar {
-    display: flex;
-    background: rgb(119,119,119);
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 20%;
-    height: 100%;
+  display: flex;
+  background: rgb(119, 119, 119);
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 20%;
+  height: 100%;
 }
 
 .notes-top-panel {
-    display: flex;
-    background: whitesmoke;
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 2%;
-    padding: 1% 0;
+  display: flex;
+  background: whitesmoke;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 2%;
+  padding: 1% 0;
 }
 
 .notes {
-    display: flex;
-    background-color:black;
-    position: fixed;
-    top: 0;
-    left: 20%;
-    width: 80%;
-    height: 100%;
-    padding: 20px 0;
+  display: flex;
+  background-color: black;
+  position: fixed;
+  top: 0;
+  left: 20%;
+  width: 80%;
+  height: 100%;
+  padding: 20px 0;
 }
 
 .login-form {
-    display: flex; 
-    flex-direction: column;
-    align-items: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .login-title {
-    font-size: 50px;
-    font-weight: 700;
-    text-align: center;
-    line-height: 1.1;
-    margin-bottom: 1%;
+  font-size: 50px;
+  font-weight: 700;
+  text-align: center;
+  line-height: 1.1;
+  margin-bottom: 1%;
 }
 
 .login-div {
-    display: table-cell;
-    position: fixed;
-    width: 900px;
-    height: auto;
-    top: 50%;
-    left: 50%;
-    margin-top: -160px;
-    margin-left: -450px;
+  display: table-cell;
+  position: fixed;
+  width: 900px;
+  height: auto;
+  top: 50%;
+  left: 50%;
+  margin-top: -160px;
+  margin-left: -450px;
 }
 
 input {
-    background: rgba(201, 201, 201, 0.6);
-    box-sizing: border-box;
-    font-size: inherit;
-    width: 100%;
-    line-height: 26px;
-    padding: 4px 10px;
-    margin-top: 3%;
-    border: none;
-    outline: none;
-    opacity: 80%;
+  background: rgba(201, 201, 201, 0.6);
+  box-sizing: border-box;
+  font-size: inherit;
+  width: 100%;
+  line-height: 26px;
+  padding: 4px 10px;
+  margin-top: 3%;
+  border: none;
+  outline: none;
+  opacity: 80%;
 }
 
 input:focus {
-    opacity: 70%;
+  opacity: 70%;
 }
 
 #root {
-    font-family: inter, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol";
-    display: table;
+  font-family: inter, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica,
+    "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol";
+  display: table;
 }
 
 .form-div {
-    width: 40%;
+  width: 40%;
 }
 
 #bad-email-div {
-    display: block;
-    margin-top: 3%;
-    font-size: smaller;
-    color: red;
-    opacity: 75%;
+  display: block;
+  margin-top: 3%;
+  font-size: smaller;
+  color: red;
+  opacity: 75%;
 }
 
 #login-submit-button {
-    transition: background 20ms ease-in 0s;
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    white-space: nowrap;
-    height: 36px;
-    border-radius: 5px;
-    color: rgb(235, 87, 87);
-    font-size: 14px;
-    line-height: 1;
-    font-weight: 500;
-    background: rgb(253, 245, 242) none repeat scroll 0% 0%;
-    box-shadow: rgba(15, 15, 15, 0.1) 0px 1px 2px, rgba(235, 87, 87, 0.3) 0px 0px 0px 1px inset;
-    width: 40%;
-    margin-top: 3%;
+  transition: background 20ms ease-in 0s;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  white-space: nowrap;
+  height: 36px;
+  border-radius: 5px;
+  color: rgb(235, 87, 87);
+  font-size: 14px;
+  line-height: 1;
+  font-weight: 500;
+  background: rgb(253, 245, 242) none repeat scroll 0% 0%;
+  box-shadow: rgba(15, 15, 15, 0.1) 0px 1px 2px,
+    rgba(235, 87, 87, 0.3) 0px 0px 0px 1px inset;
+  width: 40%;
+  margin-top: 3%;
 }
 
 #login-submit-button:hover {
-    background: rgb(252, 230, 226) none repeat scroll 0% 0%;
+  background: rgb(252, 230, 226) none repeat scroll 0% 0%;
 }
 
 .my-label {
-    display: block;
-    margin-top: 3%;
-    margin-bottom: 0;
-    padding-bottom: 0;
-    font-size: smaller;
-    color: black;
-    opacity: 50%;
+  display: block;
+  margin-top: 3%;
+  margin-bottom: 0;
+  padding-bottom: 0;
+  font-size: smaller;
+  color: black;
+  opacity: 50%;
 }
 
 #forgot-password {
-    margin-top: 2%;
-    opacity: 50%;
-    font-size: smaller;
-    text-decoration: underline;
+  margin-top: 2%;
+  opacity: 50%;
+  font-size: smaller;
+  text-decoration: underline;
+}
+
+/* 
+
+Note's CSS starting here ;
+
+*/
+
+* {
+  margin: 0;
+  padding: 0;
+}
+
+.notion__sidebar {
+  background: rgb(247, 246, 243);
+  width: 480px;
+  height: 100vh;
+  position: relative;
+  flex-grow: 2 1 1;
+}
+
+.notion__sidebar__bio {
+  display: flex;
+  padding: 8px;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 1px;
+}
+
+.notion__sidebar__bio:hover {
+  background-color: rgba(55, 53, 47, 0.08);
+}
+
+.notion__sidebar__bio__img {
+  height: 20px;
+  width: 20px;
+  margin-right: 10px;
+  border-radius: 4px;
+}
+
+.notion__sidebar__bio__profilename {
+  display: flex;
+  flex-direction: row;
+}
+
+.notion__sidebar__bio__profilename__switch {
+  height: 15px;
+  width: 15px;
+  margin-left: 10px;
+  margin-top: 1px;
+  opacity: 30%;
+}
+
+.notion__sidebar__bio__colapser {
+  opacity: 60%;
+
+  width: 15px;
+  height: 15px;
+  padding: 4px;
+  border-radius: 4px;
+}
+
+.notion__sidebar__bio__colapser:hover {
+  background-color: rgba(55, 53, 47, 0.08);
+}
+
+.notion__sidebar__navigation {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-left: 10px;
+  opacity: 60%;
+  font-size: 15px;
+}
+
+.notion__sidebar__navigation__item {
+  width: 100%;
+  padding: 3px;
+}
+
+.notion__sidebar__navigation__item:hover {
+  background-color: rgba(55, 53, 47, 0.08);
+}
+
+.notion__sidebar__deathnote {
+  display: flex;
+  flex-direction: column;
+  overflow: scroll;
+  align-items: center;
+  margin: 20px 0 0 10px;
+
+  opacity: 60%;
+  font-size: 15px;
+  height: 50%;
+}
+
+.notion__sidebar__deathnote__item {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.notion__sidebar__deathnote__item:hover {
+  background-color: rgba(55, 53, 47, 0.08);
+}
+.notion__sidebar__deathnote__item__action {
+  display: flex;
+  flex-direction: row;
+  justify-self: flex-start;
+  width: 50px;
+}
+
+.notion__sidebar__deathnote__item__action_item {
+  height: 15px;
+  width: 15px;
+  margin: 4px;
+  background-color: rgba(55, 53, 47, 0.08);
+}
+
+.notion__sidebar__deathnote__basics {
+  margin-top: 20px;
+  width: 100%;
+  height: 100px;
+}
+.notion__sidebar__newpage {
+  position: fixed;
+  width: 480px;
+  bottom: 0;
+}
+
+.notion__sidebar__newpage__container {
+  opacity: 60%;
+  padding: 15px;
+  display: flex;
+  padding: auto;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  border-top: solid rgb(68, 57, 57) 1px;
+}
+
+.notion__sidebar__newpage__container__plus {
+  width: 15px;
+  height: 15px;
+  margin-right: 10px;
+}
+
+.notion__whole__page {
+  display: flex;
+  flex-direction: row;
+}
+
+.notion__content {
+  width: calc(100% - 480px);
+}
+
+.notion__content__navbar {
+  display: flex;
+  padding: 8px;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 1px;
+}
+
+.notion__content__navbar__docname {
+  height: 15px;
+
+  border-radius: 4px;
+  display: flex;
+  flex-direction: row;
+
+  margin-right: 10px;
+  margin-left: 10px;
+  margin-top: 1px;
+
+  padding: 4px;
+
+  opacity: 60%;
+}
+
+.notion__content__navbar__docname:hover {
+  background-color: rgba(55, 53, 47, 0.08);
+}
+
+.notion__content__navbar__actions {
+  display: flex;
+  flex-direction: row;
+}
+
+.notion__content__navbar__actions__item {
+  opacity: 60%;
+
+  width: 15px;
+  height: 15px;
+  padding: 4px;
+  border-radius: 4px;
+  margin-left: 10px;
+}
+
+.notion__content__document__title {
+  padding: 0 100px 0 100px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.notion__content__document__itself {
+  padding: 0 100px 0 100px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.text_big {
+  width: 70%;
+  font-size: 40px;
+}
+
+.text_regular {
+  width: 70%;
+  border: solid 0px white;
+}
+
+.text_big:focus {
+  outline: 0;
+}
+
+.text_regular:focus {
+  outline: 0;
 }
