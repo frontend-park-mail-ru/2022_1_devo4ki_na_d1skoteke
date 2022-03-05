@@ -8,13 +8,13 @@ const getSignUpTitle = () => {
   return signUpTitle;
 };
 
-const createBadNicknameDiv = () => {
-  const badNicknameDiv = document.createElement('div');
-  badNicknameDiv.classList.add('bad-input-div');
-  badNicknameDiv.id = 'bad-nickname-div';
-  badNicknameDiv.style.display = 'none';
+const createBadNicknameError = () => {
+  const badNicknameError = document.createElement('div');
+  badNicknameError.classList.add('bad-input');
+  badNicknameError.id = 'bad-nickname';
+  badNicknameError.style.display = 'none';
 
-  return badNicknameDiv;
+  return badNicknameError;
 };
 
 const validateNickname = (nickname) => {
@@ -26,47 +26,40 @@ const validateNickname = (nickname) => {
   if (!nicknameRegex.test(nickname)) {
     return utils.InvalidStatusType.WRONG_SYMBOLS;
   }
-  // будет в будущем
-  // if (nicknameDatabaseCheck(nickname)){
-  //   return invalidStatusType.ALREADY_EXISTS
-  // }
+  // TODO: check nickname in db and return ALREADY_EXISTS status
 
   return utils.InvalidStatusType.VALID;
 };
 
 const createNicknameInput = () => {
-  const nicknameDiv = document.createElement('div');
-  nicknameDiv.classList.add('form-div');
+  const nicknameForm = document.createElement('div');
+  nicknameForm.classList.add('form');
 
   const nicknameInput = utils.createInput('nickname', 'enter yourn nickname', 'nickname');
   nicknameInput.id = 'nickname-input';
 
-  nicknameDiv.appendChild(utils.createLabel('Nickname'));
-  nicknameDiv.appendChild(nicknameInput);
-  nicknameDiv.appendChild(createBadNicknameDiv());
+  nicknameForm.appendChild(utils.createLabel('Nickname'));
+  nicknameForm.appendChild(nicknameInput);
+  nicknameForm.appendChild(createBadNicknameError());
 
   nicknameInput.addEventListener('input', (e) => {
     switch (validateNickname(e.target.value)) {
       case utils.InvalidStatusType.WRONG_SYMBOLS:
-        nicknameDiv.querySelector('#bad-nickname-div').style.display = 'block';
-        nicknameDiv.querySelector('#bad-nickname-div')
+        nicknameForm.querySelector('#bad-nickname').style.display = 'block';
+        nicknameForm.querySelector('#bad-nickname')
           .innerHTML = 'your nickname should only contain alphanumeric characters';
         break;
-      // case invalidStatusType.ALREADY_EXISTS:
-      //   nicknameDiv.querySelector('#bad-nickname-div').style.display = 'block';
-      //   nicknameDiv.querySelector('#bad-nickname-div')
-      //    .innerHTML = 'your nickname is already in use, please choose another one';
-      //   break;
+      // TODO: ALREADY_EXISTS status handler
       case utils.InvalidStatusType.EMPTY:
-        nicknameDiv.querySelector('#bad-nickname-div').style.display = 'none';
+        nicknameForm.querySelector('#bad-nickname').style.display = 'none';
         break;
       case utils.InvalidStatusType.VALID:
-        nicknameDiv.querySelector('#bad-nickname-div').style.display = 'none';
+        nicknameForm.querySelector('#bad-nickname').style.display = 'none';
         break;
       default:
     }
   });
-  return nicknameDiv;
+  return nicknameForm;
 };
 
 const validatePasswordPrimary = (password) => {
@@ -90,84 +83,84 @@ const validatePasswordConfirm = (passwordConfirm, primaryPassword) => {
   return utils.InvalidStatusType.DO_NOT_MATCH;
 };
 
-const createBadPrimaryPasswordDiv = () => {
-  const badPrimaryPasswordDiv = document.createElement('div');
-  badPrimaryPasswordDiv.innerHTML = 'password is unsafe\n '
+const createBadPrimaryPasswordError = () => {
+  const badPrimaryPasswordError = document.createElement('div');
+  badPrimaryPasswordError.innerHTML = 'password is unsafe\n '
     + 'it should contain from 7 to 15 characters with at least one numeric digit and a special character';
-  badPrimaryPasswordDiv.classList.add('bad-input-div');
-  badPrimaryPasswordDiv.id = 'bad-passwordPrimary-div';
-  badPrimaryPasswordDiv.style.display = 'none';
+  badPrimaryPasswordError.classList.add('bad-input');
+  badPrimaryPasswordError.id = 'bad-passwordPrimary';
+  badPrimaryPasswordError.style.display = 'none';
 
-  return badPrimaryPasswordDiv;
+  return badPrimaryPasswordError;
 };
 
-const createBadConfirmPasswordDiv = () => {
-  const badSecondaryPasswordDiv = document.createElement('div');
-  badSecondaryPasswordDiv.innerHTML = 'passwords don\'t match';
-  badSecondaryPasswordDiv.classList.add('bad-input-div');
-  badSecondaryPasswordDiv.id = 'bad-passwordConfirm-div';
-  badSecondaryPasswordDiv.style.display = 'none';
+const createBadConfirmPasswordError = () => {
+  const badSecondaryPasswordError = document.createElement('div');
+  badSecondaryPasswordError.innerHTML = 'passwords don\'t match';
+  badSecondaryPasswordError.classList.add('bad-input');
+  badSecondaryPasswordError.id = 'bad-passwordConfirm';
+  badSecondaryPasswordError.style.display = 'none';
 
-  return badSecondaryPasswordDiv;
+  return badSecondaryPasswordError;
 };
 
 const createPrimaryPasswordInput = () => {
-  const passwordDiv = document.createElement('div');
-  passwordDiv.classList.add('form-div');
+  const passwordForm = document.createElement('div');
+  passwordForm.classList.add('form');
 
   const passwordInput = utils.createInput('password', 'enter password', 'password');
   passwordInput.id = 'primary-password-input';
 
-  passwordDiv.appendChild(utils.createLabel('Password'));
-  passwordDiv.appendChild(passwordInput);
-  passwordDiv.appendChild(createBadPrimaryPasswordDiv());
+  passwordForm.appendChild(utils.createLabel('Password'));
+  passwordForm.appendChild(passwordInput);
+  passwordForm.appendChild(createBadPrimaryPasswordError());
 
   passwordInput.addEventListener('input', (e) => {
     switch (validatePasswordPrimary(e.target.value)) {
       case utils.InvalidStatusType.WRONG_SYMBOLS:
-        passwordDiv.querySelector('#bad-passwordPrimary-div').style.display = 'block';
-        passwordDiv.querySelector('#bad-passwordPrimary-div').innerHTML = 'your password is unsafe!!\n\t '
+        passwordForm.querySelector('#bad-passwordPrimary').style.display = 'block';
+        passwordForm.querySelector('#bad-passwordPrimary').innerHTML = 'your password is unsafe!!\n\t '
           + 'it should contain from 7 to 15 characters with at least one numeric digit and a special character';
         break;
       case utils.InvalidStatusType.EMPTY:
-        passwordDiv.querySelector('#bad-passwordPrimary-div').style.display = 'none';
+        passwordForm.querySelector('#bad-passwordPrimary').style.display = 'none';
         break;
       case utils.InvalidStatusType.VALID:
-        passwordDiv.querySelector('#bad-passwordPrimary-div').style.display = 'none';
+        passwordForm.querySelector('#bad-passwordPrimary').style.display = 'none';
         break;
       default:
     }
   });
-  return passwordDiv;
+  return passwordForm;
 };
 
 const createConfirmPasswordInput = () => {
-  const confirmPasswordDiv = document.createElement('div');
-  confirmPasswordDiv.classList.add('form-div');
+  const confirmPasswordForm = document.createElement('div');
+  confirmPasswordForm.classList.add('form');
 
   const confirmPasswordInput = utils.createInput('password', 'enter password', 'password');
   confirmPasswordInput.id = 'confirm-password-input';
 
-  confirmPasswordDiv.appendChild(utils.createLabel('Confirm password'));
-  confirmPasswordDiv.appendChild(confirmPasswordInput);
-  confirmPasswordDiv.appendChild(createBadConfirmPasswordDiv());
+  confirmPasswordForm.appendChild(utils.createLabel('Confirm password'));
+  confirmPasswordForm.appendChild(confirmPasswordInput);
+  confirmPasswordForm.appendChild(createBadConfirmPasswordError());
 
   confirmPasswordInput.addEventListener('input', (e) => {
     switch (validatePasswordConfirm(e.target.value, document.querySelector('#primary-password-input').value)) {
       case utils.InvalidStatusType.DO_NOT_MATCH:
-        confirmPasswordDiv.querySelector('#bad-passwordConfirm-div').style.display = 'block';
-        confirmPasswordDiv.querySelector('#bad-passwordConfirm-div').innerHTML = 'password dont match';
+        confirmPasswordForm.querySelector('#bad-passwordConfirm').style.display = 'block';
+        confirmPasswordForm.querySelector('#bad-passwordConfirm').innerHTML = 'password dont match';
         break;
       case utils.InvalidStatusType.EMPTY:
-        confirmPasswordDiv.querySelector('#bad-passwordConfirm-div').style.display = 'none';
+        confirmPasswordForm.querySelector('#bad-passwordConfirm').style.display = 'none';
         break;
       case utils.InvalidStatusType.VALID:
-        confirmPasswordDiv.querySelector('#bad-passwordConfirm-div').style.display = 'none';
+        confirmPasswordForm.querySelector('#bad-passwordConfirm').style.display = 'none';
         break;
       default:
     }
   });
-  return confirmPasswordDiv;
+  return confirmPasswordForm;
 };
 
 const createSignUpButton = () => {
@@ -183,7 +176,7 @@ const createSignUpButton = () => {
 const createHaveAccount = () => {
   const havaAccount = document.createElement('a');
   havaAccount.classList.add('have-account');
-  havaAccount.href = '/login';
+  havaAccount.href = 'login';
   havaAccount.innerHTML = 'I already have an account';
   return havaAccount;
 };
@@ -207,15 +200,15 @@ const getSignUpForm = () => {
   return signUpForm;
 };
 
-export default () => {
+export const Signup = () => {
   const root = document.getElementById('root');
   root.innerHTML = '';
 
-  const loginDiv = document.createElement('div');
+  const completeSignupForm = document.createElement('div');
 
-  loginDiv.classList.add('signup-div');
-  loginDiv.appendChild(getSignUpTitle());
-  loginDiv.appendChild(getSignUpForm());
+  completeSignupForm.classList.add('signup');
+  completeSignupForm.appendChild(getSignUpTitle());
+  completeSignupForm.appendChild(getSignUpForm());
 
-  root.appendChild(loginDiv);
+  root.appendChild(completeSignupForm);
 };

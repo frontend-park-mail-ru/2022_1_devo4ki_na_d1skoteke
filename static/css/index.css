@@ -44,7 +44,7 @@
     margin-bottom: 1%;
 }
 
-.login-div, .signup-div {
+.login, .signup {
     display: table-cell;
     position: fixed;
     width: 900px;
@@ -77,11 +77,11 @@ input:focus {
     display: table;
 }
 
-.form-div {
+.form {
     width: 40%;
 }
 
-.bad-input-div {
+.bad-input {
     display: block;
     margin-top: 3%;
     font-size: smaller;

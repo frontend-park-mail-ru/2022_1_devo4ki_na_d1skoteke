@@ -16,10 +16,8 @@ export const validateEmail = (email) => {
   if (!emailRegex.test(email)) {
     return InvalidStatusType.WRONG_SYMBOLS;
   }
-  // будет в будущем
-  // if (emailDatabaseCheck(email)){
-  //   return invalidStatusType.ALREADY_EXISTS
-  // }
+  // TODO: check email in db and return ALREADY_EXISTS status
+
   return InvalidStatusType.VALID;
 };
 
@@ -39,53 +37,44 @@ export const createLabel = (text) => {
   return label;
 };
 
-export const createBadEmailDiv = () => {
-  const badEmailDiv = document.createElement('div');
-  badEmailDiv.innerHTML = 'please provide valid email';
-  badEmailDiv.classList.add('bad-input-div');
-  badEmailDiv.id = 'bad-email-div';
-  badEmailDiv.style.display = 'none';
+export const createBadEmailTextError = () => {
+  const badEmailText = document.createElement('div');
+  badEmailText.innerHTML = 'please provide valid email';
+  badEmailText.classList.add('bad-input');
+  badEmailText.id = 'bad-email';
+  badEmailText.style.display = 'none';
 
-  return badEmailDiv;
+  return badEmailText;
 };
 
 export const createEmailInput = () => {
-  const emailDiv = document.createElement('div');
-  emailDiv.classList.add('form-div');
+  const emailForm = document.createElement('div');
+  emailForm.classList.add('form');
 
   const emailInput = createInput('email', 'enter email', 'email');
   emailInput.id = 'email-input';
 
-  emailDiv.appendChild(createLabel('Email'));
-  emailDiv.appendChild(emailInput);
-  emailDiv.appendChild(createBadEmailDiv());
+  emailForm.appendChild(createLabel('Email'));
+  emailForm.appendChild(emailInput);
+  emailForm.appendChild(createBadEmailTextError());
 
   emailInput.addEventListener('input', (e) => {
     switch (validateEmail(e.target.value)) {
       case InvalidStatusType.WRONG_SYMBOLS:
-        emailDiv.querySelector('#bad-email-div').style.display = 'block';
-        emailDiv.querySelector('#bad-email-div')
+        emailForm.querySelector('#bad-email').style.display = 'block';
+        emailForm.querySelector('#bad-email')
           .innerHTML = 'please provide valid email address';
         break;
-      // case InvalidStatusType.ALREADY_EXISTS:
-      //   if (emailDiv.parentElement.className?? === 'loginForm'){
-      //     break;
-      //   }
-      //   if (emailDiv.parentElement.className?? === 'signUpForm') {
-      //     emailDiv.querySelector('#bad-email-div').style.display = 'block';
-      //     emailDiv.querySelector('#bad-email-div')
-      //       .innerHTML = 'your email is already in use, please try to login';
-      //   }
-      //   break;
+      // TODO: ALREADY_EXISTS status handler
       case InvalidStatusType.EMPTY:
-        emailDiv.querySelector('#bad-email-div').style.display = 'none';
+        emailForm.querySelector('#bad-email').style.display = 'none';
         break;
       case InvalidStatusType.VALID:
-        emailDiv.querySelector('#bad-email-div').style.display = 'none';
+        emailForm.querySelector('#bad-email').style.display = 'none';
         break;
       default:
     }
   });
 
-  return emailDiv;
+  return emailForm;
 };

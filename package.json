@@ -4,7 +4,6 @@
   "description": "Репозиторий команды devo4ki na d1skoteke",
   "main": "server.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node server.js",
     "debug": "DEBUG=server node server.js",
     "lint": "eslint .",

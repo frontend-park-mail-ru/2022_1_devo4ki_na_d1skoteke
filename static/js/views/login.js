@@ -8,35 +8,35 @@ const getLogInTitle = () => {
   return logInTitle;
 };
 
-const createBadPasswordDiv = () => {
-  const badPrimaryPasswordDiv = document.createElement('div');
-  badPrimaryPasswordDiv.innerHTML = 'password is incorrect';
-  badPrimaryPasswordDiv.classList.add('bad-input-div');
-  badPrimaryPasswordDiv.id = 'bad-password-div';
-  badPrimaryPasswordDiv.style.display = 'none';
+const createBadPasswordError = () => {
+  const badPrimaryPasswordError = document.createElement('div');
+  badPrimaryPasswordError.innerHTML = 'password is incorrect';
+  badPrimaryPasswordError.classList.add('bad-input');
+  badPrimaryPasswordError.id = 'bad-password';
+  badPrimaryPasswordError.style.display = 'none';
 
-  return badPrimaryPasswordDiv;
+  return badPrimaryPasswordError;
 };
 
 const createPasswordInput = () => {
-  const passwordDiv = document.createElement('div');
-  passwordDiv.classList.add('form-div');
+  const passwordForm = document.createElement('div');
+  passwordForm.classList.add('form');
 
   const passwordInput = utils.createInput('password', 'enter password', 'password');
   passwordInput.id = 'password-input';
 
-  passwordDiv.appendChild(utils.createLabel('Password'));
-  passwordDiv.appendChild(passwordInput);
-  passwordDiv.appendChild(createBadPasswordDiv());
+  passwordForm.appendChild(utils.createLabel('Password'));
+  passwordForm.appendChild(passwordInput);
+  passwordForm.appendChild(createBadPasswordError());
 
-  return passwordDiv;
+  return passwordForm;
 };
 
 const createSignup = () => {
   const signUp = document.createElement('a');
   signUp.classList.add('new-signup');
   signUp.id = 'new-signup';
-  signUp.href = '/signup';
+  signUp.href = 'signup';
   signUp.innerHTML = 'Don\'t have an account?';
   return signUp;
 };
@@ -69,22 +69,15 @@ const getLoginForm = () => {
   return loginForm;
 };
 
-export default () => {
-  window.history.pushState(null, null, "/login");
+export const Login = () => {
   const root = document.getElementById('root');
   root.innerHTML = '';
 
-  const loginDiv = document.createElement('div');
+  const completeLoginForm = document.createElement('div');
 
-  loginDiv.classList.add('login-div');
-  loginDiv.appendChild(getLogInTitle());
-  loginDiv.appendChild(getLoginForm());
+  completeLoginForm.classList.add('login');
+  completeLoginForm.appendChild(getLogInTitle());
+  completeLoginForm.appendChild(getLoginForm());
 
-  const terms = utils.createLabel('By clicking “Login” above, you acknowledge that you have read and understood, '
-    + 'and agree to Notion\'s terms & conditions and Privacy Policy .');
-  terms.style.textAlign = 'center';
-  terms.style.marginLeft = 'auto';
-  loginDiv.appendChild(terms);
-
-  root.appendChild(loginDiv);
+  root.appendChild(completeLoginForm);
 };
