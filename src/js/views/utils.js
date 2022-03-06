@@ -7,12 +7,19 @@ export const InvalidStatusType = {
   VALID: 'valid',
 };
 
+export const createLogo = () => {
+  const logo = document.createElement('img');
+  logo.classList.add('logo');
+  logo.src = './static/img/signup_login_logo.png';
+  return logo;
+};
+
 export const validateEmail = (email) => {
   if (email === '') {
     return InvalidStatusType.EMPTY;
   }
 
-  const emailRegex = /[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?/;
+  const emailRegex = /^([a-zA-Z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-zA-Z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-zA-Z0-9](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?\.)+[a-zA-Z0-9](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?)$/;
   if (!emailRegex.test(email)) {
     return InvalidStatusType.WRONG_SYMBOLS;
   }
@@ -39,7 +46,7 @@ export const createLabel = (text) => {
 
 export const createBadEmailTextError = () => {
   const badEmailText = document.createElement('div');
-  badEmailText.innerHTML = 'please provide valid email';
+  badEmailText.innerHTML = 'Please enter valid email';
   badEmailText.classList.add('bad-input');
   badEmailText.id = 'bad-email';
   badEmailText.style.display = 'none';
@@ -51,19 +58,19 @@ export const createEmailInput = () => {
   const emailForm = document.createElement('div');
   emailForm.classList.add('form');
 
-  const emailInput = createInput('email', 'enter email', 'email');
+  const emailInput = createInput('email', 'Enter email', 'email');
   emailInput.id = 'email-input';
 
   emailForm.appendChild(createLabel('Email'));
   emailForm.appendChild(emailInput);
   emailForm.appendChild(createBadEmailTextError());
 
-  emailInput.addEventListener('input', (e) => {
+  emailInput.addEventListener('focusout', (e) => {
     switch (validateEmail(e.target.value)) {
       case InvalidStatusType.WRONG_SYMBOLS:
         emailForm.querySelector('#bad-email').style.display = 'block';
         emailForm.querySelector('#bad-email')
-          .innerHTML = 'please provide valid email address';
+          .innerHTML = 'Please enter valid email';
         break;
       // TODO: ALREADY_EXISTS status handler
       case InvalidStatusType.EMPTY:
@@ -74,6 +81,9 @@ export const createEmailInput = () => {
         break;
       default:
     }
+  });
+  emailInput.addEventListener('input', () => {
+    emailForm.querySelector('#bad-email').style.display = 'none';
   });
 
   return emailForm;

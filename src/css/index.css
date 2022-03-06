@@ -1,0 +1,128 @@
+:root {
+    --input-form-fill-color: rgba(201, 201, 201, 0.6);
+    --btn-text-color: rgb(0, 0, 0);
+    --btn-background-color: #faf4e7;
+    --btn-border-color: #EED7AA;
+    --btn-background-hover-color: #f5eecc;
+}
+
+#root {
+    font-family: inter, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica,
+    "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol";
+    display: table;
+}
+
+body {
+    position: relative;
+}
+
+.logo {
+    display: block;
+    margin: 0 auto;
+}
+.signup {
+    display: block;
+    position: absolute;
+    width: 100%;
+    height: 700px;
+    padding-top: 4%;
+}
+
+.login {
+    display: block;
+    position: absolute;
+    width: 100%;
+    height: 600px;
+    padding-top: 8%;
+}
+
+.login-form, .signup-form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    align-content: center;
+}
+
+.login-title, .signup-title {
+    font-size: 50px;
+    font-weight: 700;
+    text-align: center;
+    line-height: 1.1;
+    margin-bottom: 25px;
+}
+
+input {
+    background: var(--input-form-fill-color);
+    box-sizing: border-box;
+    font-size: 16px;
+    width: 100%;
+    line-height: 28px;
+    border-radius: 4px;
+    padding: 4px 10px;
+    margin-top: 3px;
+    border: none;
+    outline: none;
+    opacity: 80%;
+
+}
+
+input:focus {
+    opacity: 70%;
+}
+
+.bad-input {
+    display: block;
+    margin-top: 4px;
+    font-size: smaller;
+    color: red;
+    opacity: 75%;
+}
+
+.form {
+    width: 360px;
+}
+
+.submit-btn {
+    transition: background 20ms ease-in 0s;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    white-space: nowrap;
+    height: 36px;
+    border-radius: 4px;
+    color: var(--btn-text-color);
+    font-size: 14px;
+    line-height: 1;
+    font-weight: 500;
+    background: var(--btn-background-color);
+    width: 360px;
+    margin-top: 25px;
+    border: 1px solid var(--btn-border-color);
+}
+
+.submit-btn:hover {
+    background: var(--btn-background-hover-color);
+}
+
+.my-label {
+    display: block;
+    margin-top: 15px;
+    margin-bottom: 0;
+    padding-bottom: 0;
+    font-size: 16px;
+    color: black;
+    opacity: 50%;
+}
+
+.new-signup, .have-account {
+    margin-top: 15px;
+    opacity: 50%;
+    text-decoration: none;
+    color: black;
+}
+
+.new-signup:hover, .have-account:hover {
+    text-decoration: underline;
+}
+
+
