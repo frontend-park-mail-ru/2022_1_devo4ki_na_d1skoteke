@@ -7,6 +7,14 @@ export const InvalidStatusType = {
   VALID: 'valid',
 };
 
+export const SetFavicon = () => {
+  const addFavicon = document.createElement('link');
+  addFavicon.setAttribute('rel', 'favicon');
+  addFavicon.setAttribute('href', './src/img/favicon.ico');
+
+  document.querySelector('head').appendChild(addFavicon);
+};
+
 export const createLogo = () => {
   const logo = document.createElement('img');
   logo.classList.add('logo');
