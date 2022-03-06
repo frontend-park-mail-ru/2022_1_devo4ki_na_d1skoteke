@@ -10,7 +10,7 @@ export const InvalidStatusType = {
 export const SetFavicon = () => {
   const addFavicon = document.createElement('link');
   addFavicon.setAttribute('rel', 'favicon');
-  addFavicon.setAttribute('href', './src/img/favicon.ico');
+  addFavicon.setAttribute('href', './public/img/favicon.ico');
 
   document.querySelector('head').appendChild(addFavicon);
 };
@@ -18,7 +18,7 @@ export const SetFavicon = () => {
 export const createLogo = () => {
   const logo = document.createElement('img');
   logo.classList.add('logo');
-  logo.src = './src/img/signup_login_logo.png';
+  logo.src = './public/img/signup_login_logo.png';
   return logo;
 };
 
