@@ -1,43 +1,16 @@
-'use strict';
+const express = require("express");
+const path = require('path');
 
-const http = require('http');
-const fs = require('fs');
-const debug = require('debug');
+const routes = require('./routes/routes')
 
-const SERVER_PORT = 3000;
+const app = express();
 
-const log = debug('server');
-const staticPattern = new RegExp('^[\/]static');
+app.use(express.json());
 
-const getMimeType = (filename) => {
-    switch (filename.split('.').pop()) {
-        case 'js':
-            return 'javascript'
-        case 'css':
-            return 'css'
-    }
-}
+app.use(express.static(path.resolve(__dirname, 'public')));
 
-http.createServer(function(req, res) {
-    log(req.url);
-    
-    if (req.url === '/') {
-        fs.readFile(`${__dirname}/index.html`, function(err, data) {
-            if (err) {
-                throw err;
-            }
-            res.writeHead(200, { 'Content-Type': 'text/html' });
-            res.write(data); 
-            res.end();
-        });
-    } else if (staticPattern.test(req.url)) {
-        fs.readFile(`${__dirname}${req.url}`, function (err, data) {
-            if (err) {
-                throw err; 
-            }
-            res.writeHead(200, { 'Content-Type': `text/${getMimeType(req.url)}` });
-            res.write(data);
-            res.end();
-        });
-    }
-}).listen(SERVER_PORT);
+app.use("/", routes);
+
+const listener = app.listen(3000, () => {
+    console.log("App is listening on port " + listener.address().port);
+})
