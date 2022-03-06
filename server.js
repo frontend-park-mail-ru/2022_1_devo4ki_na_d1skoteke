@@ -5,7 +5,7 @@ const debug = require('debug');
 const SERVER_PORT = 3000;
 
 const log = debug('server');
-const staticPattern = /^[/]static/;
+const staticPattern = /^[/]src/;
 
 const getMimeType = (filename) => {
   switch (filename.split('.').pop()) {

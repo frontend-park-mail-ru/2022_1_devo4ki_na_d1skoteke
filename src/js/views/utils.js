@@ -10,7 +10,7 @@ export const InvalidStatusType = {
 export const createLogo = () => {
   const logo = document.createElement('img');
   logo.classList.add('logo');
-  logo.src = './static/img/signup_login_logo.png';
+  logo.src = './src/img/signup_login_logo.png';
   return logo;
 };
 
