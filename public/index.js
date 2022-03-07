@@ -1,38 +1,48 @@
-import {Login} from './js/views/login.js';
-import {Signup} from './js/views/signup.js';
-import {SetFavicon} from './js/views/utils.js';
-// import {renderAuth} from './components/Enter/Enter.js';
-
-const root = document.getElementById('root');
-
-// const configApp = {
-//   login: {
-//     href: '/login',
-//     name: 'Авторизация',
-//     open: loginPage,
-//   },
-// };
-//
-// function loginPage() {
-//   root.appendChild(renderAuth({
-//     inputs: [
-//       {type: 'email', name: 'email', placeholder: 'Email'},
-//       {type: 'password', name: 'password', placeholder: 'Пароль'},
-//     ],
-//     url: {
-//       signup: '/signup',
-//       login: '/login',
-//     },
-//     auth: true,
-//   }));
-// }
-// const enterPage = () => {
-//   const enter = new EnterComponent(root);
-//   enter.render();
-// };
+import { Login } from './components/Enter/login.js';
+import { Signup } from './components/Enter/signup.js';
+import { SetFavicon } from './js/utils.js';
 
 SetFavicon();
-Login();
-Signup();
 
-// enterPage();
+// _______best practice navigation, well played_____
+const root = document.getElementById('root');
+
+const createTmpNavigation = (node) => {
+  const signup = document.createElement('button');
+  const login = document.createElement('button');
+  const note = document.createElement('button');
+
+  signup.dataset.section = 'signup';
+  login.dataset.section = 'login';
+  note.dataset.section = 'note';
+
+  signup.innerText = 'signup';
+  login.innerText = 'login';
+  note.innerText = 'note';
+
+  const tmpNavbar = document.createElement('div');
+  tmpNavbar.classList.add('tmp_navigation');
+  tmpNavbar.appendChild(signup);
+  tmpNavbar.appendChild(login);
+  tmpNavbar.appendChild(note);
+
+  node.appendChild(tmpNavbar);
+};
+createTmpNavigation(root);
+
+root.addEventListener('click', (e) => {
+  const { target } = e;
+  switch (target.dataset.section) {
+    case 'signup': {
+      Signup();
+      break;
+    }
+    case 'login': {
+      Login();
+      break;
+    }
+    default: {
+      break;
+    }
+  }
+});

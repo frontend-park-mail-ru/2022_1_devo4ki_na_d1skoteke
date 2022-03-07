@@ -1,0 +1,19 @@
+- const btn_msg = (ENTER_TYPE==='login') ? 'Log in' : 'Sign Up'
+- const alter_variant_text = (ENTER_TYPE==='login') ? 'Don\'t have an account?' : 'I already have an account'
+
+div(class= ENTER_TYPE)
+  img.logo(src='./img/signup_login_logo.png')
+  .title #{btn_msg}
+  form(class= ENTER_TYPE+'-form')
+    for input in inputForms
+      .form
+        label.my-label #{input.labelname}
+        input(
+          type=input.type
+          name=input.name
+          placeholder=input.placeholder
+          id=input.name+'-input'
+        )
+        .bad-input(id= 'bad-'+input.name)
+    button.submit-btn(type='submit' id= ENTER_TYPE+'-submit-btn') #{btn_msg}
+    a.alternative-variant(href=ENTER_TYPE) #{alter_variant_text}
