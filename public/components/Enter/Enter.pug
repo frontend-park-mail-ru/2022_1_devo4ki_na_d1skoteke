@@ -6,7 +6,7 @@
 div(class= ENTER_TYPE)
   img.logo(src='./img/signup_login_logo.png')
   .title #{btn_msg}
-  form(class= ENTER_TYPE+'-form')
+  form(class= ENTER_TYPE+'-form' name= ENTER_TYPE+'-form')
     for input in inputForms
       .form
         label.my-label #{input.labelname}
@@ -17,5 +17,5 @@ div(class= ENTER_TYPE)
           id=input.name+'-input'
         )
         .bad-input(id= 'bad-'+input.name)
-    button.submit-btn(type='submit' id= ENTER_TYPE+'-submit-btn') #{btn_msg}
+    input.submit-btn(type='submit' id= ENTER_TYPE+'-submit-btn' value= btn_msg)
     a.alternative-variant(href=opposite_variant data-section=opposite_variant) #{alter_variant_text}

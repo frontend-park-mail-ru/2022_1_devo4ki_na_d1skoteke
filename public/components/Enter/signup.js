@@ -53,27 +53,29 @@ const validatePasswordPrimary = (password) => {
 };
 
 const addValidationPrimaryPassword = () => {
-  const passwordInput = document.getElementById('primary-password-input');
+  const passwordInput = document.getElementById('primaryPassword-input');
   const passwordForm = document.querySelector('form');
 
+  passwordForm.querySelector('#bad-primaryPassword').style.display = 'none';
   passwordInput.addEventListener('focusout', (e) => {
     switch (validatePasswordPrimary(e.target.value)) {
       case utils.InvalidStatusType.WRONG_SYMBOLS:
-        passwordForm.querySelector('#bad-primary-password').style.display = 'block';
-        passwordForm.querySelector('#bad-primary-password').innerHTML = 'Your password'
+        passwordForm.querySelector('#bad-primaryPassword').style.display = 'block';
+        passwordForm.querySelector('#bad-primaryPassword').innerHTML = 'Your password '
           + 'is unsafe!';
         break;
       case utils.InvalidStatusType.EMPTY:
-        passwordForm.querySelector('#bad-primary-password').style.display = 'none';
+        passwordForm.querySelector('#bad-primaryPassword').style.display = 'none';
         break;
       case utils.InvalidStatusType.VALID:
-        passwordForm.querySelector('#bad-primary-password').style.display = 'none';
+        passwordForm.querySelector('#bad-primaryPassword').style.display = 'none';
         break;
       default:
+        passwordForm.querySelector('#bad-primaryPassword').style.display = 'none';
     }
   });
   passwordInput.addEventListener('input', () => {
-    passwordForm.querySelector('#bad-primary-password').style.display = 'none';
+    passwordForm.querySelector('#bad-primaryPassword').style.display = 'none';
   });
 };
 
@@ -88,30 +90,32 @@ const validatePasswordConfirm = (passwordConfirm, primaryPassword) => {
 };
 
 const addValidationConfirmPassword = () => {
-  const confirmPasswordInput = document.getElementById('confirm-password-input');
+  const confirmPasswordInput = document.getElementById('confirmPassword-input');
   const confirmPasswordForm = document.querySelector('form');
 
+  confirmPasswordForm.querySelector('#bad-confirmPassword').style.display = 'none';
   confirmPasswordInput.addEventListener('focusout', (e) => {
     switch (validatePasswordConfirm(
       e.target.value,
-      document.querySelector('#primary-password-input').value,
+      document.querySelector('#primaryPassword-input').value,
     )) {
       case utils.InvalidStatusType.DO_NOT_MATCH:
-        confirmPasswordForm.querySelector('#bad-confirm-password').style.display = 'block';
-        confirmPasswordForm.querySelector('#bad-confirm-password').innerHTML = 'Passwords'
+        confirmPasswordForm.querySelector('#bad-confirmPassword').style.display = 'block';
+        confirmPasswordForm.querySelector('#bad-confirmPassword').innerHTML = 'Passwords '
           + 'don\'t match';
         break;
       case utils.InvalidStatusType.EMPTY:
-        confirmPasswordForm.querySelector('#bad-confirm-password').style.display = 'none';
+        confirmPasswordForm.querySelector('#bad-confirmPassword').style.display = 'none';
         break;
       case utils.InvalidStatusType.VALID:
-        confirmPasswordForm.querySelector('#bad-confirm-password').style.display = 'none';
+        confirmPasswordForm.querySelector('#bad-confirmPassword').style.display = 'none';
         break;
       default:
+        confirmPasswordForm.querySelector('#bad-confirmPassword').style.display = 'none';
     }
   });
   confirmPasswordInput.addEventListener('input', () => {
-    confirmPasswordForm.querySelector('#bad-confirm-password').style.display = 'none';
+    confirmPasswordForm.querySelector('#bad-confirmPassword').style.display = 'none';
   });
 };
 

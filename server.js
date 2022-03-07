@@ -1,6 +1,8 @@
 const express = require('express');
 const path = require('path');
 const fs = require('fs');
+const pug = require('pug');
+const uuid = require('uuid').v4;
 
 const app = express();
 
@@ -8,8 +10,6 @@ app.use(express.json());
 app.use(express.static(path.resolve(__dirname, 'public')));
 
 app.set('view engine', 'pug');
-
-const pug = require('pug');
 
 const compileTemplate = () => {
   const tmplName = 'Enter';
@@ -26,6 +26,58 @@ const compileTemplate = () => {
 };
 
 compileTemplate();
+
+const users = {
+  'mr.erik770@mail.ru': {
+    nickname: 'erik770',
+    email: 'mr.erik770@mail.ru',
+    password: 'password',
+  },
+};
+const ids = {};
+
+app.post('/signup', (req, res) => {
+  const { nickname } = req.body;
+  const { email } = req.body;
+  const { password } = req.body;
+  if (
+    !password || !email
+    || !password.match(/^\S{4,}$/)
+    || !email.match(/@/)
+  ) {
+    return res.status(400).json({ error: 'Не валидные данные пользователя' });
+  }
+  if (users[email]) {
+    return res.status(400).json({ error: 'Пользователь уже существует' });
+  }
+
+  const id = uuid();
+  const user = {
+    nickname, email, password,
+  };
+  ids[id] = email;
+  users[email] = user;
+
+  res.cookie('podvorot', id, { expires: new Date(Date.now() + 1000 * 60 * 10) });
+  return res.status(201).json({ id });
+});
+
+app.post('/login', (req, res) => {
+  const { password } = req.body;
+  const { email } = req.body;
+  if (!password || !email) {
+    return res.status(400).json({ error: 'Не указан E-Mail или пароль' });
+  }
+  if (!users[email] || users[email].password !== password) {
+    return res.status(400).json({ error: 'Не верный E-Mail и/или пароль' });
+  }
+
+  const id = uuid();
+  ids[id] = email;
+
+  res.cookie('podvorot', id, { expires: new Date(Date.now() + 1000 * 60 * 10) });
+  return res.status(200).json({ id });
+});
 
 const SERVER_PORT = process.env.PORT || 3000;
 

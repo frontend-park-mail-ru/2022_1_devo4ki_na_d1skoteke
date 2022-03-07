@@ -49,7 +49,7 @@ input {
 
 }
 
-input:focus {
+.form > input:focus {
     opacity: 70%;
 }
 

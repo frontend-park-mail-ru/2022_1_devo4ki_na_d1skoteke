@@ -54,3 +54,15 @@ export const addValidationEmail = () => {
     emailForm.querySelector('#bad-email').style.display = 'none';
   });
 };
+
+export const haveWrongInput = (form) => {
+  const errorFields = form.querySelectorAll('.bad-input');
+
+  // eslint-disable-next-line no-restricted-syntax
+  for (const error of errorFields) {
+    if (error.style.display !== 'none') {
+      return true;
+    }
+  }
+  return false;
+};
