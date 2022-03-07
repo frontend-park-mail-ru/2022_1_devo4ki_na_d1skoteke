@@ -1,11 +1,14 @@
+import { CreateLeftSide } from "../components/LeftSideBar/LeftSideBar.js";
+
 export const note = (node) => {
     const page = document.createElement("div");
   
     page.classList.add("notion__whole__page");
   
-    createSidebar(page);
+    CreateLeftSide(page, {name: "jhosua"});
+
     createNotionContent(page);
-  
+
     node.appendChild(page);
   };
   
@@ -452,9 +455,51 @@ const createSidebarBio = (node) => {
     inputForm.setAttribute("placeholder", " ");
     inputForm.setAttribute("data-content-editable-leaf", "true");
     inputForm.setAttribute("contenteditable", "true");
-    inputForm.innerText = "hehe";
+    inputForm.innerText = "";
+    
+    if (node.lastChild === null) {
+      console.log('hehe');
+      node.appendChild(inputForm);
+    }
+    // node.appendChild(inputForm);
+    // let insertBefore = inputForm.nextSibling;
+    // console.log(node.lastChild);
+
+
+    inputForm.addEventListener("keyup", function(event) {
+
+
+      ////////////// событие происходит внутри inputForm
+      // create tmpNode;
+      // insertBEfore(inputForm->nextChild), inputForm->nextChild если nextChild != 0
+      // input.parendNode.appendChild(tm  pNode);
+
+      event.preventDefault();
+      if (event.keyCode === 13) {
+
+        let tmpNode = createDocumentItsetlfInput(node)
+        if (inputForm.nextSibling !== null) {
+          inputForm.parentNode.insertBefore(tmpNode, inputForm.nextSibling);
+          console.log("this one")
+          tmpNode.focus();
+          
+          return;
+        } else {
+          console.log("and that one")
+
+          inputForm.parentNode.appendChild(tmpNode);
+            
+        tmpNode.focus();
+        // tmpNode.select();
+          return;
+        }
+
   
-    node.appendChild(inputForm);
+
+
+      }
+    });
+    return inputForm;
   };
   
   const createNotionContentDocumentItself = (node) => {
@@ -464,17 +509,7 @@ const createSidebarBio = (node) => {
     createDocumentItsetlfInput(documentItself);
     createDocumentItsetlfInput(documentItself);
     createDocumentItsetlfInput(documentItself);
-    createDocumentItsetlfInput(documentItself);
-    createDocumentItsetlfInput(documentItself);
-    createDocumentItsetlfInput(documentItself);
-    createDocumentItsetlfInput(documentItself);
-    createDocumentItsetlfInput(documentItself);
-    createDocumentItsetlfInput(documentItself);
-    createDocumentItsetlfInput(documentItself);
-    createDocumentItsetlfInput(documentItself);
-    createDocumentItsetlfInput(documentItself);
-    createDocumentItsetlfInput(documentItself);
-    createDocumentItsetlfInput(documentItself);
+
   
     node.appendChild(documentItself);
   };
