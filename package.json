@@ -20,7 +20,6 @@
   },
   "homepage": "https://github.com/frontend-park-mail-ru/2022_1_devo4ki_na_d1skoteke#readme",
   "dependencies": {
-    "core-js": "^3.21.1",
     "debug": "^4.3.3",
     "express": "^4.17.3",
     "pug": "^3.0.2",

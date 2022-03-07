@@ -62,16 +62,9 @@ export const createBadEmailTextError = () => {
   return badEmailText;
 };
 
-export const createEmailInput = () => {
-  const emailForm = document.createElement('div');
-  emailForm.classList.add('form');
-
-  const emailInput = createInput('email', 'Enter email', 'email');
-  emailInput.id = 'email-input';
-
-  emailForm.appendChild(createLabel('Email'));
-  emailForm.appendChild(emailInput);
-  emailForm.appendChild(createBadEmailTextError());
+export const addValidationEmail = () => {
+  const emailInput = document.getElementById('email-input');
+  const emailForm = document.querySelector('form');
 
   emailInput.addEventListener('focusout', (e) => {
     switch (validateEmail(e.target.value)) {
@@ -93,6 +86,39 @@ export const createEmailInput = () => {
   emailInput.addEventListener('input', () => {
     emailForm.querySelector('#bad-email').style.display = 'none';
   });
-
-  return emailForm;
 };
+
+// export const createEmailInput = () => {
+//   const emailForm = document.createElement('div');
+//   emailForm.classList.add('form');
+//
+//   const emailInput = createInput('email', 'Enter email', 'email');
+//   emailInput.id = 'email-input';
+//
+//   emailForm.appendChild(createLabel('Email'));
+//   emailForm.appendChild(emailInput);
+//   emailForm.appendChild(createBadEmailTextError());
+//
+//   emailInput.addEventListener('focusout', (e) => {
+//     switch (validateEmail(e.target.value)) {
+//       case InvalidStatusType.WRONG_SYMBOLS:
+//         emailForm.querySelector('#bad-email').style.display = 'block';
+//         emailForm.querySelector('#bad-email')
+//           .innerHTML = 'Please enter valid email';
+//         break;
+//       // TODO: ALREADY_EXISTS status handler
+//       case InvalidStatusType.EMPTY:
+//         emailForm.querySelector('#bad-email').style.display = 'none';
+//         break;
+//       case InvalidStatusType.VALID:
+//         emailForm.querySelector('#bad-email').style.display = 'none';
+//         break;
+//       default:
+//     }
+//   });
+//   emailInput.addEventListener('input', () => {
+//     emailForm.querySelector('#bad-email').style.display = 'none';
+//   });
+//
+//   return emailForm;
+// };
