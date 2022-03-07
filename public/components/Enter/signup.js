@@ -1,5 +1,5 @@
 import * as utils from '../../js/utils.js';
-import {Enter} from './Enter.js';
+import { Enter } from './compiled/Enter.js';
 
 const validateNickname = (nickname) => {
   if (nickname === '') {
@@ -54,7 +54,6 @@ const validatePasswordPrimary = (password) => {
 
 const addValidationPrimaryPassword = () => {
   const passwordInput = document.getElementById('primary-password-input');
-  console.log(passwordInput);
   const passwordForm = document.querySelector('form');
 
   passwordInput.addEventListener('focusout', (e) => {
@@ -93,8 +92,10 @@ const addValidationConfirmPassword = () => {
   const confirmPasswordForm = document.querySelector('form');
 
   confirmPasswordInput.addEventListener('focusout', (e) => {
-    switch (validatePasswordConfirm(e.target.value,
-      document.querySelector('#primary-password-input').value)) {
+    switch (validatePasswordConfirm(
+      e.target.value,
+      document.querySelector('#primary-password-input').value,
+    )) {
       case utils.InvalidStatusType.DO_NOT_MATCH:
         confirmPasswordForm.querySelector('#bad-confirm-password').style.display = 'block';
         confirmPasswordForm.querySelector('#bad-confirm-password').innerHTML = 'Passwords'
@@ -121,42 +122,13 @@ const addValidationForForms = () => {
   addValidationConfirmPassword();
 };
 
-export const Signup = () => {
+export const Signup = (context) => {
   const root = document.getElementById('root');
   root.innerHTML = '';
 
   const completeSignupForm = document.createElement('div');
 
-  completeSignupForm.innerHTML = Enter({
-    ENTER_TYPE: 'signup',
-    inputForms: [
-      {
-        labelname: 'Email',
-        type: 'email',
-        name: 'email',
-        placeholder: 'Enter email',
-      },
-      {
-        labelname: 'Nickname',
-        type: 'nickname',
-        name: 'nickname',
-        placeholder: 'Enter your nickname',
-      },
-      {
-        labelname: 'Password',
-        type: 'password',
-        name: 'primary-password',
-        placeholder: 'Enter password',
-      },
-      {
-        labelname: 'Confirm password',
-        type: 'password',
-        name: 'confirm-password',
-        placeholder: 'Enter password again',
-      },
-    ],
-  });
-
+  completeSignupForm.innerHTML = Enter(context);
   root.appendChild(completeSignupForm);
 
   addValidationForForms();

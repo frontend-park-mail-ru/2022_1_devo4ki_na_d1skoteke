@@ -1,5 +1,5 @@
 import * as utils from '../../js/utils.js';
-import { Enter } from './Enter.js';
+import { Enter } from './compiled/Enter.js';
 
 const validatePassword = (password) => {
   if (password === '') {
@@ -34,29 +34,13 @@ const addValidationForForms = () => {
   });
 };
 
-export const Login = () => {
+export const Login = (context) => {
   const root = document.getElementById('root');
   root.innerHTML = '';
 
   const completeLoginForm = document.createElement('div');
 
-  completeLoginForm.innerHTML = Enter({
-    ENTER_TYPE: 'login',
-    inputForms: [
-      {
-        labelname: 'Email',
-        type: 'email',
-        name: 'email',
-        placeholder: 'Enter email',
-      },
-      {
-        labelname: 'Password',
-        type: 'password',
-        name: 'password',
-        placeholder: 'Enter password',
-      },
-    ],
-  });
+  completeLoginForm.innerHTML = Enter(context);
   root.appendChild(completeLoginForm);
 
   addValidationForForms();

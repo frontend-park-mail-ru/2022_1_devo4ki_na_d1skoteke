@@ -13,13 +13,13 @@ const pug = require('pug');
 
 const compileTemplate = () => {
   const tmplName = 'Enter';
-  const componentPath = `public/components/${tmplName}/`;
+  const componentPath = `public/components/${tmplName}`;
 
   const comp = pug.compileFileClient(`${componentPath}/${tmplName}.pug`, { name: `${tmplName}` });
   const templates = [];
   templates.push(comp);
 
-  fs.writeFileSync(`${componentPath}/${tmplName}.js`, `${templates.pop()} export {${tmplName}}`);
+  fs.writeFileSync(`${componentPath}/compiled/${tmplName}.js`, `${templates.pop()} export {${tmplName}}`);
 };
 
 compileTemplate();

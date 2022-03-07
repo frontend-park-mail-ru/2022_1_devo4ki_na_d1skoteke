@@ -1,5 +1,4 @@
-import { Login } from './components/Enter/login.js';
-import { Signup } from './components/Enter/signup.js';
+import { renderEnter } from './components/Enter/Enter.js';
 import { SetFavicon } from './js/utils.js';
 
 SetFavicon();
@@ -34,11 +33,55 @@ root.addEventListener('click', (e) => {
   const { target } = e;
   switch (target.dataset.section) {
     case 'signup': {
-      Signup();
+      renderEnter({
+        ENTER_TYPE: 'signup',
+        inputForms: [
+          {
+            labelname: 'Email',
+            type: 'email',
+            name: 'email',
+            placeholder: 'Enter email',
+          },
+          {
+            labelname: 'Nickname',
+            type: 'nickname',
+            name: 'nickname',
+            placeholder: 'Enter your nickname',
+          },
+          {
+            labelname: 'Password',
+            type: 'password',
+            name: 'primary-password',
+            placeholder: 'Enter password',
+          },
+          {
+            labelname: 'Confirm password',
+            type: 'password',
+            name: 'confirm-password',
+            placeholder: 'Enter password again',
+          },
+        ],
+      });
       break;
     }
     case 'login': {
-      Login();
+      renderEnter({
+        ENTER_TYPE: 'login',
+        inputForms: [
+          {
+            labelname: 'Email',
+            type: 'email',
+            name: 'email',
+            placeholder: 'Enter email',
+          },
+          {
+            labelname: 'Password',
+            type: 'password',
+            name: 'password',
+            placeholder: 'Enter password',
+          },
+        ],
+      });
       break;
     }
     default: {
