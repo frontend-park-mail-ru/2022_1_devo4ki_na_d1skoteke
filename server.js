@@ -19,6 +19,9 @@ const compileTemplate = () => {
   const templates = [];
   templates.push(comp);
 
+  if (!fs.existsSync(`${componentPath}/compiled`)) {
+    fs.mkdirSync(`${componentPath}/compiled`);
+  }
   fs.writeFileSync(`${componentPath}/compiled/${tmplName}.js`, `${templates.pop()} export {${tmplName}}`);
 };
 
