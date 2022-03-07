@@ -54,4 +54,3 @@ export const addValidationEmail = () => {
     emailForm.querySelector('#bad-email').style.display = 'none';
   });
 };
-

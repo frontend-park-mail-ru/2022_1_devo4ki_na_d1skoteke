@@ -1,5 +1,7 @@
-- const btn_msg = (ENTER_TYPE==='login') ? 'Log in' : 'Sign Up'
-- const alter_variant_text = (ENTER_TYPE==='login') ? 'Don\'t have an account?' : 'I already have an account'
+-
+  const btn_msg = (ENTER_TYPE==='login') ? 'Log in' : 'Sign Up'
+  const alter_variant_text = (ENTER_TYPE==='login') ? 'Don\'t have an account?' : 'I already have an account'
+  const opposite_variant = (ENTER_TYPE==='login') ? 'signup' : 'login'
 
 div(class= ENTER_TYPE)
   img.logo(src='./img/signup_login_logo.png')
@@ -16,4 +18,4 @@ div(class= ENTER_TYPE)
         )
         .bad-input(id= 'bad-'+input.name)
     button.submit-btn(type='submit' id= ENTER_TYPE+'-submit-btn') #{btn_msg}
-    a.alternative-variant(href=ENTER_TYPE) #{alter_variant_text}
+    a.alternative-variant(href=opposite_variant data-section=opposite_variant) #{alter_variant_text}
