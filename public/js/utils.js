@@ -9,10 +9,10 @@ export const InvalidStatusType = {
 
 export const SetFavicon = () => {
   const addFavicon = document.createElement('link');
-  addFavicon.setAttribute('rel', 'favicon');
-  addFavicon.setAttribute('href', 'img/favicon.ico');
+  addFavicon.setAttribute('rel', 'icon');
+  addFavicon.setAttribute('href', './img/favicon.ico');
 
-  document.querySelector('head').appendChild(addFavicon);
+  document.querySelector('head').insertBefore(addFavicon, document.querySelector('title').nextSibling);
 };
 
 export const validateEmail = (email) => {
