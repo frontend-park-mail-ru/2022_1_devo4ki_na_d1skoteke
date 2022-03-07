@@ -1,4 +1,5 @@
 import { CreateLeftSide } from "../components/LeftSideBar/LeftSideBar.js";
+import { CreateNoteContent } from "../components/NoteContent/NoteContent.js";
 
 export const note = (node) => {
     const page = document.createElement("div");
@@ -6,8 +7,7 @@ export const note = (node) => {
     page.classList.add("notion__whole__page");
   
     CreateLeftSide(page, {name: "jhosua"});
-
-    createNotionContent(page);
+    CreateNoteContent(page, {title: "note number 41"});
 
     node.appendChild(page);
   };
@@ -482,7 +482,7 @@ const createSidebarBio = (node) => {
           inputForm.parentNode.insertBefore(tmpNode, inputForm.nextSibling);
           console.log("this one")
           tmpNode.focus();
-          
+
           return;
         } else {
           console.log("and that one")
