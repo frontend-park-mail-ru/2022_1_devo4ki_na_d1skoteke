@@ -4,7 +4,7 @@
 }
 
 :root {
-  --notion-sidebar-width: 480px;
+  --notion-sidebar-width: 40vh;
 }
 
 .tmp_navigation {
@@ -12,11 +12,11 @@
   flex-direction: row;
   align-items: center;
   justify-content: space-evenly;
-  background-color: skyblue;
+  background-color: #faffd6;
 }
 
 .notion__sidebar {
-  background: rgb(247, 246, 243);
+  background-color: #faffd6;
   width: var(--notion-sidebar-width);
   height: 100vh;
   position: relative;

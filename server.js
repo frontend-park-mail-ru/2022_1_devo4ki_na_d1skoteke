@@ -14,57 +14,121 @@ const compileTemplate = () => {
   const tmplName = 'NoteContent';
   const componentPath = `public/components/${tmplName}`;
 
-  const comp = pug.compileFileClient(`${componentPath}/${tmplName}.pug`, { name: `${tmplName}` });
+  const comp = pug.compileFileClient(`${componentPath}/${tmplName}.pug`, {
+    name: `${tmplName}`,
+  });
   const templates = [];
   templates.push(comp);
 
   if (!fs.existsSync(`${componentPath}/compiled`)) {
     fs.mkdirSync(`${componentPath}/compiled`);
   }
-  fs.writeFileSync(`${componentPath}/compiled/${tmplName}.js`, `${templates.pop()} export {${tmplName}}`);
+  fs.writeFileSync(
+    `${componentPath}/compiled/${tmplName}.js`,
+    `${templates.pop()} export {${tmplName}}`,
+  );
 };
 
 compileTemplate();
+
+app.use('/note', (req, res) => {
+  const bookStore = [
+    {
+      title: 'Templating with Pug',
+      author: 'Winston Smith',
+      pages: 143,
+      year: 2017,
+    },
+    {
+      title: 'Node.js will help',
+      author: 'Guy Fake',
+      pages: 879,
+      year: 2015,
+    },
+  ];
+  res.render('sidebar', { bookStore });
+});
+
+app.use('/body', (req, res) => {
+  const bookStore = [
+    {
+      title: 'Templating with Pug',
+      author: 'Winston Smith',
+      pages: 143,
+      year: 2017,
+    },
+    {
+      title: 'Node.js will help',
+      author: 'Guy Fake',
+      pages: 879,
+      year: 2015,
+    },
+  ];
+  res.render('sidebar2', {
+    name: 'Jhon',
+    title: 'Lectures for technopark',
+    bookStore,
+  });
+});
+
+app.use('/books', (req, res) => {
+  const bookStore = [
+    {
+      title: 'Templating with Pug',
+      author: 'Winston Smith',
+      pages: 143,
+      year: 2017,
+    },
+    {
+      title: 'Node.js will help',
+      author: 'Guy Fake',
+      pages: 879,
+      year: 2015,
+    },
+  ];
+
+  res.render('books', {
+    bookStore,
+  });
+});
+
+app.use('/yyy', (req, res) => {
+  res.render('yyy', { title: 'ffff' });
+});
 
 app.use(express.json());
 
 app.use(express.static(path.resolve(__dirname, 'public')));
 
-
-
 app.use('/api/v1/note/:id', (req, res) => {
-  const id = req.params.id;
-  res.json({name: `somerandomshitname${id}`, body: `somarandombody${id}`});
-})
+  const { id } = req.params;
+  res.json({ name: `The note is ${id}`, body: `Name is ${id}` });
+});
 
 app.use('/api/v1/notes', (req, res) => {
-
-
   const body = {
     notes: [
       {
-        name: "hehe 1 note",
-        favincon: "s3/erfgefwfwef",
-        token: "API-ion-2342341242regf3qf3f3f3wfd"
+        title: 'First note heheheh interesting',
+        favincon: 's3/erfgefwfwef',
+        token: 'AP-ion-2342341242regf3qf3f3f3wfd',
       },
       {
-        name: "hehe 2 note",
-        favincon: "s3/erfgefwfwef",
-        token: "API-ion-2342341242regf3qf3f3f3wfd"
+        title: '2 note heheheh interesting',
+        favincon: 's3/erfgefwfwef',
+        token: 'API-ion-2342341242regf3qf3f3f3wfe',
       },
       {
-        name: "hehe 3 note",
-        favincon: "s3/erfgefwfwef",
-        token: "API-ion-2342341242regf3qf3f3f3wfd"
-      }
-    
-    ]
-    }
+        title: '3 note heheheh interesting',
+        favincon: 's3/erfgefwfwef',
+        token: 'API-ion-2342341242regf3qf3f3f3wfd',
+      },
+    ],
+  };
 
+  // res.body = ();
   res.json(body);
-})
-
-const listener = app.listen(3000, () => {
-  console.log(`App is listening on port ${listener.address().port}`);
 });
 
+app.listen(3000, () => {
+});
