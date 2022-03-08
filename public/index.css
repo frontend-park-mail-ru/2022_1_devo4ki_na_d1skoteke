@@ -1,4 +1,4 @@
-@import '/components/Enter/Enter.css';
+@import 'components/Auth/Auth.css';
 
 :root {
     --input-form-fill-color: rgba(201, 201, 201, 0.6);

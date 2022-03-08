@@ -1,6 +1,7 @@
 {
   "env": {
     "browser": true,
+    "es6": true,
     "commonjs": true,
     "es2021": true,
     "node": true
@@ -22,6 +23,7 @@
         "skipBlankLines": true
       }
     ],
+    "no-use-before-define": "off",
     "import/prefer-default-export": "off",
     "import/extensions": [
       "error",

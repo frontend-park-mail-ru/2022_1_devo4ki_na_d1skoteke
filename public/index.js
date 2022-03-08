@@ -1,11 +1,57 @@
-import { renderEnter } from './components/Enter/Enter.js';
+/* eslint-disable no-undef */
+import { renderAuthPage } from './components/Auth/Auth.js';
 import { SetFavicon, haveWrongInput, badResponseHandler } from './js/utils.js';
 
 const root = document.getElementById('root');
 SetFavicon();
 
+const configApp = {
+  notes: {
+    href: '/notes',
+    openMethod: notesPage,
+  },
+  signup: {
+    href: '/sighup',
+    text: 'Зарегистрироваться',
+    openMethod: signupPage,
+  },
+  login: {
+    href: '/login',
+    text: 'Войти',
+    openMethod: loginPage,
+  },
+};
+
+const notesPage = () => {
+  root.innerHTML = '';
+
+  Ajax.get(
+    {
+      url: '/notes',
+      callback: (status, responseText) => {
+        let isAuthorised = false;
+        if (status === 200) {
+          isAuthorised = true;
+        }
+
+        if (isAuthorised) {
+          const notePage = document.createElement('div');
+          notePage.classList.add('title');
+          const { nickname } = JSON.parse(responseText);
+
+          notePage.innerHTML = `This is ${nickname}'s Notes page.`;
+          root.appendChild(notePage);
+          return;
+        }
+        signupPage();
+      },
+    },
+  );
+};
+notesPage();
+
 const signupPage = () => {
-  renderEnter({
+  renderAuthPage({
     ENTER_TYPE: 'signup',
     inputForms: [
       {
@@ -66,7 +112,7 @@ const signupPage = () => {
 };
 
 const loginPage = () => {
-  renderEnter({
+  renderAuthPage({
     ENTER_TYPE: 'login',
     inputForms: [
       {
@@ -113,52 +159,6 @@ const loginPage = () => {
     );
   });
 };
-
-const notesPage = () => {
-  root.innerHTML = '';
-
-  Ajax.get(
-    {
-      url: '/notes',
-      callback: (status, responseText) => {
-        let isAuthorised = false;
-        if (status === 200) {
-          isAuthorised = true;
-        }
-
-        if (isAuthorised) {
-          const notePage = document.createElement('div');
-          notePage.classList.add('title');
-          const { nickname } = JSON.parse(responseText);
-
-          notePage.innerHTML = `This is ${nickname}'s Notes page.`;
-          root.appendChild(notePage);
-          return;
-        }
-        signupPage();
-      },
-    },
-  );
-};
-
-const configApp = {
-  notes: {
-    href: '/notes',
-    openMethod: notesPage,
-  },
-  signup: {
-    href: '/sighup',
-    text: 'Зарегистрироваться',
-    openMethod: signupPage,
-  },
-  login: {
-    href: '/login',
-    text: 'Войти',
-    openMethod: loginPage,
-  },
-};
-
-notesPage();
 
 root.addEventListener('click', (e) => {
   const { target } = e;

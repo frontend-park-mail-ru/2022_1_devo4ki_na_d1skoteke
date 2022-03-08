@@ -14,7 +14,7 @@ app.use(cookie());
 app.set('view engine', 'pug');
 
 const compileTemplate = () => {
-  const tmplName = 'Enter';
+  const tmplName = 'Auth';
   const componentPath = `public/components/${tmplName}`;
 
   const comp = pug.compileFileClient(`${componentPath}/${tmplName}.pug`, { name: `${tmplName}` });
