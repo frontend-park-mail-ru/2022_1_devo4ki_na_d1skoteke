@@ -66,3 +66,26 @@ export const haveWrongInput = (form) => {
   }
   return false;
 };
+
+export const badResponseHandler = (responseText) => {
+  const { error } = JSON.parse(responseText);
+  let errorField;
+  switch (error) {
+    case 'Нет пользователя с таким email':
+      errorField = document.getElementById('bad-email');
+      errorField.style.display = 'block';
+      errorField.innerHTML = 'No user with such email';
+      break;
+    case 'Не верный пароль':
+      errorField = document.getElementById('bad-password');
+      errorField.style.display = 'block';
+      errorField.innerHTML = 'Wrong password';
+      break;
+    case 'Пользователь уже существует':
+      errorField = document.getElementById('bad-email');
+      errorField.style.display = 'block';
+      errorField.innerHTML = 'This email is already in use<br> You can log in or create new account';
+      break;
+    default:
+  }
+};

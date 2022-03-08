@@ -3,11 +3,13 @@ const path = require('path');
 const fs = require('fs');
 const pug = require('pug');
 const uuid = require('uuid').v4;
+const cookie = require('cookie-parser');
 
 const app = express();
 
 app.use(express.json());
 app.use(express.static(path.resolve(__dirname, 'public')));
+app.use(cookie());
 
 app.set('view engine', 'pug');
 
@@ -58,7 +60,7 @@ app.post('/signup', (req, res) => {
   ids[id] = email;
   users[email] = user;
 
-  res.cookie('podvorot', id, { expires: new Date(Date.now() + 1000 * 60 * 10) });
+  res.cookie('zavorot', id, { expires: new Date(Date.now() + 1000 * 60 * 10) });
   return res.status(201).json({ id });
 });
 
@@ -68,17 +70,29 @@ app.post('/login', (req, res) => {
   if (!password || !email) {
     return res.status(400).json({ error: 'Не указан E-Mail или пароль' });
   }
-  if (!users[email] || users[email].password !== password) {
-    return res.status(400).json({ error: 'Не верный E-Mail и/или пароль' });
+  if (!users[email]) {
+    return res.status(400).json({ error: 'Нет пользователя с таким email' });
+  }
+  if (users[email].password !== password) {
+    return res.status(400).json({ error: 'Не верный пароль' });
   }
 
   const id = uuid();
   ids[id] = email;
 
-  res.cookie('podvorot', id, { expires: new Date(Date.now() + 1000 * 60 * 10) });
+  res.cookie('zavorot', id, { expires: new Date(Date.now() + 1000 * 60 * 10) });
   return res.status(200).json({ id });
 });
 
+app.get('/notes', (req, res) => {
+  const id = req.cookies.zavorot;
+  const email = ids[id];
+  if (!email || !users[email]) {
+    return res.status(401).end();
+  }
+
+  return res.json(users[email]);
+});
 const SERVER_PORT = process.env.PORT || 3000;
 
 app.listen(SERVER_PORT, () => {

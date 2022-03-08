@@ -8,6 +8,7 @@
   };
 
   class Ajax {
+    // eslint-disable-next-line class-methods-use-this
     ajax(
       {
         url = '/',

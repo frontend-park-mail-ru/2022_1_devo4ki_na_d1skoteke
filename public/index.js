@@ -1,5 +1,5 @@
 import { renderEnter } from './components/Enter/Enter.js';
-import { SetFavicon, haveWrongInput } from './js/utils.js';
+import { SetFavicon, haveWrongInput, badResponseHandler } from './js/utils.js';
 
 const root = document.getElementById('root');
 SetFavicon();
@@ -51,13 +51,14 @@ const signupPage = () => {
       {
         url: '/signup',
         body: { email, nickname, password },
-        callback: (status) => {
+        callback: (status, responseText) => {
           if (status === 201) {
-            console.log('success');
-            // TODO: notesPage
+            notesPage();
             return;
           }
-          console.log('auth error');
+          if (status === 400) {
+            badResponseHandler(responseText);
+          }
         },
       },
     );
@@ -98,23 +99,52 @@ const loginPage = () => {
       {
         url: '/login',
         body: { email, password },
-        callback: (status) => {
+        callback: (status, responseText) => {
           if (status === 200) {
-            console.log('auth success');
-            // TODO: notesPage
+            // console.log('auth success');
+            notesPage();
             return;
           }
-          console.log('auth error');
+          if (status === 400) {
+            badResponseHandler(responseText);
+          }
         },
       },
     );
   });
 };
 
+const notesPage = () => {
+  root.innerHTML = '';
+
+  Ajax.get(
+    {
+      url: '/notes',
+      callback: (status, responseText) => {
+        let isAuthorised = false;
+        if (status === 200) {
+          isAuthorised = true;
+        }
+
+        if (isAuthorised) {
+          const notePage = document.createElement('div');
+          notePage.classList.add('title');
+          const { nickname } = JSON.parse(responseText);
+
+          notePage.innerHTML = `This is ${nickname}'s Notes page.`;
+          root.appendChild(notePage);
+          return;
+        }
+        signupPage();
+      },
+    },
+  );
+};
+
 const configApp = {
   notes: {
-    href: '/',
-    // TODO: openMethod: notesPage,
+    href: '/notes',
+    openMethod: notesPage,
   },
   signup: {
     href: '/sighup',
@@ -128,7 +158,7 @@ const configApp = {
   },
 };
 
-signupPage();
+notesPage();
 
 root.addEventListener('click', (e) => {
   const { target } = e;
