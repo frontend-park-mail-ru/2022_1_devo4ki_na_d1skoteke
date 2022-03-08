@@ -5,23 +5,9 @@ import { SetFavicon, haveWrongInput, badResponseHandler } from './js/utils.js';
 const root = document.getElementById('root');
 SetFavicon();
 
-const configApp = {
-  notes: {
-    href: '/notes',
-    openMethod: notesPage,
-  },
-  signup: {
-    href: '/sighup',
-    text: 'Зарегистрироваться',
-    openMethod: signupPage,
-  },
-  login: {
-    href: '/login',
-    text: 'Войти',
-    openMethod: loginPage,
-  },
-};
-
+/**
+ * Create notes page for user, if user is unauthorised create signup page
+ */
 const notesPage = () => {
   root.innerHTML = '';
 
@@ -50,6 +36,9 @@ const notesPage = () => {
 };
 notesPage();
 
+/**
+ * Creating signup page
+ */
 const signupPage = () => {
   renderAuthPage({
     ENTER_TYPE: 'signup',
@@ -111,6 +100,9 @@ const signupPage = () => {
   });
 };
 
+/**
+ * Creating login page
+ */
 const loginPage = () => {
   renderAuthPage({
     ENTER_TYPE: 'login',
@@ -160,6 +152,30 @@ const loginPage = () => {
   });
 };
 
+/**
+ * Config of whole application.
+ * Shows dependence of links to our pages and functions that display them
+ */
+const configApp = {
+  notes: {
+    href: '/notes',
+    openMethod: notesPage,
+  },
+  signup: {
+    href: '/sighup',
+    openMethod: signupPage,
+  },
+  login: {
+    href: '/login',
+    openMethod: loginPage,
+  },
+};
+
+/**
+ * Adding event listener to all links to make application SPA
+ * replaces GET requests to function calls which creates specific page
+ * depending on config of our application
+ */
 root.addEventListener('click', (e) => {
   const { target } = e;
 

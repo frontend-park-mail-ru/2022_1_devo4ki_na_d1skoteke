@@ -13,6 +13,10 @@ app.use(cookie());
 
 app.set('view engine', 'pug');
 
+/**
+ * Compile templates from pug files to js files that create HTML.
+ * Compiled js file is placed in 'compiled' folder of component
+ */
 const compileTemplate = () => {
   const tmplName = 'Auth';
   const componentPath = `public/components/${tmplName}`;

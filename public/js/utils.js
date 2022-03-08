@@ -5,6 +5,7 @@ const InvalidStatusType = {
   VALID: 'valid',
 };
 
+/** Sets favicon of our application */
 export const SetFavicon = () => {
   const addFavicon = document.createElement('link');
   addFavicon.setAttribute('rel', 'icon');
@@ -172,6 +173,10 @@ const addValidationConfirmPassword = () => {
   });
 };
 
+/**
+ * Add event listeners to all inputs in form.
+ * Event listeners check if user entered wrong data and display errors
+ */
 export const addValidationForSignupForms = () => {
   addValidationEmail();
   addValidationNickname();
@@ -183,10 +188,13 @@ const validatePassword = (password) => {
   if (password === '') {
     return InvalidStatusType.EMPTY;
   }
-
   return InvalidStatusType.VALID;
 };
 
+/**
+ * Add event listeners to all inputs in form.
+ * Event listeners check if user entered wrong data and display errors
+ */
 export const addValidationForLoginForms = () => {
   addValidationEmail();
 
@@ -212,6 +220,10 @@ export const addValidationForLoginForms = () => {
   });
 };
 
+/**
+ * Checks if user somewhere entered wrong data.
+ * Used to prevent sending request with wrong data
+ * */
 export const haveWrongInput = (form) => {
   const errorFields = form.querySelectorAll('.bad-input');
 
@@ -224,6 +236,7 @@ export const haveWrongInput = (form) => {
   return false;
 };
 
+/** Shows errors in case of bad response from server */
 export const badResponseHandler = () => {
   let errorField = document.getElementById('bad-password');
   if (errorField !== null) {
