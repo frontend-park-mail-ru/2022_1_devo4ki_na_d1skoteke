@@ -2,6 +2,7 @@
     display: block;
     margin: 0 auto;
 }
+
 .signup {
     display: block;
     position: absolute;
@@ -45,7 +46,6 @@ input {
     border: none;
     outline: none;
     opacity: 80%;
-
 }
 
 .form > input:focus {

@@ -45,7 +45,6 @@ const signupPage = () => {
     inputForms: [
       {
         labelname: 'Email',
-        type: 'email',
         name: 'email',
         placeholder: 'Enter email',
       },
@@ -57,13 +56,11 @@ const signupPage = () => {
       },
       {
         labelname: 'Password',
-        type: 'password',
         name: 'primaryPassword',
         placeholder: 'Enter password',
       },
       {
         labelname: 'Confirm password',
-        type: 'password',
         name: 'confirmPassword',
         placeholder: 'Enter password again',
       },
@@ -109,13 +106,11 @@ const loginPage = () => {
     inputForms: [
       {
         labelname: 'Email',
-        type: 'email',
         name: 'email',
         placeholder: 'Enter email',
       },
       {
         labelname: 'Password',
-        type: 'password',
         name: 'password',
         placeholder: 'Enter password',
       },

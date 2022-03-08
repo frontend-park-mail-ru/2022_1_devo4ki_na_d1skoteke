@@ -3,9 +3,9 @@
 :root {
     --input-form-fill-color: rgba(201, 201, 201, 0.6);
     --btn-text-color: rgb(0, 0, 0);
-    --btn-background-color: #faf4e7;
-    --btn-border-color: #EED7AA;
-    --btn-background-hover-color: #f5eecc;
+    --btn-background-color: #FAFFD6;
+    --btn-border-color: #FFF170;
+    --btn-background-hover-color: #F6FFB8;
 }
 
 #root {

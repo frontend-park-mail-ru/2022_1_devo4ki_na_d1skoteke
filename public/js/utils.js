@@ -1,5 +1,6 @@
 const InvalidStatusType = {
   WRONG_SYMBOLS: 'invalid',
+  PASS_WRONG_LENGTH: 'wrong length',
   DO_NOT_MATCH: 'don\'t match',
   EMPTY: 'empty',
   VALID: 'valid',
@@ -96,7 +97,10 @@ const validatePasswordPrimary = (password) => {
   if (password === '') {
     return InvalidStatusType.EMPTY;
   }
-  const passwordRegex = /^(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{7,30}$/;
+  if (password.length < 7 || password.length > 30) {
+    return InvalidStatusType.PASS_WRONG_LENGTH;
+  }
+  const passwordRegex = /^(?=.*[0-9])[a-zA-Z0-9!@#$%^&*]{7,30}$/;
   if (!passwordRegex.test(password)) {
     return InvalidStatusType.WRONG_SYMBOLS;
   }
@@ -112,7 +116,12 @@ const addValidationPrimaryPassword = () => {
     switch (validatePasswordPrimary(e.target.value)) {
       case InvalidStatusType.WRONG_SYMBOLS:
         passwordForm.querySelector('#bad-primaryPassword').style.display = 'block';
-        passwordForm.querySelector('#bad-primaryPassword').innerHTML = 'Your password '
+        passwordForm.querySelector('#bad-primaryPassword').innerHTML = 'Password must have at least '
+          + 'one letter and digit';
+        break;
+      case InvalidStatusType.PASS_WRONG_LENGTH:
+        passwordForm.querySelector('#bad-primaryPassword').style.display = 'block';
+        passwordForm.querySelector('#bad-primaryPassword').innerHTML = 'Password must be 7-30 characters long'
           + 'is unsafe!';
         break;
       case InvalidStatusType.EMPTY:
