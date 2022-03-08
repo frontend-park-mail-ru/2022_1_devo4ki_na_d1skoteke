@@ -1,70 +1,56 @@
+import { note } from './views/note.js';
 
-import note from "./views/note.js";
-
-let root = document.getElementById("root");
+const root = document.getElementById('root');
 
 const createTmpNavigation = (node) => {
-  const signup = document.createElement("button");
-  const login = document.createElement("button");
-  const note = document.createElement("button");
+  const signup = document.createElement('button');
+  const login = document.createElement('button');
+  const noteNav = document.createElement('button');
 
-  signup.dataset.section = "signup";
-  login.dataset.section = "login";
-  note.dataset.section = "note";
+  signup.dataset.section = 'signup';
+  login.dataset.section = 'login';
+  noteNav.dataset.section = 'note';
  
-  signup.innerText = "signup";
-  login.innerText = "login";
-  note.innerText = "note";
+  signup.innerText = 'signup';
+  login.innerText = 'login';
+  noteNav.innerText = 'note';
 
-  const tmp_navbar = document.createElement("div");
-  tmp_navbar.classList.add("tmp_navigation");
-  tmp_navbar.appendChild(signup);
-  tmp_navbar.appendChild(login);
-  tmp_navbar.appendChild(note);
+  const tmpNavbar = document.createElement('div');
+  tmpNavbar.classList.add('tmp_navigation');
+  tmpNavbar.appendChild(signup);
+  tmpNavbar.appendChild(login);
+  tmpNavbar.appendChild(noteNav);
 
-  node.appendChild(tmp_navbar);
-
+  node.appendChild(tmpNavbar);
 };
-
-
-
 
 createTmpNavigation(root);
 
-
-
-root.addEventListener("click", (e) => {
+root.addEventListener('click', (e) => {
   const { target } = e;
   switch (target.dataset.section) {
-      case "signup": {
+    case 'signup': {
+      root.innerHTML = '';
+      root.innerText = 'there would be signup page';
+      createTmpNavigation(root);
+      break;
+    }
 
-        root.innerHTML = '';
-        root.innerText = "there would be signup page"
-        createTmpNavigation(root);
-        console.log("signup");
+    case 'login': {
+      root.innerHTML = '';
+      root.innerText = 'there would be login page';
+      createTmpNavigation(root);
+      break;
+    }
 
-        break;
-      } 
+    case 'note': {
+      root.innerHTML = '';
+      createTmpNavigation(root);
+      note(root);
+      break;
+    }
 
-      case "login": {
-        root.innerHTML = '';
-        root.innerText = "there would be login page"
-        createTmpNavigation(root);
-        console.log("login");
-        break;
-      } 
-
-      case "note": {
-        root.innerHTML = '';
-        createTmpNavigation(root);
-        note(root);
-        console.log("note");
-        break;
-      } 
-
-      default :{
-        console.log("unrecognized event");
-
-      }
+    default: {
+    }
   }
 });
