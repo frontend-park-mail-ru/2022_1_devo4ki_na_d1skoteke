@@ -4,6 +4,10 @@ export default class ApiStore {
     this.baseUrl = baseUrl;
   }
 
+  /*
+    signupData: {headers: any[], body: {login, email, password, passwordConfirmation}} 
+  */
+
   async Signup(signupData) {
     let endpoint = `${this.baseUrl}/api/v1/users/signup`;
 
@@ -15,6 +19,8 @@ export default class ApiStore {
       body: JSON.stringify(signupData.body),
     });
     // TODO: handle response - set cookie, etc
+
+    return response;
   }
 
   async Login() {
@@ -28,6 +34,7 @@ export default class ApiStore {
       body: JSON.stringify(signupData.body),
     });
     // TODO: handle response - set cookie, etc
+    return response;
   }
   async Logout() {}
 
