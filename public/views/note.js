@@ -7,8 +7,8 @@ export const note = (node) => {
     page.classList.add("notion__whole__page");
   
     CreateLeftSide(page, {name: "jhosua"});
-    CreateNoteContent(page, {title: "note number 41"});
-
+    // CreateNoteContent(page, {title: "note number 41"});
+    // createSidebar(page,)
     node.appendChild(page);
   };
   
