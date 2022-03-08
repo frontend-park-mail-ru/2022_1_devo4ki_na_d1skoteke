@@ -50,16 +50,17 @@ const signupPage = () => {
       },
       {
         labelname: 'Nickname',
-        type: 'nickname',
         name: 'nickname',
         placeholder: 'Enter your nickname',
       },
       {
+        type: 'password',
         labelname: 'Password',
         name: 'primaryPassword',
         placeholder: 'Enter password',
       },
       {
+        type: 'password',
         labelname: 'Confirm password',
         name: 'confirmPassword',
         placeholder: 'Enter password again',
@@ -110,6 +111,7 @@ const loginPage = () => {
         placeholder: 'Enter email',
       },
       {
+        type: 'password',
         labelname: 'Password',
         name: 'password',
         placeholder: 'Enter password',
