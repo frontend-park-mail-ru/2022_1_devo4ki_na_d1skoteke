@@ -10,8 +10,10 @@ app.set('view engine', 'pug');
 
 // app.set('view engine', 'pug');
 
-const compileTemplate = () => {
-  const tmplName = 'NoteContent';
+const templateNames = ['NoteContent', 'LeftSideBar'];
+
+const compileTemplate = (tmplName) => {
+  // const tmplName = 'NoteContent';
   const componentPath = `public/components/${tmplName}`;
 
   const comp = pug.compileFileClient(`${componentPath}/${tmplName}.pug`, {
@@ -29,7 +31,11 @@ const compileTemplate = () => {
   );
 };
 
-compileTemplate();
+templateNames.forEach((el) => {
+  compileTemplate(el);
+
+})
+
 
 app.use('/note', (req, res) => {
   const bookStore = [
