@@ -2,6 +2,11 @@ import { note } from './views/note.js';
 
 const root = document.getElementById('root');
 
+/**
+ * Represents a navigation bar
+ * @constructor
+ * @param {HTMLDivElement} node - The node for which tmpNavigation will be append
+ */
 const createTmpNavigation = (node) => {
   const signup = document.createElement('button');
   const login = document.createElement('button');
