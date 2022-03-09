@@ -1,7 +1,8 @@
+
 import ApiStore from './store/ApiStore.js';
 import { note } from './views/note.js';
 
-const root = document.getElementById('root');
+const root = document.getElementById("root");
 
 /**
  * Represents a navigation bar
@@ -24,8 +25,8 @@ const createTmpNavigation = async (node) => {
   noteNav.innerText = 'note';
   logout.innerText = 'logout';
 
-  const tmpNavbar = document.createElement('div');
-  tmpNavbar.classList.add('tmp_navigation');
+  const tmpNavbar = document.createElement("div");
+  tmpNavbar.classList.add("tmp_navigation");
   tmpNavbar.appendChild(signup);
   tmpNavbar.appendChild(login);
   tmpNavbar.appendChild(noteNav);
@@ -44,22 +45,22 @@ createTmpNavigation(root);
 root.addEventListener('click', async (e) => {
   const { target } = e;
   switch (target.dataset.section) {
-    case 'signup': {
-      root.innerHTML = '';
-      root.innerText = 'there would be signup page';
+    case "signup": {
+      root.innerHTML = "";
+      root.innerText = "there would be signup page";
       createTmpNavigation(root);
       break;
     }
 
-    case 'login': {
-      root.innerHTML = '';
-      root.innerText = 'there would be login page';
+    case "login": {
+      root.innerHTML = "";
+      root.innerText = "there would be login page";
       createTmpNavigation(root);
       break;
     }
 
-    case 'note': {
-      root.innerHTML = '';
+    case "note": {
+      root.innerHTML = "";
       createTmpNavigation(root);
       note(root);
       break;
