@@ -7,14 +7,12 @@ export const note = async (node) => {
 
   page.classList.add("notion__whole__page");
 
-  const back = new ApiStore();
-
-  const fetchRes = await back.GetAllNotes();
+  const fetchRes = await ApiStore.GetAllNotes();
   const bookStore = fetchRes.notes;
 
   CreateLeftSide(page, { name: "Henry", bookStore });
 
-  const tno = await back.GetNoteByToken("My first note");
+  const tno = await ApiStore.GetNoteByToken("My first note");
 
   CreateNoteContent(page, { name: "Henry", title: tno.name, bookStore });
 

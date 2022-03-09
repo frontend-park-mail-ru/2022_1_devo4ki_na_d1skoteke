@@ -1,22 +1,22 @@
-import { note } from "./views/note.js";
+import { note } from './views/note.js';
 
-const root = document.getElementById("root");
+const root = document.getElementById('root');
 
 const createTmpNavigation = (node) => {
-  const signup = document.createElement("button");
-  const login = document.createElement("button");
-  const noteNav = document.createElement("button");
+  const signup = document.createElement('button');
+  const login = document.createElement('button');
+  const noteNav = document.createElement('button');
 
-  signup.dataset.section = "signup";
-  login.dataset.section = "login";
-  noteNav.dataset.section = "note";
+  signup.dataset.section = 'signup';
+  login.dataset.section = 'login';
+  noteNav.dataset.section = 'note';
 
-  signup.innerText = "signup";
-  login.innerText = "login";
-  noteNav.innerText = "note";
+  signup.innerText = 'signup';
+  login.innerText = 'login';
+  noteNav.innerText = 'note';
 
-  const tmpNavbar = document.createElement("div");
-  tmpNavbar.classList.add("tmp_navigation");
+  const tmpNavbar = document.createElement('div');
+  tmpNavbar.classList.add('tmp_navigation');
   tmpNavbar.appendChild(signup);
   tmpNavbar.appendChild(login);
   tmpNavbar.appendChild(noteNav);
@@ -26,25 +26,25 @@ const createTmpNavigation = (node) => {
 
 createTmpNavigation(root);
 
-root.addEventListener("click", (e) => {
+root.addEventListener('click', (e) => {
   const { target } = e;
   switch (target.dataset.section) {
-    case "signup": {
-      root.innerHTML = "";
-      root.innerText = "there would be signup page";
+    case 'signup': {
+      root.innerHTML = '';
+      root.innerText = 'there would be signup page';
       createTmpNavigation(root);
       break;
     }
 
-    case "login": {
-      root.innerHTML = "";
-      root.innerText = "there would be login page";
+    case 'login': {
+      root.innerHTML = '';
+      root.innerText = 'there would be login page';
       createTmpNavigation(root);
       break;
     }
 
-    case "note": {
-      root.innerHTML = "";
+    case 'note': {
+      root.innerHTML = '';
       createTmpNavigation(root);
       note(root);
       break;

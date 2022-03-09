@@ -33,8 +33,6 @@ templateNames.forEach((el) => {
   compileTemplate(el);
 });
 
-
-
 app.use(express.json());
 
 app.use(express.static(path.resolve(__dirname, "public")));
