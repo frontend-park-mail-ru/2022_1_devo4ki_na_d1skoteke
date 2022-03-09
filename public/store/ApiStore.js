@@ -20,17 +20,14 @@ export class ApiStore {
   static postData = async (url = "", data = {}) => {
     const response = await fetch(url, {
       method: "POST",
-      mode: "cors",
-      cache: "no-cache",
-      credentials: "same-origin",
+      mode: "no-cors",
+      credentials: 'include',
       headers: {
         "Content-Type": "application/json",
       },
-      redirect: "follow",
-      referrerPolicy: "no-referrer",
       body: JSON.stringify(data),
     });
-    return response.json();
+    // return response.json();
   };
 
   /**
@@ -53,7 +50,7 @@ export class ApiStore {
    * @returns {promise<Object>} - the promise with result of calling Login method
    */
   static Login = async ({ email, password }) => {
-    const data = await this.postData("/api/v1/users/login", {
+    const data = await this.postData("http://95.163.212.32:3001/api/v1/users/login", {
       email,
       password,
     });
@@ -65,7 +62,11 @@ export class ApiStore {
    * @returns {promise<Object>} - the promise with result of calling Logout method
    */
   static Logout = async () => {
-    const res = await fetch("/api/v1/users/logout");
+    const res = await fetch("http://95.163.212.32:3001/api/v1/users/logout", {
+      method: "GET",
+      mode: "no-cors",
+      credentials: 'include',
+    });
     const resp = await res.json();
     return resp;
   };
@@ -86,8 +87,18 @@ export class ApiStore {
    * @returns {promise<Notes>} - the promise with result of calling GetAllNotes method
    */
   static GetAllNotes = async () => {
-    const res = await fetch("/api/v1/notes");
+
+
+    const res = await fetch("http://95.163.212.32:3001/api/v1/notes", {
+      method: "GET",
+      mode: "no-cors",
+      credentials: 'include',
+
+
+    });
+    // console.log
     const resp = await res.json();
+    console.log(resp);
     return resp;
   };
 }

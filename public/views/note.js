@@ -8,7 +8,9 @@ export const note = async (node) => {
   page.classList.add("notion__whole__page");
 
   const fetchRes = await ApiStore.GetAllNotes();
-  const bookStore = fetchRes.notes;
+  // const bookStore = fetchRes.notes;
+
+  console.log(fetchRes);
 
   CreateLeftSide(page, { name: "Henry", bookStore });
 
