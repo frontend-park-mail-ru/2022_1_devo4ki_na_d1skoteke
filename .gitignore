@@ -3,3 +3,5 @@ node_modules/
 public/components/NoteContent/compiled/
 public/components/Enter/compiled/
 public/components/LeftSideBar/compiled/
+views/
+server copy.js
