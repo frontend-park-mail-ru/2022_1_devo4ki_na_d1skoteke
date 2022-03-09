@@ -1,6 +1,6 @@
 import { CreateLeftSide } from '../components/LeftSideBar/LeftSideBar.js';
 import { CreateNoteContent } from '../components/NoteContent/NoteContent.js';
-import ApiStore from '../store/ApiStore.js';
+import { ApiStore } from '../store/ApiStore.js';
 
 export const note = async (node) => {
   const page = document.createElement('div');
@@ -15,8 +15,8 @@ export const note = async (node) => {
   CreateLeftSide(page, { name: 'Henry', bookStore });
 
   const tno = await back.GetNoteByToken('My first note');
-  
+
   CreateNoteContent(page, { name: 'Henry', title: tno.name, bookStore });
-  
+
   node.appendChild(page);
 };
