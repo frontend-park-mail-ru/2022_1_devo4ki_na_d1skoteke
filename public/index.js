@@ -50,7 +50,6 @@ root.addEventListener('click', (e) => {
       break;
     }
 
-    default: {
-    }
+    default:
   }
 });
