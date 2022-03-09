@@ -5,56 +5,57 @@ export class ApiStore {
     this.baseUrl = baseUrl;
   }
 
-  async postData(url = '', data = {}) {
+  static postData = async (url = "", data = {}) => {
     const response = await fetch(url, {
-      method: 'POST',
-      mode: 'cors',
-      cache: 'no-cache',
-      credentials: 'same-origin',
+      method: "POST",
+      mode: "cors",
+      cache: "no-cache",
+      credentials: "same-origin",
       headers: {
-        'Content-Type': 'application/json',
+        "Content-Type": "application/json",
       },
-      redirect: 'follow',
-      referrerPolicy: 'no-referrer',
+      redirect: "follow",
+      referrerPolicy: "no-referrer",
       body: JSON.stringify(data),
     });
     return response.json();
-  }
+  };
 
-  async Signup({
-    username, email, password, confirm_password,
-  }) {
-    const data = await postData('/api/v1/users/signup', {
-      username, email, password, confirm_password,
+  static Signup = async ({ username, email, password, confirmPassword }) => {
+    const data = await this.postData("/api/v1/users/signup", {
+      username,
+      email,
+      password,
+      confirmPassword,
     });
     return data;
-  }
+  };
 
-  async Login({ email, password }) {
-    const data = await postData('/api/v1/users/login', { email, password });
+  static Login = async ({ email, password }) => {
+    const data = await this.postData("/api/v1/users/login", {
+      email,
+      password,
+    });
     return data;
-  }
+  };
 
-  async Logout() {
-    const res = await fetch('/api/v1/users/logout');
+  static Logout = async () => {
+    const res = await fetch("/api/v1/users/logout");
     const resp = await res.json();
-    console.log(resp);
-    return (resp);
-  }
+    return resp;
+  };
 
-  async GetNoteByToken(id) {
+  static GetNoteByToken = async (id) => {
     const res = await fetch(`/api/v1/note/${id}`);
     const resp = await res.json();
-    console.log(resp);
-    return (resp);
-  }
+    return resp;
+  };
 
-  async GetAllNotes() {
-    const res = await fetch('/api/v1/notes');
+  static GetAllNotes = async () => {
+    const res = await fetch("/api/v1/notes");
     const resp = await res.json();
-    console.log(resp);
-    return (resp);
-  }
+    return resp;
+  };
 }
 
 export default ApiStore;
