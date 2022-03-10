@@ -32,8 +32,7 @@ const createTmpNavigation = async (node) => {
   tmpNavbar.appendChild(noteNav);
   tmpNavbar.appendChild(logout);
 
-  const apResp = await ApiStore.Login({ email: "nikita@mail.ru", password: "Nikita1234!@#" })
-
+  // const apResp = await ApiStore.Login({ email: "nikita@mail.ru", password: "Nikita1234!@#" })
 
   // console.log("log", apResp);
   console.log(document.cookie);

@@ -94,7 +94,6 @@ export class ApiStore {
       mode: "no-cors",
       credentials: 'include',
 
-
     });
     // console.log
     const resp = await res.json();
