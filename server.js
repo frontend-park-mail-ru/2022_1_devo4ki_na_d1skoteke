@@ -1,27 +1,22 @@
-const express = require('express');
-const path = require('path');
-const fs = require('fs');
-const pug = require('pug');
-const uuid = require('uuid').v4;
-const cookie = require('cookie-parser');
+const express = require("express");
+const path = require("path");
 
 const app = express();
 
-app.use(express.json());
-app.use(express.static(path.resolve(__dirname, 'public')));
-app.use(cookie());
+const pug = require("pug");
+const fs = require("fs");
 
-app.set('view engine', 'pug');
+app.set("view engine", "pug");
 
-/**
- * Compile templates from pug files to js files that create HTML.
- * Compiled js file is placed in 'compiled' folder of component
- */
-const compileTemplate = () => {
-  const tmplName = 'Auth';
+const templateNames = ["NoteContent", "LeftSideBar"];
+// const templateNames = ['NoteContent', 'LeftSideBar', 'Enter'];
+
+const compileTemplate = (tmplName) => {
   const componentPath = `public/components/${tmplName}`;
 
-  const comp = pug.compileFileClient(`${componentPath}/${tmplName}.pug`, { name: `${tmplName}` });
+  const comp = pug.compileFileClient(`${componentPath}/${tmplName}.pug`, {
+    name: `${tmplName}`,
+  });
   const templates = [];
   templates.push(comp);
 

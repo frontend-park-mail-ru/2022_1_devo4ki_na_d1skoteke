@@ -1,0 +1,20 @@
+link(rel='stylesheet' href='styles.css')
+
+.notion__sidebar
+  .notion__sidebar__bio
+    .notion__sidebar__bio__profilename
+      div
+        img.notion__sidebar__bio__img(src='https://lh3.googleusercontent.com/a-/AOh14Ggo62gr8BTTecwfg3uGVTFoxat5d2cDxL59mUTWrA=s100')
+      div
+        |#{name}&apos;s Notion
+  .notion__sidebar__navigation
+  .notion__sidebar__deathnote
+    each book in bookStore
+      .notion__sidebar__deathnote__item
+        .notion__sidebar__deathnote__item__action
+          div= ">"
+        .notion__sidebar__deathnote__item__bio
+          div= book.title
+
+
+

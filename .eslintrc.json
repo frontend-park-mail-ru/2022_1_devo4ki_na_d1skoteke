@@ -1,4 +1,5 @@
 {
+<<<<<<< HEAD
   "env": {
     "browser": true,
     "es6": true,
@@ -35,3 +36,38 @@
     ]
   }
 }
+=======
+"env": {
+    "browser": true,
+    "commonjs": true,
+    "es2021": true,
+    "node": true
+},
+"extends": [
+    "airbnb-base"
+],
+"parserOptions": {
+    "ecmaVersion": "latest"
+},
+"rules": {
+    "quotes": [
+    "error",
+    "single"
+    ],
+    "no-trailing-spaces": [
+    "error",
+    {
+        "skipBlankLines": true
+    }
+    ],
+    "import/prefer-default-export": "off",
+    "import/extensions": [
+    "error",
+    "ignorePackages",
+    {
+        "js": "on"
+    }
+    ]
+}
+}
+>>>>>>> TP-396_network_module
