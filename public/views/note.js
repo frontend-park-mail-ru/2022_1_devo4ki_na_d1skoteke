@@ -31,7 +31,9 @@ export const note = async (node) => {
   // };
 
 
-  console.log()
+  console.log("inside:",fetchRes);
+
+  const bookStore = fetchRes.notes; 
 
 
 
@@ -42,7 +44,7 @@ export const note = async (node) => {
 
   CreateLeftSide(page, { name: "Henry", bookStore });
 
-  const tno = await ApiStore.GetNoteByToken("My first note");
+  // const tno = await ApiStore.GetNoteByToken("My first note");
 
   CreateNoteContent(page, { name: "Henry", title: "1", bookStore });
 

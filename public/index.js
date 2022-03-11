@@ -29,8 +29,10 @@ const notesPage = async () => {
     return;
   }
 
-  createTmpNavigation(root);
-  // note
+  note(root);
+
+  // createTmpNavigation(root);
+  // noted
 
   console.log("fetchres", hehe);
   return;

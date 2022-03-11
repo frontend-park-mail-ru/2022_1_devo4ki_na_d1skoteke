@@ -1,5 +1,8 @@
+const baseUrl = '127.0.0.1';
+
 /**
  * Class represents storage for API requests
+ * 
  */
 export class ApiStore {
   baseUrl;
@@ -7,7 +10,7 @@ export class ApiStore {
    * Creates a ApiStore
    * @param {string} baseUrl - The base of the url where API requests are sent to
    */
-  constructor(baseUrl) {
+  constructor(baseUrl='127.0.0.1') {
     this.baseUrl = baseUrl;
   }
 
@@ -36,7 +39,7 @@ export class ApiStore {
    * @returns {promise<Object>} - the promise with result of calling Signup method
    */
   static Signup = async ({ username, email, password, confirm_password }) => {
-    const data = await this.postData("http://95.163.212.32:3001/api/v1/users/signup", {
+    const data = await this.postData(`http://${baseUrl}:3001/api/v1/users/signup`, {
       username,
       email,
       password,
@@ -50,7 +53,7 @@ export class ApiStore {
    * @returns {promise<Object>} - the promise with result of calling Login method
    */
   static Login = async ({ email, password }) => {
-    const data = await this.postData("http://95.163.212.32:3001/api/v1/users/login", {
+    const data = await this.postData(`http://${baseUrl}:3001/api/v1/users/login`, {
       email,
       password,
     });
@@ -62,7 +65,7 @@ export class ApiStore {
    * @returns {promise<Object>} - the promise with result of calling Logout method
    */
   static Logout = async () => {
-    const res = await fetch("http://95.163.212.32:3001/api/v1/users/logout", {
+    const res = await fetch(`http://${baseUrl}:3001/api/v1/users/logout`, {
       method: "GET",
       mode: "no-cors",
       credentials: 'include',
@@ -77,9 +80,16 @@ export class ApiStore {
    * @returns {promise<Note>} - the promise with result of calling GetNoteByToken method
    */
   static GetNoteByToken = async (id) => {
-    const res = await fetch(`/api/v1/note/${id}`);
+    // /api/v1/notes
+    const res = await fetch(`http://${baseUrl}:3001/api/v1/note/${encodeURI(id)}`);
     const resp = await res.json();
-    return resp;
+
+    if (resp.status !== 200) {
+      return -1;
+    }
+
+    return resp.body;
+    // return resp;
   };
 
   /**
@@ -88,22 +98,25 @@ export class ApiStore {
    */
   static GetAllNotes = async () => {
 
+    const baseUrl = '127.0.0.1';
 
-    const res = await fetch("http://95.163.212.32:3001/api/v1/notes", {
+    const res = await fetch(`http://${baseUrl}:3001/api/v1/notes`, {
       method: "GET",
-      mode: "no-cors",
+      // mode: "no-cors",
       credentials: 'include',
 
     });
 
+    // const res2 = res.statusText;
+
     console.log(res);
 
-    if (!res.ok) {
+    if (res.status !== 200) {
       return 401;
     }
 
-    console.log
     const resp = await res.json();
+    
     console.log(resp);
     return resp;
   };
