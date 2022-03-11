@@ -3,11 +3,16 @@ import { CreateNoteContent } from "../components/NoteContent/NoteContent.js";
 import { ApiStore } from "../store/ApiStore.js";
 
 export const note = async (node) => {
+
+  // node.innerHTML = '';
+
   const page = document.createElement("div");
 
   page.classList.add("notion__whole__page");
 
   const fetchRes = await ApiStore.GetAllNotes();
+
+  // con
 
   // const bookStore = fetchRes.notes;
   // let bookStore = {

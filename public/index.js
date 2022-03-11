@@ -29,9 +29,9 @@ const notesPage = async () => {
     return;
   }
 
+  createTmpNavigation(root);
   note(root);
 
-  // createTmpNavigation(root);
   // noted
 
   console.log("fetchres", hehe);
@@ -168,7 +168,7 @@ const loginPage = () => {
   });
 
   const loginForm = document.forms.namedItem('login-form');
-  loginForm.addEventListener('submit', (e) => {
+  loginForm.addEventListener('submit', async (e) => {
     e.preventDefault();
 
     if (haveWrongInput(loginForm)) {
@@ -177,6 +177,22 @@ const loginPage = () => {
 
     const email = loginForm.email.value.trim();
     const password = loginForm.password.value.trim();
+
+    const res = await ApiStore.Login({email, password});
+    
+    console.log(res);
+
+    if (res.status !== 200) {
+
+      loginPage();
+      return;
+    }
+
+    console.log("login res",res);
+
+    createTmpNavigation(root);
+    note(root);
+    return;
 
     Ajax.post(
       {
@@ -273,38 +289,39 @@ const createTmpNavigation = async (node) => {
 
 // // createTmpNavigation(root);
 
-// root.addEventListener('click', async (e) => {
-//   const { target } = e;
-//   switch (target.dataset.section) {
-//     case "signup": {
-//       root.innerHTML = "";
-//       signupPage();
-//       createTmpNavigation(root);
-//       break;
-//     }
+root.addEventListener('click', async (e) => {
+  const { target } = e;
+  switch (target.dataset.section) {
+    case "signup": {
+      root.innerHTML = "";
+      signupPage();
+      createTmpNavigation(root);
+      break;
+    }
 
-//     case "login": {
-//       root.innerHTML = "";
-//       loginPage();
-//       createTmpNavigation(root);
-//       break;
-//     }
+    case "login": {
+      root.innerHTML = "";
+      loginPage();
+      createTmpNavigation(root);
+      break;
+    }
 
-//     case "note": {
-//       root.innerHTML = "";
-//       createTmpNavigation(root);
-//       note(root);
-//       break;
-//     }
+    case "note": {
+      root.innerHTML = "";
+      createTmpNavigation(root);
+      note(root);
+      break;
+    }
 
-//     case 'logout': {
-//       root.innerHTML = '';
-//       createTmpNavigation(root);
-//       const logoutRes = await ApiStore.Logout();
-//       // note(root);
-//       console.log(logoutRes);
-//       break;
-//     }
+    case 'logout': {
+      root.innerHTML = '';
+      createTmpNavigation(root);
+      const logoutRes = await ApiStore.Logout();
+      // note(root);
+      loginPage();
+      console.log(logoutRes);
+      break;
+    }
 
-//   }
-// });
+  }
+});

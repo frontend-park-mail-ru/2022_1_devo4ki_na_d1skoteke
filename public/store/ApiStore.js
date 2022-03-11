@@ -23,7 +23,6 @@ export class ApiStore {
   static postData = async (url = "", data = {}) => {
     const response = await fetch(url, {
       method: "POST",
-      mode: "no-cors",
       credentials: 'include',
       headers: {
         "Content-Type": "application/json",
@@ -57,6 +56,9 @@ export class ApiStore {
       email,
       password,
     });
+
+    // const bod = await data.json();
+    console.log("returned from fetch", data);
     return data;
   };
 
@@ -67,11 +69,12 @@ export class ApiStore {
   static Logout = async () => {
     const res = await fetch(`http://${baseUrl}:3001/api/v1/users/logout`, {
       method: "GET",
-      mode: "no-cors",
       credentials: 'include',
     });
-    const resp = await res.json();
-    return resp;
+
+    console.log(res);
+    // const resp = await res.json();
+    return res;
   };
 
   /**
