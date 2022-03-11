@@ -2,8 +2,13 @@
 import { renderAuthPage } from './components/Auth/Auth.js';
 import { SetFavicon, haveWrongInput, badResponseHandler } from './js/utils.js';
 
+
+
+
 import ApiStore from './store/ApiStore.js';
 import { note } from './views/note.js';
+
+
 
 const root = document.getElementById("root");
 
@@ -12,12 +17,27 @@ SetFavicon();
 /**
  * Create notes page for user, if user is unauthorised create signup page
  */
-const notesPage = () => {
+const notesPage = async () => {
   root.innerHTML = '';
+
+  const hehe = await ApiStore.GetAllNotes();
+  let isAuthorised = false;
+
+  if (hehe === 401) {
+    signupPage();
+    console.log("rgwethqrthwrh");
+    return;
+  }
+
+  createTmpNavigation(root);
+  // note
+
+  console.log("fetchres", hehe);
+  return;
 
   Ajax.get(
     {
-      url: '/notes',
+      url: 'http://95.163.212.32:3001/api/v1/notes',
       callback: (status, responseText) => {
         let isAuthorised = false;
         if (status === 200) {
@@ -73,7 +93,7 @@ const signupPage = () => {
   });
 
   const signUp = document.forms.namedItem('signup-form');
-  signUp.addEventListener('submit', (e) => {
+  signUp.addEventListener('submit', async (e) => {
     e.preventDefault();
 
     if (haveWrongInput(signUp)) {
@@ -81,13 +101,35 @@ const signupPage = () => {
     }
 
     const email = signUp.email.value.trim();
-    const nickname = signUp.nickname.value.trim();
+    const username = signUp.nickname.value.trim();
     const password = signUp.primaryPassword.value.trim();
+    const confirm_password = signUp.confirmPassword.value.trim();
 
+    const res = await ApiStore.Signup({ username, email, password, confirm_password });
+
+    // if res.o
+
+    console.log(res);
+
+
+    if (res !== undefined && !res.ok) {
+
+      createTmpNavigation(root);
+      return;
+    }
+
+    const res2 = await ApiStore.Login({ email, password });
+
+    console.log("", res2)
+    notesPage();
+
+
+
+    return;
     Ajax.post(
       {
-        url: '/signup',
-        body: { email, nickname, password },
+        url: 'http://95.163.212.32:3001/api/v1/users/signup',
+        body: { nickname, email, password, confirm_password },
         callback: (status, responseText) => {
           if (status === 201) {
             notesPage();
@@ -227,40 +269,40 @@ const createTmpNavigation = async (node) => {
   node.appendChild(tmpNavbar);
 };
 
-createTmpNavigation(root);
+// // createTmpNavigation(root);
 
-root.addEventListener('click', async (e) => {
-  const { target } = e;
-  switch (target.dataset.section) {
-    case "signup": {
-      root.innerHTML = "";
-      root.innerText = "there would be signup page";
-      createTmpNavigation(root);
-      break;
-    }
+// root.addEventListener('click', async (e) => {
+//   const { target } = e;
+//   switch (target.dataset.section) {
+//     case "signup": {
+//       root.innerHTML = "";
+//       signupPage();
+//       createTmpNavigation(root);
+//       break;
+//     }
 
-    case "login": {
-      root.innerHTML = "";
-      root.innerText = "there would be login page";
-      createTmpNavigation(root);
-      break;
-    }
+//     case "login": {
+//       root.innerHTML = "";
+//       loginPage();
+//       createTmpNavigation(root);
+//       break;
+//     }
 
-    case "note": {
-      root.innerHTML = "";
-      createTmpNavigation(root);
-      note(root);
-      break;
-    }
+//     case "note": {
+//       root.innerHTML = "";
+//       createTmpNavigation(root);
+//       note(root);
+//       break;
+//     }
 
-    case 'logout': {
-      root.innerHTML = '';
-      createTmpNavigation(root);
-      const logoutRes = await ApiStore.Logout();
-      // note(root);
-      console.log(logoutRes);
-      break;
-    }
+//     case 'logout': {
+//       root.innerHTML = '';
+//       createTmpNavigation(root);
+//       const logoutRes = await ApiStore.Logout();
+//       // note(root);
+//       console.log(logoutRes);
+//       break;
+//     }
 
-  }
-});
+//   }
+// });

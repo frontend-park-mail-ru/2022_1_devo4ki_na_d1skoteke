@@ -43,6 +43,7 @@
 
       if (body) {
         xhr.setRequestHeader('Content-type', 'application/json; charset=utf8');
+        xhr.setRequestHeader('cors', 'no-cors');
         xhr.send(JSON.stringify(body));
         return;
       }

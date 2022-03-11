@@ -8,8 +8,8 @@ const fs = require("fs");
 
 app.set("view engine", "pug");
 
-const templateNames = ["NoteContent", "LeftSideBar"];
-// const templateNames = ['NoteContent', 'LeftSideBar', 'Enter'];
+// const templateNames = ["NoteContent", "LeftSideBar"];
+const templateNames = ['NoteContent', 'LeftSideBar', 'Auth'];
 
 const compileTemplate = (tmplName) => {
   const componentPath = `public/components/${tmplName}`;
@@ -26,7 +26,14 @@ const compileTemplate = (tmplName) => {
   fs.writeFileSync(`${componentPath}/compiled/${tmplName}.js`, `${templates.pop()} export {${tmplName}}`);
 };
 
-compileTemplate();
+templateNames.forEach((el) => {
+  compileTemplate(el);
+
+})
+
+app.use(express.json());
+
+app.use(express.static(path.resolve(__dirname, "public")));
 
 const users = {
   'mr.erik770@mail.ru': {

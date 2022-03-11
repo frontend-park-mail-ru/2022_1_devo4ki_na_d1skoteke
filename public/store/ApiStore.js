@@ -35,12 +35,12 @@ export class ApiStore {
    * @param {object} param0 - The parameters, requested by API
    * @returns {promise<Object>} - the promise with result of calling Signup method
    */
-  static Signup = async ({ username, email, password, confirmPassword }) => {
-    const data = await this.postData("/api/v1/users/signup", {
+  static Signup = async ({ username, email, password, confirm_password }) => {
+    const data = await this.postData("http://95.163.212.32:3001/api/v1/users/signup", {
       username,
       email,
       password,
-      confirmPassword,
+      confirm_password,
     });
     return data;
   };
@@ -95,7 +95,14 @@ export class ApiStore {
       credentials: 'include',
 
     });
-    // console.log
+
+    console.log(res);
+
+    if (!res.ok) {
+      return 401;
+    }
+
+    console.log
     const resp = await res.json();
     console.log(resp);
     return resp;
