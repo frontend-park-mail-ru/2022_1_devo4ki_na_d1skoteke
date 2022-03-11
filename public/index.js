@@ -24,7 +24,7 @@ const notesPage = async () => {
   let isAuthorised = false;
 
   if (hehe === 401) {
-    signupPage();
+    loginPage();
     console.log("rgwethqrthwrh");
     return;
   }
