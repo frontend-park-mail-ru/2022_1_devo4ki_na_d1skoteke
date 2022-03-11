@@ -258,6 +258,8 @@ root.addEventListener('click', (e) => {
  * @param {HTMLDivElement} node - The node for which tmpNavigation will be append
  */
 const createTmpNavigation = async (node) => {
+  node.innerHTML = ''
+
   const signup = document.createElement('button');
   const login = document.createElement('button');
   const noteNav = document.createElement('button');
