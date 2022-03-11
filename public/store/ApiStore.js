@@ -23,13 +23,14 @@ export class ApiStore {
   static postData = async (url = "", data = {}) => {
     const response = await fetch(url, {
       method: "POST",
+      mode: "cors",
       credentials: 'include',
       headers: {
-        "Content-Type": "application/json",
+        "Content-Type": "multipart/form-data",
       },
       body: JSON.stringify(data),
     });
-    // return response.json();
+    return response;
   };
 
   /**
