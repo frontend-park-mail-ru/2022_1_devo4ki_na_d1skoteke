@@ -14,11 +14,11 @@
   flex-direction: row;
   align-items: center;
   justify-content: space-evenly;
-  background-color: #FFFDEB;
+  background-color: #fffdeb;
 }
 
 .notion__sidebar {
-  background-color: #FFFDEB;
+  background-color: #fffdeb;
   width: var(--notion-sidebar-width);
   height: 100vh;
   position: relative;
@@ -263,7 +263,8 @@
   padding-top: 8%;
 }
 
-.login-form, .signup-form {
+.login-form,
+.signup-form {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -349,4 +350,60 @@ input {
 
 .alternative-variant:hover {
   text-decoration: underline;
+}
+
+.page {
+  display: flex;
+  flex-direction: row;
+  height: 100%;
+  width: 100%;
+}
+
+.page__sidebar {
+  /* width: 30vw; */
+
+  background-color: #fffdeb;
+  font-size: 24px;
+  border: 1px solid #fff170;
+  height: 100vh;
+}
+
+.page__sidebar__bio {
+  padding: 10px;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+.page__sidebar__holder {
+  height: 80px;
+}
+
+.page__sidebar__notes {
+  display: flex;
+  flex-direction: column;
+}
+
+.page__content__navbar {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  margin: 10px;
+}
+
+.page__content__navbar__title {
+  width: 70vw;
+  font-size: 36px;
+}
+
+.page__content__spaceholder {
+  height: 30px;
+}
+
+.page__content__text {
+  display: flex;
+  flex-direction: row;
+  margin: 20px;
+  font-size: 24px;
 }
