@@ -1,7 +1,7 @@
 /* eslint-disable no-undef */
 import { renderAuthPage } from './components/Auth/Auth.js';
 import { SetFavicon, haveWrongInput, badResponseHandler } from './js/utils.js';
-import ApiStore from './store/ApiStore.js';
+import { ApiStore } from './store/ApiStore.js';
 import { note } from './views/note.js';
 
 const root = document.getElementById('root');
@@ -17,7 +17,7 @@ const notesPage = async () => {
   const hehe = await ApiStore.GetAllNotes();
 
   if (hehe === 401) {
-    loginPage();
+    signupPage();
     return;
   }
 

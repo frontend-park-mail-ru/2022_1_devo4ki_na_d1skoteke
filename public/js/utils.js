@@ -246,6 +246,14 @@ export const haveWrongInput = (form) => {
     }
   }
 
+  const primaryPassword = document.querySelector('#primaryPassword-input');
+  const confirmPassword = document.querySelector('#confirmPassword-input');
+  if (primaryPassword.value !== confirmPassword.value) {
+    const err = confirmPassword.nextElementSibling;
+    err.style.display = 'block';
+    err.innerHTML = 'Passwords don\'t match';
+    return true;
+  }
   const inputFields = form.querySelectorAll('.inputField');
 
   for (const input of inputFields) {

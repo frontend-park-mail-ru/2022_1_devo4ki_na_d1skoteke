@@ -2,11 +2,10 @@ const baseUrl = '95.163.212.32';
 
 /**
  * Class represents storage for API requests
- *
+ * 
  */
 export class ApiStore {
   baseUrl;
-
   /**
    * Creates a ApiStore
    * @param {string} baseUrl - The base of the url where API requests are sent to
@@ -21,13 +20,13 @@ export class ApiStore {
    * @param {any} data
    * @returns {promise<Object>} - the body of HTTP response from called API
    */
-  static postData = async (url = '', data = {}) => {
+  static postData = async (url = "", data = {}) => {
     const response = await fetch(url, {
-      method: 'POST',
-      mode: 'cors',
+      method: "POST",
+      mode: "cors",
       credentials: 'include',
       headers: {
-        'Content-Type': 'multipart/form-data',
+        "Content-Type": "multipart/form-data",
       },
       body: JSON.stringify(data),
     });
@@ -39,9 +38,7 @@ export class ApiStore {
    * @param {object} param0 - The parameters, requested by API
    * @returns {promise<Object>} - the promise with result of calling Signup method
    */
-  static Signup = async ({
-    username, email, password, confirm_password,
-  }) => {
+  static Signup = async ({ username, email, password, confirm_password }) => {
     const data = await this.postData(`http://${baseUrl}:3001/api/v1/users/signup`, {
       username,
       email,
@@ -50,7 +47,6 @@ export class ApiStore {
     });
     return data;
   };
-
   /**
    * Does login request to API
    * @param {object} param0 - The parameters, requested by API
@@ -62,8 +58,7 @@ export class ApiStore {
       password,
     });
 
-    // const bod = await data.json();
-    console.log('returned from fetch', data);
+    console.log("returned from fetch", data);
     return data;
   };
 
@@ -73,9 +68,10 @@ export class ApiStore {
    */
   static Logout = async () => {
     const res = await fetch(`http://${baseUrl}:3001/api/v1/users/logout`, {
-      method: 'GET',
+      method: "GET",
       credentials: 'include',
     });
+
     return res;
   };
 
@@ -85,7 +81,6 @@ export class ApiStore {
    * @returns {promise<Note>} - the promise with result of calling GetNoteByToken method
    */
   static GetNoteByToken = async (id) => {
-    // /api/v1/notes
     const res = await fetch(`http://${baseUrl}:3001/api/v1/note/${encodeURI(id)}`);
     const resp = await res.json();
 
@@ -94,7 +89,6 @@ export class ApiStore {
     }
 
     return resp.body;
-    // return resp;
   };
 
   /**
@@ -102,8 +96,11 @@ export class ApiStore {
    * @returns {promise<Notes>} - the promise with result of calling GetAllNotes method
    */
   static GetAllNotes = async () => {
+
+    const baseUrl = '95.163.212.32';
+
     const res = await fetch(`http://${baseUrl}:3001/api/v1/notes`, {
-      method: 'GET',
+      method: "GET",
       // mode: "no-cors",
       credentials: 'include',
 
@@ -118,5 +115,3 @@ export class ApiStore {
     return resp;
   };
 }
-
-export default ApiStore;
