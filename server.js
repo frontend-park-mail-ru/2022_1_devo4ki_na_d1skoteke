@@ -1,14 +1,14 @@
-const express = require("express");
-const path = require("path");
+const express = require('express');
+const path = require('path');
+const pug = require('pug');
+const fs = require('fs');
+const uuid = require('uuid');
 
 const app = express();
+app.use(express.json());
+app.use(express.static(path.resolve(__dirname, 'public')));
+app.set('view engine', 'pug');
 
-const pug = require("pug");
-const fs = require("fs");
-
-app.set("view engine", "pug");
-
-// const templateNames = ["NoteContent", "LeftSideBar"];
 const templateNames = ['NoteContent', 'LeftSideBar', 'Auth'];
 
 const compileTemplate = (tmplName) => {
@@ -28,12 +28,7 @@ const compileTemplate = (tmplName) => {
 
 templateNames.forEach((el) => {
   compileTemplate(el);
-
-})
-
-app.use(express.json());
-
-app.use(express.static(path.resolve(__dirname, "public")));
+});
 
 const users = {
   'mr.erik770@mail.ru': {
@@ -99,6 +94,7 @@ app.get('/notes', (req, res) => {
 
   return res.json(users[email]);
 });
+
 const SERVER_PORT = process.env.PORT || 3000;
 
 app.listen(SERVER_PORT, () => {

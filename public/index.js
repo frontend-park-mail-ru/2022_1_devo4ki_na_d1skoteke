@@ -4,7 +4,7 @@ import { SetFavicon, haveWrongInput, badResponseHandler } from './js/utils.js';
 import ApiStore from './store/ApiStore.js';
 import { note } from './views/note.js';
 
-const root = document.getElementById("root");
+const root = document.getElementById('root');
 
 SetFavicon();
 
@@ -15,7 +15,6 @@ const notesPage = async () => {
   root.innerHTML = '';
 
   const hehe = await ApiStore.GetAllNotes();
-  let isAuthorised = false;
 
   if (hehe === 401) {
     loginPage();
@@ -23,7 +22,6 @@ const notesPage = async () => {
   }
 
   note(root);
-  return;
 };
 
 notesPage();
@@ -71,13 +69,13 @@ const signupPage = () => {
     const email = signUp.email.value.trim();
     const username = signUp.nickname.value.trim();
     const password = signUp.primaryPassword.value.trim();
-    const confirm_password = signUp.confirmPassword.value.trim();
+    const confirmPassword = signUp.confirmPassword.value.trim();
 
     const res = await ApiStore.Signup({
       username,
       email,
       password,
-      confirm_password,
+      confirmPassword,
     });
 
     if (res !== undefined && !res.ok) {
@@ -85,11 +83,9 @@ const signupPage = () => {
       return;
     }
 
-    const res2 = await ApiStore.Login({ email, password });
+    await ApiStore.Login({ email, password });
 
     notesPage();
-
-    return;
   });
 };
 
@@ -128,12 +124,11 @@ const loginPage = () => {
     const res = await ApiStore.Login({ email, password });
 
     if (res.status !== 200) {
-      loginPage();
+      badResponseHandler();
       return;
     }
 
     note(root);
-    return;
   });
 };
 
@@ -174,31 +169,32 @@ root.addEventListener('click', (e) => {
   }
 });
 
-root.addEventListener("click", async (e) => {
+root.addEventListener('click', async (e) => {
   const { target } = e;
   switch (target.dataset.section) {
-    case "signup": {
-      root.innerHTML = "";
+    case 'signup': {
       signupPage();
       break;
     }
 
-    case "login": {
-      root.innerHTML = "";
+    case 'login': {
       loginPage();
       break;
     }
 
-    case "note": {
-      root.innerHTML = "";
+    case 'note': {
       note(root);
       break;
     }
 
-    case "logout": {
-      root.innerHTML = "";
-      const logoutRes = await ApiStore.Logout();
+    case 'logout': {
+      root.innerHTML = '';
+      await ApiStore.Logout();
       loginPage();
+      break;
+    }
+
+    default: {
       break;
     }
   }
