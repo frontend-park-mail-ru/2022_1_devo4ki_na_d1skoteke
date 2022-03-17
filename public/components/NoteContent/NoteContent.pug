@@ -1,11 +1,10 @@
-.notion__content
-  .notion__content__navbar
-    .notion__content__navbar__docname
-      | user document freevole name
-    .notion__content__navbar__actions
-  .notion__content__document__title
-    .text_big(spellcheck='true' placeholder=' ' data-content-editable-leaf='true' contenteditable='true') Name title
-  .notion__content__document__itself
+.page__content__navbar
+  .page__content__navbar__title
     each book in bookStore
-      div= book.title
-      //- .text_regular(spellcheck='true' placeholder=' ' data-content-editable-leaf='true' contenteditable='true')
+      div= book.name
+  button
+    #logout Logout
+.page__content__spaceholder
+.page__content__text
+  each book in bookStore
+    div= book.body

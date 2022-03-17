@@ -18,40 +18,14 @@ const notesPage = async () => {
   let isAuthorised = false;
 
   if (hehe === 401) {
-    signupPage();
-    console.log("rgwethqrthwrh");
+    loginPage();
     return;
   }
 
-  createTmpNavigation(root);
-  // note
-
-  console.log("fetchres", hehe);
+  note(root);
   return;
-
-  Ajax.get(
-    {
-      url: 'http://95.163.212.32:3001/api/v1/notes',
-      callback: (status, responseText) => {
-        let isAuthorised = false;
-        if (status === 200) {
-          isAuthorised = true;
-        }
-
-        if (isAuthorised) {
-          const notePage = document.createElement('div');
-          notePage.classList.add('title');
-          const { nickname } = JSON.parse(responseText);
-
-          notePage.innerHTML = `This is ${nickname}'s Notes page.`;
-          root.appendChild(notePage);
-          return;
-        }
-        signupPage();
-      },
-    },
-  );
 };
+
 notesPage();
 
 /**
@@ -99,42 +73,23 @@ const signupPage = () => {
     const password = signUp.primaryPassword.value.trim();
     const confirm_password = signUp.confirmPassword.value.trim();
 
-    const res = await ApiStore.Signup({ username, email, password, confirm_password });
-
-    // if res.o
-
-    console.log(res);
-
+    const res = await ApiStore.Signup({
+      username,
+      email,
+      password,
+      confirm_password,
+    });
 
     if (res !== undefined && !res.ok) {
-
-      createTmpNavigation(root);
+      notesPage();
       return;
     }
 
     const res2 = await ApiStore.Login({ email, password });
 
-    console.log("", res2)
     notesPage();
 
-
-
     return;
-    Ajax.post(
-      {
-        url: 'http://95.163.212.32:3001/api/v1/users/signup',
-        body: { nickname, email, password, confirm_password },
-        callback: (status, responseText) => {
-          if (status === 201) {
-            notesPage();
-            return;
-          }
-          if (status === 400) {
-            badResponseHandler(responseText);
-          }
-        },
-      },
-    );
   });
 };
 
@@ -160,7 +115,7 @@ const loginPage = () => {
   });
 
   const loginForm = document.forms.namedItem('login-form');
-  loginForm.addEventListener('submit', (e) => {
+  loginForm.addEventListener('submit', async (e) => {
     e.preventDefault();
 
     if (haveWrongInput(loginForm)) {
@@ -170,22 +125,15 @@ const loginPage = () => {
     const email = loginForm.email.value.trim();
     const password = loginForm.password.value.trim();
 
-    Ajax.post(
-      {
-        url: '/login',
-        body: { email, password },
-        callback: (status, responseText) => {
-          if (status === 200) {
-            // console.log('auth success');
-            notesPage();
-            return;
-          }
-          if (status === 400) {
-            badResponseHandler(responseText);
-          }
-        },
-      },
-    );
+    const res = await ApiStore.Login({ email, password });
+
+    if (res.status !== 200) {
+      loginPage();
+      return;
+    }
+
+    note(root);
+    return;
   });
 };
 
@@ -223,80 +171,35 @@ root.addEventListener('click', (e) => {
     if (section) {
       configApp[section].openMethod();
     }
-
   }
-})
+});
 
+root.addEventListener("click", async (e) => {
+  const { target } = e;
+  switch (target.dataset.section) {
+    case "signup": {
+      root.innerHTML = "";
+      signupPage();
+      break;
+    }
 
-/**
- * Represents a navigation bar
- * @constructor
- * @param {HTMLDivElement} node - The node for which tmpNavigation will be append
- */
-const createTmpNavigation = async (node) => {
-  const signup = document.createElement('button');
-  const login = document.createElement('button');
-  const noteNav = document.createElement('button');
-  const logout = document.createElement('button');
+    case "login": {
+      root.innerHTML = "";
+      loginPage();
+      break;
+    }
 
-  signup.dataset.section = 'signup';
-  login.dataset.section = 'login';
-  noteNav.dataset.section = 'note';
-  logout.dataset.section = 'logout';
+    case "note": {
+      root.innerHTML = "";
+      note(root);
+      break;
+    }
 
-  signup.innerText = 'signup';
-  login.innerText = 'login';
-  noteNav.innerText = 'note';
-  logout.innerText = 'logout';
-
-  const tmpNavbar = document.createElement("div");
-  tmpNavbar.classList.add("tmp_navigation");
-  tmpNavbar.appendChild(signup);
-  tmpNavbar.appendChild(login);
-  tmpNavbar.appendChild(noteNav);
-  tmpNavbar.appendChild(logout);
-
-  // const apResp = await ApiStore.Login({ email: "nikita@mail.ru", password: "Nikita1234!@#" })
-
-  // console.log("log", apResp);
-  console.log(document.cookie);
-  node.appendChild(tmpNavbar);
-};
-
-// // createTmpNavigation(root);
-
-// root.addEventListener('click', async (e) => {
-//   const { target } = e;
-//   switch (target.dataset.section) {
-//     case "signup": {
-//       root.innerHTML = "";
-//       signupPage();
-//       createTmpNavigation(root);
-//       break;
-//     }
-
-//     case "login": {
-//       root.innerHTML = "";
-//       loginPage();
-//       createTmpNavigation(root);
-//       break;
-//     }
-
-//     case "note": {
-//       root.innerHTML = "";
-//       createTmpNavigation(root);
-//       note(root);
-//       break;
-//     }
-
-//     case 'logout': {
-//       root.innerHTML = '';
-//       createTmpNavigation(root);
-//       const logoutRes = await ApiStore.Logout();
-//       // note(root);
-//       console.log(logoutRes);
-//       break;
-//     }
-
-//   }
-// });
+    case "logout": {
+      root.innerHTML = "";
+      const logoutRes = await ApiStore.Logout();
+      loginPage();
+      break;
+    }
+  }
+});
