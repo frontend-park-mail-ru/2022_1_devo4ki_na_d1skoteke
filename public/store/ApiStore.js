@@ -1,4 +1,4 @@
-const baseUrl = '127.0.0.1';
+const baseUrl = '95.163.212.32';
 
 /**
  * Class represents storage for API requests
@@ -10,7 +10,7 @@ export class ApiStore {
    * Creates a ApiStore
    * @param {string} baseUrl - The base of the url where API requests are sent to
    */
-  constructor(baseUrl='127.0.0.1') {
+  constructor(baseUrl = '95.163.212.32') {
     this.baseUrl = baseUrl;
   }
 
@@ -102,7 +102,7 @@ export class ApiStore {
    */
   static GetAllNotes = async () => {
 
-    const baseUrl = '127.0.0.1';
+    const baseUrl = '95.163.212.32';
 
     const res = await fetch(`http://${baseUrl}:3001/api/v1/notes`, {
       method: "GET",
@@ -120,7 +120,7 @@ export class ApiStore {
     }
 
     const resp = await res.json();
-    
+
     console.log(resp);
     return resp;
   };
