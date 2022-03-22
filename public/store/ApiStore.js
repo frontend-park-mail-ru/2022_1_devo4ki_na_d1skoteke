@@ -101,7 +101,6 @@ export class ApiStore {
 
     const res = await fetch(`http://${baseUrl}:3001/api/v1/notes`, {
       method: "GET",
-      // mode: "no-cors",
       credentials: 'include',
 
     });
@@ -113,5 +112,22 @@ export class ApiStore {
     const resp = await res.json();
 
     return resp;
+  };
+
+  static CheckAuth = async () => {
+
+    const baseUrl = '95.163.212.32';
+
+    const res = await fetch(`http://${baseUrl}:3001/api/v1/users/auth`, {
+      method: "GET",
+      credentials: 'include',
+
+    });
+
+    if (res.status !== 200) {
+      return 401;
+    }
+
+    return 200;
   };
 }
