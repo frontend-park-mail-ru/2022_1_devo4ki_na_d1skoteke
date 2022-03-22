@@ -69,13 +69,13 @@ const signupPage = () => {
     const email = signUp.email.value.trim();
     const username = signUp.nickname.value.trim();
     const password = signUp.primaryPassword.value.trim();
-    const confirmPassword = signUp.confirmPassword.value.trim();
+    const confirm_password = signUp.confirmPassword.value.trim();
 
     const res = await ApiStore.Signup({
       username,
       email,
       password,
-      confirmPassword,
+      confirm_password,
     });
 
     if (res !== undefined && !res.ok) {
