@@ -26,7 +26,7 @@ export class ApiStore {
   };
 
   /**
-   * Does signup request to API
+   * Sends signup request to API
    * @param {object} param0 - The parameters, requested by API
    * @returns {promise<Object>} - the promise with result of calling Signup method
    */
@@ -43,7 +43,7 @@ export class ApiStore {
   };
 
   /**
-   * Does login request to API
+   * Sends login request to API
    * @param {object} param0 - The parameters, requested by API
    * @returns {promise<Object>} - the promise with result of calling Login method
    */
@@ -56,7 +56,7 @@ export class ApiStore {
   };
 
   /**
-   * Does logout request to API
+   * Sends logout request to API
    * @returns {promise<Object>} - the promise with result of calling Logout method
    */
   static Logout = async () => {
@@ -69,7 +69,7 @@ export class ApiStore {
   };
 
   /**
-   * Does GetNoteByToken request to API
+   * Sends GetNoteByToken request to API
    * @param {string} id - The ID of note, requested by API
    * @returns {promise<Note>} - the promise with result of calling GetNoteByToken method
    */
@@ -85,7 +85,7 @@ export class ApiStore {
   };
 
   /**
-   * Does GetAllNotes request to API
+   * Sends GetAllNotes request to API
    * @returns {promise<Notes>} - the promise with result of calling GetAllNotes method
    */
   static GetAllNotes = async () => {
@@ -105,7 +105,7 @@ export class ApiStore {
   };
 
   /**
-   * The method allows to check whether user is authenticated or not
+   * Allows to check whether user is authenticated or not
    * @returns HTTP code status, representing the auth status
    */
   static CheckAuth = async () => {
