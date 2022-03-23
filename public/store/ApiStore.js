@@ -2,7 +2,6 @@ const baseUrl = '95.163.212.32';
 
 /**
  * Class represents storage for API requests
- * 
  */
 export class ApiStore {
   baseUrl;
@@ -97,8 +96,6 @@ export class ApiStore {
    */
   static GetAllNotes = async () => {
 
-    const baseUrl = '95.163.212.32';
-
     const res = await fetch(`http://${baseUrl}:3001/api/v1/notes`, {
       method: "GET",
       credentials: 'include',
@@ -120,8 +117,6 @@ export class ApiStore {
    * @returns HTTP code status, representing the auth status
    */
   static CheckAuth = async () => {
-
-    const baseUrl = '95.163.212.32';
 
     const res = await fetch(`http://${baseUrl}:3001/api/v1/users/auth`, {
       method: "GET",
