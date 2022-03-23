@@ -1,3 +1,5 @@
+/* eslint-disable camelcase */
+
 const baseUrl = '95.163.212.32';
 
 /**
@@ -29,13 +31,13 @@ export class ApiStore {
    * @returns {promise<Object>} - the promise with result of calling Signup method
    */
   static Signup = async ({
-    username, email, password, confirmPassword,
+    username, email, password, confirm_password,
   }) => {
     const data = await this.postData(`http://${baseUrl}:3001/api/v1/users/signup`, {
       username,
       email,
       password,
-      confirmPassword,
+      confirm_password,
     });
     return data;
   };

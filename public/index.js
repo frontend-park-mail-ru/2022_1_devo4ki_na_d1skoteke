@@ -1,4 +1,6 @@
 /* eslint-disable no-undef */
+/* eslint-disable camelcase */
+
 import { renderAuthPage } from './components/Auth/Auth.js';
 import { SetFavicon, haveWrongInput, badResponseHandler } from './js/utils.js';
 import { ApiStore } from './store/ApiStore.js';
@@ -69,13 +71,13 @@ const signupPage = () => {
     const email = signUp.email.value.trim();
     const username = signUp.nickname.value.trim();
     const password = signUp.primaryPassword.value.trim();
-    const confirmPassword = signUp.confirmPassword.value.trim();
+    const confirm_password = signUp.confirmPassword.value.trim();
 
     const res = await ApiStore.Signup({
       username,
       email,
       password,
-      confirmPassword,
+      confirm_password,
     });
 
     if (res !== undefined && !res.ok) {
