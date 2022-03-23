@@ -32,6 +32,7 @@ const addValidationEmail = () => {
   const emailInput = document.getElementById('email-input');
   const emailForm = document.querySelector('form');
 
+  emailForm.querySelector('#bad-email').style.display = 'none';
   emailInput.addEventListener('focusout', (e) => {
     switch (validateEmail(e.target.value)) {
       case InvalidStatusType.WRONG_SYMBOLS:
@@ -71,6 +72,7 @@ const addValidationNickname = () => {
   const nicknameInput = document.getElementById('nickname-input');
   const nicknameForm = document.querySelector('form');
 
+  nicknameForm.querySelector('#bad-nickname').style.display = 'none';
   nicknameInput.addEventListener('focusout', (e) => {
     switch (validateNickname(e.target.value)) {
       case InvalidStatusType.WRONG_SYMBOLS:
@@ -210,6 +212,7 @@ export const addValidationForLoginForms = () => {
   const passwordInput = document.getElementById('password-input');
   const passwordForm = document.querySelector('form');
 
+  passwordForm.querySelector('#bad-password').style.display = 'none';
   passwordInput.addEventListener('focusout', (e) => {
     switch (validatePassword(e.target.value)) {
       case InvalidStatusType.EMPTY:
@@ -234,15 +237,47 @@ export const addValidationForLoginForms = () => {
  * Used to prevent sending request with wrong data
  * */
 export const haveWrongInput = (form) => {
+  let haveEmptyInput = false;
   const errorFields = form.querySelectorAll('.bad-input');
 
-  // eslint-disable-next-line no-restricted-syntax
   for (const error of errorFields) {
     if (error.style.display !== 'none') {
       return true;
     }
   }
-  return false;
+
+  const primaryPassword = document.querySelector('#primaryPassword-input');
+  if (primaryPassword != null) {
+    const confirmPassword = document.querySelector('#confirmPassword-input');
+    if (primaryPassword.value !== confirmPassword.value) {
+      const err = confirmPassword.nextElementSibling;
+      err.style.display = 'block';
+      err.innerHTML = 'Passwords don\'t match';
+      return true;
+    }
+  }
+  const inputFields = form.querySelectorAll('.inputField');
+
+  for (const input of inputFields) {
+    if (input.value === '') {
+      haveEmptyInput = true;
+      break;
+    }
+  }
+
+  if (!haveEmptyInput) {
+    return false;
+  }
+
+  for (const input of inputFields) {
+    if (input.value === '') {
+      const err = input.nextElementSibling;
+      err.style.display = 'block';
+      err.innerHTML = 'You forgot to fill the field!';
+    }
+  }
+
+  return true;
 };
 
 /** Shows errors in case of bad response from server */

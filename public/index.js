@@ -1,11 +1,10 @@
 /* eslint-disable no-undef */
-import { renderAuthPage } from "./components/Auth/Auth.js";
-import { SetFavicon, haveWrongInput, badResponseHandler } from "./js/utils.js";
+import { renderAuthPage } from './components/Auth/Auth.js';
+import { SetFavicon, haveWrongInput, badResponseHandler } from './js/utils.js';
+import { ApiStore } from './store/ApiStore.js';
+import { note } from './views/note.js';
 
-import ApiStore from "./store/ApiStore.js";
-import { note } from "./views/note.js";
-
-const root = document.getElementById("root");
+const root = document.getElementById('root');
 
 SetFavicon();
 
@@ -13,18 +12,16 @@ SetFavicon();
  * Create notes page for user, if user is unauthorised create signup page
  */
 const notesPage = async () => {
-  root.innerHTML = "";
+  root.innerHTML = '';
 
-  const hehe = await ApiStore.GetAllNotes();
-  let isAuthorised = false;
+  const hehe = await ApiStore.CheckAuth();
 
   if (hehe === 401) {
-    loginPage();
+    signupPage();
     return;
   }
 
   note(root);
-  return;
 };
 
 notesPage();
@@ -34,35 +31,35 @@ notesPage();
  */
 const signupPage = () => {
   renderAuthPage({
-    ENTER_TYPE: "signup",
+    ENTER_TYPE: 'signup',
     inputForms: [
       {
-        labelname: "Email",
-        name: "email",
-        placeholder: "Enter email",
+        labelname: 'Email',
+        name: 'email',
+        placeholder: 'Enter email',
       },
       {
-        labelname: "Nickname",
-        name: "nickname",
-        placeholder: "Enter your nickname",
+        labelname: 'Nickname',
+        name: 'nickname',
+        placeholder: 'Enter your nickname',
       },
       {
-        type: "password",
-        labelname: "Password",
-        name: "primaryPassword",
-        placeholder: "Enter password",
+        type: 'password',
+        labelname: 'Password',
+        name: 'primaryPassword',
+        placeholder: 'Enter password',
       },
       {
-        type: "password",
-        labelname: "Confirm password",
-        name: "confirmPassword",
-        placeholder: "Enter password again",
+        type: 'password',
+        labelname: 'Confirm password',
+        name: 'confirmPassword',
+        placeholder: 'Enter password again',
       },
     ],
   });
 
-  const signUp = document.forms.namedItem("signup-form");
-  signUp.addEventListener("submit", async (e) => {
+  const signUp = document.forms.namedItem('signup-form');
+  signUp.addEventListener('submit', async (e) => {
     e.preventDefault();
 
     if (haveWrongInput(signUp)) {
@@ -86,11 +83,9 @@ const signupPage = () => {
       return;
     }
 
-    const res2 = await ApiStore.Login({ email, password });
+    await ApiStore.Login({ email, password });
 
     notesPage();
-
-    return;
   });
 };
 
@@ -99,24 +94,24 @@ const signupPage = () => {
  */
 const loginPage = () => {
   renderAuthPage({
-    ENTER_TYPE: "login",
+    ENTER_TYPE: 'login',
     inputForms: [
       {
-        labelname: "Email",
-        name: "email",
-        placeholder: "Enter email",
+        labelname: 'Email',
+        name: 'email',
+        placeholder: 'Enter email',
       },
       {
-        type: "password",
-        labelname: "Password",
-        name: "password",
-        placeholder: "Enter password",
+        type: 'password',
+        labelname: 'Password',
+        name: 'password',
+        placeholder: 'Enter password',
       },
     ],
   });
 
-  const loginForm = document.forms.namedItem("login-form");
-  loginForm.addEventListener("submit", async (e) => {
+  const loginForm = document.forms.namedItem('login-form');
+  loginForm.addEventListener('submit', async (e) => {
     e.preventDefault();
 
     if (haveWrongInput(loginForm)) {
@@ -129,12 +124,11 @@ const loginPage = () => {
     const res = await ApiStore.Login({ email, password });
 
     if (res.status !== 200) {
-      loginPage();
+      badResponseHandler();
       return;
     }
 
     note(root);
-    return;
   });
 };
 
@@ -144,15 +138,15 @@ const loginPage = () => {
  */
 const configApp = {
   notes: {
-    href: "/notes",
+    href: '/notes',
     openMethod: notesPage,
   },
   signup: {
-    href: "/sighup",
+    href: '/sighup',
     openMethod: signupPage,
   },
   login: {
-    href: "/login",
+    href: '/login',
     openMethod: loginPage,
   },
 };
@@ -162,7 +156,7 @@ const configApp = {
  * replaces GET requests to function calls which creates specific page
  * depending on config of our application
  */
-root.addEventListener("click", (e) => {
+root.addEventListener('click', (e) => {
   const { target } = e;
 
   if (target instanceof HTMLAnchorElement) {
@@ -175,31 +169,32 @@ root.addEventListener("click", (e) => {
   }
 });
 
-root.addEventListener("click", async (e) => {
+root.addEventListener('click', async (e) => {
   const { target } = e;
   switch (target.dataset.section) {
-    case "signup": {
-      root.innerHTML = "";
+    case 'signup': {
       signupPage();
       break;
     }
 
-    case "login": {
-      root.innerHTML = "";
+    case 'login': {
       loginPage();
       break;
     }
 
-    case "note": {
-      root.innerHTML = "";
+    case 'note': {
       note(root);
       break;
     }
 
-    case "logout": {
-      root.innerHTML = "";
-      const logoutRes = await ApiStore.Logout();
+    case 'logout': {
+      root.innerHTML = '';
+      await ApiStore.Logout();
       loginPage();
+      break;
+    }
+
+    default: {
       break;
     }
   }

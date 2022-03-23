@@ -58,7 +58,6 @@ export class ApiStore {
       password,
     });
 
-    // const bod = await data.json();
     console.log("returned from fetch", data);
     return data;
   };
@@ -73,8 +72,6 @@ export class ApiStore {
       credentials: 'include',
     });
 
-    console.log(res);
-    // const resp = await res.json();
     return res;
   };
 
@@ -84,7 +81,6 @@ export class ApiStore {
    * @returns {promise<Note>} - the promise with result of calling GetNoteByToken method
    */
   static GetNoteByToken = async (id) => {
-    // /api/v1/notes
     const res = await fetch(`http://${baseUrl}:3001/api/v1/note/${encodeURI(id)}`);
     const resp = await res.json();
 
@@ -93,7 +89,6 @@ export class ApiStore {
     }
 
     return resp.body;
-    // return resp;
   };
 
   /**
@@ -106,14 +101,9 @@ export class ApiStore {
 
     const res = await fetch(`http://${baseUrl}:3001/api/v1/notes`, {
       method: "GET",
-      // mode: "no-cors",
       credentials: 'include',
 
     });
-
-    // const res2 = res.statusText;
-
-    console.log(res);
 
     if (res.status !== 200) {
       return 401;
@@ -121,9 +111,28 @@ export class ApiStore {
 
     const resp = await res.json();
 
-    console.log(resp);
     return resp;
   };
-}
 
-export default ApiStore;
+
+  /**
+   * The method allows to check whether user is authenticated or not
+   * @returns HTTP code status, representing the auth status
+   */
+  static CheckAuth = async () => {
+
+    const baseUrl = '95.163.212.32';
+
+    const res = await fetch(`http://${baseUrl}:3001/api/v1/users/auth`, {
+      method: "GET",
+      credentials: 'include',
+
+    });
+
+    if (res.status !== 200) {
+      return 401;
+    }
+
+    return 200;
+  };
+}
