@@ -114,6 +114,11 @@ export class ApiStore {
     return resp;
   };
 
+
+  /**
+   * The method allows to check whether user is authenticated or not
+   * @returns HTTP code status, representing the auth status
+   */
   static CheckAuth = async () => {
 
     const baseUrl = '95.163.212.32';
