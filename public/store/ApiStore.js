@@ -4,28 +4,19 @@ const baseUrl = '95.163.212.32';
  * Class represents storage for API requests
  */
 export class ApiStore {
-  baseUrl;
-  /**
-   * Creates a ApiStore
-   * @param {string} baseUrl - The base of the url where API requests are sent to
-   */
-  constructor(baseUrl = '95.163.212.32') {
-    this.baseUrl = baseUrl;
-  }
-
   /**
    * Forming, sending and revieving response for fetch request for API
    * @param {string} url for
    * @param {any} data
    * @returns {promise<Object>} - the body of HTTP response from called API
    */
-  static postData = async (url = "", data = {}) => {
+  static postData = async (url = '', data = {}) => {
     const response = await fetch(url, {
-      method: "POST",
-      mode: "cors",
+      method: 'POST',
+      mode: 'cors',
       credentials: 'include',
       headers: {
-        "Content-Type": "multipart/form-data",
+        'Content-Type': 'multipart/form-data',
       },
       body: JSON.stringify(data),
     });
@@ -37,15 +28,18 @@ export class ApiStore {
    * @param {object} param0 - The parameters, requested by API
    * @returns {promise<Object>} - the promise with result of calling Signup method
    */
-  static Signup = async ({ username, email, password, confirm_password }) => {
+  static Signup = async ({
+    username, email, password, confirmPassword,
+  }) => {
     const data = await this.postData(`http://${baseUrl}:3001/api/v1/users/signup`, {
       username,
       email,
       password,
-      confirm_password,
+      confirmPassword,
     });
     return data;
   };
+
   /**
    * Does login request to API
    * @param {object} param0 - The parameters, requested by API
@@ -56,8 +50,6 @@ export class ApiStore {
       email,
       password,
     });
-
-    console.log("returned from fetch", data);
     return data;
   };
 
@@ -67,7 +59,7 @@ export class ApiStore {
    */
   static Logout = async () => {
     const res = await fetch(`http://${baseUrl}:3001/api/v1/users/logout`, {
-      method: "GET",
+      method: 'GET',
       credentials: 'include',
     });
 
@@ -95,9 +87,8 @@ export class ApiStore {
    * @returns {promise<Notes>} - the promise with result of calling GetAllNotes method
    */
   static GetAllNotes = async () => {
-
     const res = await fetch(`http://${baseUrl}:3001/api/v1/notes`, {
-      method: "GET",
+      method: 'GET',
       credentials: 'include',
 
     });
@@ -111,15 +102,13 @@ export class ApiStore {
     return resp;
   };
 
-
   /**
    * The method allows to check whether user is authenticated or not
    * @returns HTTP code status, representing the auth status
    */
   static CheckAuth = async () => {
-
     const res = await fetch(`http://${baseUrl}:3001/api/v1/users/auth`, {
-      method: "GET",
+      method: 'GET',
       credentials: 'include',
 
     });

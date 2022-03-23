@@ -2,7 +2,6 @@ const express = require('express');
 const path = require('path');
 const pug = require('pug');
 const fs = require('fs');
-const uuid = require('uuid');
 
 const app = express();
 app.use(express.json());
@@ -28,71 +27,6 @@ const compileTemplate = (tmplName) => {
 
 templateNames.forEach((el) => {
   compileTemplate(el);
-});
-
-const users = {
-  'mr.erik770@mail.ru': {
-    nickname: 'erik770',
-    email: 'mr.erik770@mail.ru',
-    password: 'password',
-  },
-};
-const ids = {};
-
-app.post('/signup', (req, res) => {
-  const { nickname } = req.body;
-  const { email } = req.body;
-  const { password } = req.body;
-  if (
-    !password || !email
-    || !password.match(/^\S{4,}$/)
-    || !email.match(/@/)
-  ) {
-    return res.status(400).json({ error: 'Не валидные данные пользователя' });
-  }
-  if (users[email]) {
-    return res.status(400).json({ error: 'Пользователь уже существует' });
-  }
-
-  const id = uuid();
-  const user = {
-    nickname, email, password,
-  };
-  ids[id] = email;
-  users[email] = user;
-
-  res.cookie('zavorot', id, { expires: new Date(Date.now() + 1000 * 60 * 10) });
-  return res.status(201).json({ id });
-});
-
-app.post('/login', (req, res) => {
-  const { password } = req.body;
-  const { email } = req.body;
-  if (!password || !email) {
-    return res.status(400).json({ error: 'Не указан E-Mail или пароль' });
-  }
-  if (!users[email]) {
-    return res.status(400).json({ error: 'Нет пользователя с таким email' });
-  }
-  if (users[email].password !== password) {
-    return res.status(400).json({ error: 'Не верный пароль' });
-  }
-
-  const id = uuid();
-  ids[id] = email;
-
-  res.cookie('zavorot', id, { expires: new Date(Date.now() + 1000 * 60 * 10) });
-  return res.status(200).json({ id });
-});
-
-app.get('/notes', (req, res) => {
-  const id = req.cookies.zavorot;
-  const email = ids[id];
-  if (!email || !users[email]) {
-    return res.status(401).end();
-  }
-
-  return res.json(users[email]);
 });
 
 const SERVER_PORT = process.env.PORT || 3000;

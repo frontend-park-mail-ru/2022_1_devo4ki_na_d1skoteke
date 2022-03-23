@@ -2,7 +2,9 @@ import { CreateLeftSide } from '../components/LeftSideBar/LeftSideBar.js';
 import { CreateNoteContent } from '../components/NoteContent/NoteContent.js';
 import { ApiStore } from '../store/ApiStore.js';
 
+/* eslint no-param-reassign: ["error", { "props": false }] */
 export const note = async (node) => {
+  
   node.innerHTML = '';
 
   const page = document.createElement('div');
