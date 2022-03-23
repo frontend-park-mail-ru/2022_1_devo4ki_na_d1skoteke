@@ -8,14 +8,14 @@
 .page__sidebar {
     background-color: #fffdeb;
     font-size: 24px;
-    border: 1px solid #fff170;
+    border: 1px solid var(--page__sidebar__border__color);
     height: 100vh;
     font-style: normal;
     font-weight: 400;
     font-size: 24px;
     line-height: 144%;
     letter-spacing: 0.01em;
-    color: rgba(0, 0, 0, 0.8);
+    color: var(--page-sidebar-color);
 }
 
 .page__sidebar__bio {
