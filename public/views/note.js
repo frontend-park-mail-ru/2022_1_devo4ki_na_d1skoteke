@@ -2,9 +2,28 @@ import { CreateLeftSide } from '../components/LeftSideBar/LeftSideBar.js';
 import { CreateNoteContent } from '../components/NoteContent/NoteContent.js';
 import { ApiStore } from '../store/ApiStore.js';
 
+
+export const render = async (id) => {
+  let body = document.getElementById("body");
+  let title = document.getElementById("title");
+
+  let book = null;
+  window.bookStore.forEach((el) => {
+    if (el.name === String(id)) {
+      book = el;
+    }
+  })
+
+  body.innerText = book.body;
+  title.innerText = book.name;
+
+}
+
+window.render = render;
+
 /* eslint no-param-reassign: ["error", { "props": false }] */
 export const note = async (node) => {
-  
+
   node.innerHTML = '';
 
   const page = document.createElement('div');
@@ -15,9 +34,13 @@ export const note = async (node) => {
 
   const bookStore = fetchRes.notes;
 
-  CreateLeftSide(page, { name: 'Henry', bookStore });
+  window.bookStore = bookStore;
+  // this.
 
-  CreateNoteContent(page, { name: 'Henry', title: '1', bookStore });
+  CreateLeftSide(page, { name: 'Henry', bookStore });
+  const book = bookStore[0];
+
+  CreateNoteContent(page, { book });
 
   node.appendChild(page);
 
