@@ -1,14 +1,9 @@
-<<<<<<< HEAD
 /node_modules
 /.idea
-/public/components/Auth/compiled
-=======
-node_modules/
 js/
-.idea/
+/public/components/Auth/compiled/
 public/components/NoteContent/compiled/
 public/components/Enter/compiled/
 public/components/LeftSideBar/compiled/
 views/
 server copy.js
->>>>>>> TP-396_network_module
