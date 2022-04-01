@@ -2,6 +2,7 @@
 /* eslint-disable camelcase */
 
 import { renderAuthPage } from './components/Auth/Auth.js';
+import { renderSettings } from './components/Settings/Settings.js';
 import { SetFavicon, haveWrongInput, badResponseHandler } from './js/utils.js';
 import { ApiStore } from './store/ApiStore.js';
 import { note } from './views/note.js';
@@ -89,6 +90,8 @@ const signupPage = () => {
 
     notesPage();
   });
+
+  renderSettings({});
 };
 
 /**

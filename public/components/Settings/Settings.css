@@ -1,0 +1,92 @@
+.popup {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.7);
+    top: 0;
+    left: 0;
+    bottom: 0;
+
+    font-size: 20px;
+
+}
+
+.popup__body {
+    min-height: 100%;
+    display:flex;
+    align-items: center;
+    justify-content: center;
+    padding: 30px 50px;
+
+}
+
+.menu-content {
+    display:flex;
+
+    background-color: #fff;
+    color: #000;
+    max-width: 1024px;
+    min-width: 500px;
+    width: 100%;
+
+    max-height: 400px;
+    min-height: 720px;
+    height: 100%;
+    /*padding: 5px;*/
+}
+
+.menu-content__sidebar {
+    flex: 0 0 280px;
+}
+
+.menu-content__settings {
+    flex-grow: 1;
+    flex-shrink: 1;
+    flex-basis: 250px;
+    padding: 60px 80px;
+}
+
+.close {
+    position: relative;
+}
+
+.sidebar {
+    display: flex;
+    flex-direction: column;
+    background-color:  rgba(0, 0, 0, 0.2);
+    text-align: center;
+}
+
+.sidebar__username {
+    background-color:  rgba(0, 0, 0, 0.25);
+    margin: 0 0 2px;
+    padding: 3px 10px;
+
+}
+
+.sidebar__tab:hover {
+    background-color:  rgba(0, 0, 0, 0.25);
+
+}
+
+.sidebar__tab {
+    padding: 10px;
+}
+
+.settings__title {
+    font-size: 25px;
+    text-decoration: underline;
+    margin-bottom: 50px;
+}
+
+.setting-field {
+    display: flex;
+    margin: 20px 0px;
+}
+.setting-field__label {
+    flex: 0 0 280px;
+}
+
+.setting-field__input {
+    flex-grow: 1;
+}

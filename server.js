@@ -8,11 +8,10 @@ app.use(express.json());
 app.use(express.static(path.resolve(__dirname, 'public')));
 app.set('view engine', 'pug');
 
-const templateNames = ['NoteContent', 'LeftSideBar', 'Auth'];
+const templateNames = ['NoteContent', 'Settings', 'LeftSideBar', 'Auth'];
 
 const compileTemplate = (tmplName) => {
   const componentPath = `public/components/${tmplName}`;
-
   const comp = pug.compileFileClient(`${componentPath}/${tmplName}.pug`, {
     name: `${tmplName}`,
   });

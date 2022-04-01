@@ -1,6 +1,7 @@
 @import 'components/Auth/Auth.css';
 @import 'components/LeftSideBar/LeftSideBar.css';
 @import 'components/NoteContent/NoteContent.css';
+@import 'components/Settings/Settings.css';
 
 :root {
     --input-form-fill-color: rgba(201, 201, 201, 0.6);

@@ -2,28 +2,25 @@ import { CreateLeftSide } from '../components/LeftSideBar/LeftSideBar.js';
 import { CreateNoteContent } from '../components/NoteContent/NoteContent.js';
 import { ApiStore } from '../store/ApiStore.js';
 
-
 export const render = async (id) => {
-  let body = document.getElementById("body");
-  let title = document.getElementById("title");
+  const body = document.getElementById('body');
+  const title = document.getElementById('title');
 
   let book = null;
   window.bookStore.forEach((el) => {
     if (el.name === String(id)) {
       book = el;
     }
-  })
+  });
 
   body.innerText = book.body;
   title.innerText = book.name;
-
-}
+};
 
 window.render = render;
 
 /* eslint no-param-reassign: ["error", { "props": false }] */
 export const note = async (node) => {
-
   node.innerHTML = '';
 
   const page = document.createElement('div');
