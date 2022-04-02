@@ -45,7 +45,7 @@ input {
     margin-top: 3px;
     border: none;
     outline: none;
-    opacity: 80%;
+    color: rgba(255, 0, 0, 0.8);
 }
 
 .form > input:focus {

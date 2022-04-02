@@ -4,7 +4,7 @@ var pug_match_html=/["&<>]/;
 function pug_rethrow(e,n,r,t){if(!(e instanceof Error))throw e;if(!("undefined"==typeof window&&n||t))throw e.message+=" on line "+r,e;var o,a,i,s;try{t=t||require("fs").readFileSync(n,{encoding:"utf8"}),o=3,a=t.split("\n"),i=Math.max(r-o,0),s=Math.min(a.length,r+o)}catch(t){return e.message+=" - could not read from "+n+" ("+t.message+")",void pug_rethrow(e,null,r)}o=a.slice(i,s).map(function(e,n){var t=n+i+1;return(t==r?"  > ":"    ")+t+"| "+e}).join("\n"),e.path=n;try{e.message=(n||"Pug")+":"+r+"\n"+o+"\n\n"+e.message}catch(e){}throw e}function Settings(locals) {var pug_html = "", pug_mixins = {}, pug_interp;var pug_debug_filename, pug_debug_line;try {;
     var locals_for_with = (locals || {});
     
-    (function (ENTER_TYPE, btn_msg, inputForms) {
+    (function (inputForms) {
       ;pug_debug_line = 1;pug_debug_filename = "public\u002Fcomponents\u002FSettings\u002FSettings.pug";
 pug_html = pug_html + "\u003Cdiv class=\"popup\"\u003E";
 ;pug_debug_line = 2;pug_debug_filename = "public\u002Fcomponents\u002FSettings\u002FSettings.pug";
@@ -18,13 +18,13 @@ pug_html = pug_html + "\u003Cdiv class=\"sidebar__username\"\u003E";
 ;pug_debug_line = 5;pug_debug_filename = "public\u002Fcomponents\u002FSettings\u002FSettings.pug";
 pug_html = pug_html + "idfurnl\u003C\u002Fdiv\u003E";
 ;pug_debug_line = 6;pug_debug_filename = "public\u002Fcomponents\u002FSettings\u002FSettings.pug";
-pug_html = pug_html + "\u003Cdiv class=\"sidebar__tab sidebar__tab_account-settings\"\u003E";
+pug_html = pug_html + "\u003Ca class=\"sidebar__tab sidebar__tab_account-settings\"\u003E";
 ;pug_debug_line = 6;pug_debug_filename = "public\u002Fcomponents\u002FSettings\u002FSettings.pug";
-pug_html = pug_html + "Account Settings\u003C\u002Fdiv\u003E";
+pug_html = pug_html + "Account Settings\u003C\u002Fa\u003E";
 ;pug_debug_line = 7;pug_debug_filename = "public\u002Fcomponents\u002FSettings\u002FSettings.pug";
-pug_html = pug_html + "\u003Cdiv class=\"sidebar__tab sidebar__tab_members\"\u003E";
+pug_html = pug_html + "\u003Ca class=\"sidebar__tab sidebar__tab_members\"\u003E";
 ;pug_debug_line = 7;pug_debug_filename = "public\u002Fcomponents\u002FSettings\u002FSettings.pug";
-pug_html = pug_html + "Members\u003C\u002Fdiv\u003E\u003C\u002Fdiv\u003E";
+pug_html = pug_html + "Members\u003C\u002Fa\u003E\u003C\u002Fdiv\u003E";
 ;pug_debug_line = 8;pug_debug_filename = "public\u002Fcomponents\u002FSettings\u002FSettings.pug";
 pug_html = pug_html + "\u003Cdiv class=\"menu-content__settings settings\"\u003E";
 ;pug_debug_line = 9;pug_debug_filename = "public\u002Fcomponents\u002FSettings\u002FSettings.pug";
@@ -47,7 +47,7 @@ pug_html = pug_html + "\u003Clabel class=\"my-label setting-field__label\"\u003E
 ;pug_debug_line = 13;pug_debug_filename = "public\u002Fcomponents\u002FSettings\u002FSettings.pug";
 pug_html = pug_html + (pug_escape(null == (pug_interp = input.labelname) ? "" : pug_interp)) + "\u003C\u002Flabel\u003E";
 ;pug_debug_line = 14;pug_debug_filename = "public\u002Fcomponents\u002FSettings\u002FSettings.pug";
-pug_html = pug_html + "\u003Cinput" + (" class=\"inputField setting-field__input\""+pug_attr("type", input.type, true, false)+pug_attr("name", input.name, true, false)+pug_attr("placeholder", input.placeholder, true, false)+pug_attr("id", input.name + '-input', true, false)) + "\u002F\u003E\u003C\u002Fdiv\u003E";
+pug_html = pug_html + "\u003Cinput" + (" class=\"inputField setting-field__input\""+pug_attr("type", input.type, true, false)+pug_attr("name", input.name, true, false)+pug_attr("placeholder", input.placeholder, true, false)+pug_attr("value", input.default_value, true, false)+pug_attr("id", input.name + '-input', true, false)) + "\u002F\u003E\u003C\u002Fdiv\u003E";
       }
   } else {
     var $$l = 0;
@@ -61,18 +61,18 @@ pug_html = pug_html + "\u003Clabel class=\"my-label setting-field__label\"\u003E
 ;pug_debug_line = 13;pug_debug_filename = "public\u002Fcomponents\u002FSettings\u002FSettings.pug";
 pug_html = pug_html + (pug_escape(null == (pug_interp = input.labelname) ? "" : pug_interp)) + "\u003C\u002Flabel\u003E";
 ;pug_debug_line = 14;pug_debug_filename = "public\u002Fcomponents\u002FSettings\u002FSettings.pug";
-pug_html = pug_html + "\u003Cinput" + (" class=\"inputField setting-field__input\""+pug_attr("type", input.type, true, false)+pug_attr("name", input.name, true, false)+pug_attr("placeholder", input.placeholder, true, false)+pug_attr("id", input.name + '-input', true, false)) + "\u002F\u003E\u003C\u002Fdiv\u003E";
+pug_html = pug_html + "\u003Cinput" + (" class=\"inputField setting-field__input\""+pug_attr("type", input.type, true, false)+pug_attr("name", input.name, true, false)+pug_attr("placeholder", input.placeholder, true, false)+pug_attr("value", input.default_value, true, false)+pug_attr("id", input.name + '-input', true, false)) + "\u002F\u003E\u003C\u002Fdiv\u003E";
     }
   }
 }).call(this);
 
-;pug_debug_line = 20;pug_debug_filename = "public\u002Fcomponents\u002FSettings\u002FSettings.pug";
-pug_html = pug_html + "\u003Cinput" + (" class=\"submit-btn\""+" type=\"submit\""+pug_attr("id", ENTER_TYPE + '-submit-btn', true, false)+pug_attr("value", btn_msg, true, false)) + "\u002F\u003E\u003C\u002Fdiv\u003E\u003C\u002Fdiv\u003E\u003C\u002Fdiv\u003E\u003C\u002Fdiv\u003E\u003C\u002Fdiv\u003E";
-    }.call(this, "ENTER_TYPE" in locals_for_with ?
-        locals_for_with.ENTER_TYPE :
-        typeof ENTER_TYPE !== 'undefined' ? ENTER_TYPE : undefined, "btn_msg" in locals_for_with ?
-        locals_for_with.btn_msg :
-        typeof btn_msg !== 'undefined' ? btn_msg : undefined, "inputForms" in locals_for_with ?
+;pug_debug_line = 21;pug_debug_filename = "public\u002Fcomponents\u002FSettings\u002FSettings.pug";
+pug_html = pug_html + "\u003Cdiv class=\"settings__buttons setting-field\"\u003E";
+;pug_debug_line = 22;pug_debug_filename = "public\u002Fcomponents\u002FSettings\u002FSettings.pug";
+pug_html = pug_html + "\u003Cinput class=\"submit-btn settings__buttons_save\" type=\"submit\" id=\"save-btn\" value=\"Save\"\u002F\u003E";
+;pug_debug_line = 23;pug_debug_filename = "public\u002Fcomponents\u002FSettings\u002FSettings.pug";
+pug_html = pug_html + "\u003Cinput class=\"submit-btn settings__buttons_logout\" type=\"submit\" id=\"logout-btn\" value=\"Logout\"\u002F\u003E\u003C\u002Fdiv\u003E\u003C\u002Fdiv\u003E\u003C\u002Fdiv\u003E\u003C\u002Fdiv\u003E\u003C\u002Fdiv\u003E\u003C\u002Fdiv\u003E";
+    }.call(this, "inputForms" in locals_for_with ?
         locals_for_with.inputForms :
         typeof inputForms !== 'undefined' ? inputForms : undefined));
     ;} catch (err) {pug_rethrow(err, pug_debug_filename, pug_debug_line);};return pug_html;} export {Settings}

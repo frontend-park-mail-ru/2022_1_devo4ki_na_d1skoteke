@@ -11,12 +11,14 @@ export const renderSettings = (context) => {
       {
         labelname: 'Email',
         name: 'email',
-        placeholder: 'idfurnl.ctfg@gmail.com',
+        placeholder: 'Enter email',
+        default_value: 'idfurnl.ctfg@gmail.com',
       },
       {
         labelname: 'Nickname',
         name: 'nickname',
-        placeholder: 'idfurnl',
+        placeholder: 'Enter nickname',
+        default_value: 'idfurnl',
       },
       {
         type: 'password',
