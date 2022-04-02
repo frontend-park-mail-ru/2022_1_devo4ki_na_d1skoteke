@@ -29,7 +29,7 @@ templateNames.forEach((el) => {
   compileTemplate(el);
 });
 
-const SERVER_PORT = process.env.PORT || 3000;
+const SERVER_PORT = 3000;
 
 app.listen(SERVER_PORT, () => {
   // eslint-disable-next-line no-console

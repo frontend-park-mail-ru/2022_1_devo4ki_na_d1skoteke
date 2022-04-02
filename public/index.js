@@ -16,9 +16,9 @@ SetFavicon();
 const notesPage = async () => {
   root.innerHTML = '';
 
-  const hehe = await ApiStore.CheckAuth();
+  const isAuthorisedStatus = await ApiStore.CheckAuth();
 
-  if (hehe === 401) {
+  if (isAuthorisedStatus === 401) {
     signupPage();
     return;
   }

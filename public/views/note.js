@@ -35,7 +35,6 @@ export const note = async (node) => {
   const bookStore = fetchRes.notes;
 
   window.bookStore = bookStore;
-  // this.
 
   CreateLeftSide(page, { name: 'Henry', bookStore });
   const book = bookStore[0] !== undefined ? bookStore[0] : { name: '', body: '' };
