@@ -17,11 +17,6 @@ class LeftSideBarModel {
         return this.#books;
     }
 
-    async getNotes() {
-        return new Promise((resolve, reject) => {
-            resolve(this.#books);
-        });
-    }
 }
 
 export { LeftSideBarModel };

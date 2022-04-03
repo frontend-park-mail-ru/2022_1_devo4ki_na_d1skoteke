@@ -1,14 +1,16 @@
 class LeftSideController {
 
-    model;
-    view;
+    #model;
+    #view;
 
     constructor(model, view) {
-        this.model = model;
-        this.view = view;
+        this.#model = model;
+        this.#view = view;
     }
+    
     async render(node) {
-        this.view.render(node, { name: 'Henry', bookStore })
+        const d = await this.#model.getUpdates();
+        this.#view.render(node, { name: 'Henry', bookStore: d })
     }
 }
 
