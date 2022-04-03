@@ -3,20 +3,23 @@ import { CreateNoteContent } from '../components/NoteContent/NoteContent.js';
 import { ApiStore } from '../store/ApiStore.js';
 
 
-export const render = async (id, userNotes) => {
+export const render = async (id) => {
   let body = document.getElementById("body");
   let title = document.getElementById("title");
 
-  const book = userNotes.forEach(element => {
-    if (element.name = id) {
-      return element;
+  let book = null;
+  window.bookStore.forEach((el) => {
+    if (el.name === String(id)) {
+      book = el;
     }
-  });
+  })
 
-  body.innerText = book.name;
-  title.innerText = book.body;
-  
+  body.innerText = book.body;
+  title.innerText = book.name;
+
 }
+
+window.render = render;
 
 /* eslint no-param-reassign: ["error", { "props": false }] */
 export const note = async (node) => {
@@ -31,8 +34,10 @@ export const note = async (node) => {
 
   const bookStore = fetchRes.notes;
 
+  window.bookStore = bookStore;
+
   CreateLeftSide(page, { name: 'Henry', bookStore });
-  const book = bookStore[0];
+  const book = bookStore[0] !== undefined ? bookStore[0] : { name: '', body: '' };
 
   CreateNoteContent(page, { book });
 

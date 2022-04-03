@@ -7,4 +7,4 @@
   .page__sidebar__holder
   .page__sidebar__notes
     each book in bookStore
-      div= "> " + book.name
+      div(id=book.name onclick='render(\'' + book.name + '\')' )= "> " + book.name
