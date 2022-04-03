@@ -1,39 +1,31 @@
 /* eslint-disable no-undef */
+/* eslint-disable camelcase */
+
 import { renderAuthPage } from './components/Auth/Auth.js';
 import { SetFavicon, haveWrongInput, badResponseHandler } from './js/utils.js';
+import { ApiStore } from './store/ApiStore.js';
+import { note } from './views/note.js';
 
 const root = document.getElementById('root');
+
 SetFavicon();
 
 /**
  * Create notes page for user, if user is unauthorised create signup page
  */
-const notesPage = () => {
+const notesPage = async () => {
   root.innerHTML = '';
 
-  Ajax.get(
-    {
-      url: '/notes',
-      callback: (status, responseText) => {
-        let isAuthorised = false;
-        if (status === 200) {
-          isAuthorised = true;
-        }
+  const isAuthorisedStatus = await ApiStore.CheckAuth();
 
-        if (isAuthorised) {
-          const notePage = document.createElement('div');
-          notePage.classList.add('title');
-          const { nickname } = JSON.parse(responseText);
+  if (isAuthorisedStatus === 401) {
+    signupPage();
+    return;
+  }
 
-          notePage.innerHTML = `This is ${nickname}'s Notes page.`;
-          root.appendChild(notePage);
-          return;
-        }
-        signupPage();
-      },
-    },
-  );
+  note(root);
 };
+
 notesPage();
 
 /**
@@ -69,7 +61,7 @@ const signupPage = () => {
   });
 
   const signUp = document.forms.namedItem('signup-form');
-  signUp.addEventListener('submit', (e) => {
+  signUp.addEventListener('submit', async (e) => {
     e.preventDefault();
 
     if (haveWrongInput(signUp)) {
@@ -77,24 +69,25 @@ const signupPage = () => {
     }
 
     const email = signUp.email.value.trim();
-    const nickname = signUp.nickname.value.trim();
+    const username = signUp.nickname.value.trim();
     const password = signUp.primaryPassword.value.trim();
+    const confirm_password = signUp.confirmPassword.value.trim();
 
-    Ajax.post(
-      {
-        url: '/signup',
-        body: { email, nickname, password },
-        callback: (status, responseText) => {
-          if (status === 201) {
-            notesPage();
-            return;
-          }
-          if (status === 400) {
-            badResponseHandler(responseText);
-          }
-        },
-      },
-    );
+    const res = await ApiStore.Signup({
+      username,
+      email,
+      password,
+      confirm_password,
+    });
+
+    if (res !== undefined && !res.ok) {
+      notesPage();
+      return;
+    }
+
+    await ApiStore.Login({ email, password });
+
+    notesPage();
   });
 };
 
@@ -120,7 +113,7 @@ const loginPage = () => {
   });
 
   const loginForm = document.forms.namedItem('login-form');
-  loginForm.addEventListener('submit', (e) => {
+  loginForm.addEventListener('submit', async (e) => {
     e.preventDefault();
 
     if (haveWrongInput(loginForm)) {
@@ -130,22 +123,14 @@ const loginPage = () => {
     const email = loginForm.email.value.trim();
     const password = loginForm.password.value.trim();
 
-    Ajax.post(
-      {
-        url: '/login',
-        body: { email, password },
-        callback: (status, responseText) => {
-          if (status === 200) {
-            // console.log('auth success');
-            notesPage();
-            return;
-          }
-          if (status === 400) {
-            badResponseHandler(responseText);
-          }
-        },
-      },
-    );
+    const res = await ApiStore.Login({ email, password });
+
+    if (res.status !== 200) {
+      badResponseHandler();
+      return;
+    }
+
+    note(root);
   });
 };
 
@@ -182,6 +167,37 @@ root.addEventListener('click', (e) => {
     const { section } = target.dataset;
     if (section) {
       configApp[section].openMethod();
+    }
+  }
+});
+
+root.addEventListener('click', async (e) => {
+  const { target } = e;
+  switch (target.dataset.section) {
+    case 'signup': {
+      signupPage();
+      break;
+    }
+
+    case 'login': {
+      loginPage();
+      break;
+    }
+
+    case 'note': {
+      note(root);
+      break;
+    }
+
+    case 'logout': {
+      root.innerHTML = '';
+      await ApiStore.Logout();
+      loginPage();
+      break;
+    }
+
+    default: {
+      break;
     }
   }
 });
