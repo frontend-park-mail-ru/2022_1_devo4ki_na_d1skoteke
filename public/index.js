@@ -1,7 +1,9 @@
 /* eslint-disable no-undef */
 /* eslint-disable camelcase */
 
-import { renderAuthPage } from './components/Auth/Auth.js';
+import { AuthController } from './app/controllers/Auth/Auth.js';
+import { AuthModel } from './app/models/Auth/Auth.js';
+import { AuthView } from './app/views/Auth/Auth.js';
 import { SetFavicon, haveWrongInput, badResponseHandler } from './js/utils.js';
 import { ApiStore } from './store/ApiStore.js';
 import { note } from './views/note.js';
@@ -9,6 +11,9 @@ import { note } from './views/note.js';
 const root = document.getElementById('root');
 
 SetFavicon();
+
+const controllerAuth = new AuthController(new AuthModel(), new AuthView());
+
 
 /**
  * Create notes page for user, if user is unauthorised create signup page
@@ -19,7 +24,7 @@ const notesPage = async () => {
   const hehe = await ApiStore.CheckAuth();
 
   if (hehe === 401) {
-    signupPage();
+    controllerAuth.render(root, "login");
     return;
   }
 
@@ -32,33 +37,8 @@ notesPage();
  * Creating signup page
  */
 const signupPage = () => {
-  renderAuthPage({
-    ENTER_TYPE: 'signup',
-    inputForms: [
-      {
-        labelname: 'Email',
-        name: 'email',
-        placeholder: 'Enter email',
-      },
-      {
-        labelname: 'Nickname',
-        name: 'nickname',
-        placeholder: 'Enter your nickname',
-      },
-      {
-        type: 'password',
-        labelname: 'Password',
-        name: 'primaryPassword',
-        placeholder: 'Enter password',
-      },
-      {
-        type: 'password',
-        labelname: 'Confirm password',
-        name: 'confirmPassword',
-        placeholder: 'Enter password again',
-      },
-    ],
-  });
+
+  controllerAuth.render(root, "signup");
 
   const signUp = document.forms.namedItem('signup-form');
   signUp.addEventListener('submit', async (e) => {
@@ -95,22 +75,9 @@ const signupPage = () => {
  * Creating login page
  */
 const loginPage = () => {
-  renderAuthPage({
-    ENTER_TYPE: 'login',
-    inputForms: [
-      {
-        labelname: 'Email',
-        name: 'email',
-        placeholder: 'Enter email',
-      },
-      {
-        type: 'password',
-        labelname: 'Password',
-        name: 'password',
-        placeholder: 'Enter password',
-      },
-    ],
-  });
+
+  controllerAuth.render(root, "login");
+
 
   const loginForm = document.forms.namedItem('login-form');
   loginForm.addEventListener('submit', async (e) => {
