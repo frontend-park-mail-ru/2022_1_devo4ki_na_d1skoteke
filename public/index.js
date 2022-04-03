@@ -24,7 +24,7 @@ const notesPage = async () => {
   const hehe = await ApiStore.CheckAuth();
 
   if (hehe === 401) {
-    controllerAuth.render(root, "login");
+    controllerAuth.render(root, "signup");
     return;
   }
 

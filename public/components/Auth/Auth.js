@@ -6,14 +6,14 @@ import { addValidationForLoginForms, addValidationForSignupForms } from '../../j
  * Renders Login or Signup page from template
  * @param {Object} context - context which define what page and what inputs to draw
  */
-export const renderAuthPage = (context) => {
-  const root = document.getElementById('root');
-  root.innerHTML = '';
+export const renderAuthPage = (node, context) => {
+  // const root = document.getElementById('root');
+  node.innerHTML = '';
 
   const completeLoginForm = document.createElement('div');
 
   completeLoginForm.innerHTML = Auth(context);
-  root.appendChild(completeLoginForm);
+  node.appendChild(completeLoginForm);
 
   if (context.ENTER_TYPE === 'login') {
     addValidationForLoginForms();

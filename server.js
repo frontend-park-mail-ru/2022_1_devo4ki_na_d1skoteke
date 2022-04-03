@@ -6,6 +6,7 @@ const fs = require('fs');
 const app = express();
 app.use(express.json());
 app.use(express.static(path.resolve(__dirname, 'public')));
+
 app.set('view engine', 'pug');
 
 const templateNames = ['NoteContent', 'LeftSideBar', 'Auth'];

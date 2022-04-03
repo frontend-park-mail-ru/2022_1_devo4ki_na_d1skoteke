@@ -1,6 +1,6 @@
 /* eslint-disable camelcase */
 
-const baseUrl = '95.163.212.32';
+const baseUrl = '127.0.0.1';
 
 /**
  * Class represents storage for API requests

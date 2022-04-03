@@ -1,6 +1,15 @@
-import { CreateLeftSide } from '../components/LeftSideBar/LeftSideBar.js';
-import { CreateNoteContent } from '../components/NoteContent/NoteContent.js';
+import { LeftSideController } from '../app/controllers/LeftSideBar/LeftSideBar.js';
+import { NoteController } from '../app/controllers/Note/NoteController.js';
+import { LeftSideBarModel } from '../app/models/LeftSideBar/LeftSIdeBar.js';
+import { NoteModel } from '../app/models/Note/Note.js';
+import { LeftSideBarView } from '../app/views/LeftSideBar/LeftSideBar.js';
+import { NoteView } from '../app/views/Note/Note.js';
 import { ApiStore } from '../store/ApiStore.js';
+
+
+const app = new LeftSideController(new LeftSideBarModel(), new LeftSideBarView());
+
+const pa = new NoteController(new NoteModel(), new NoteView());
 
 
 export const render = async (id) => {
@@ -35,15 +44,9 @@ export const note = async (node) => {
   const bookStore = fetchRes.notes;
 
   window.bookStore = bookStore;
-  // this.
 
-  CreateLeftSide(page, { name: 'Henry', bookStore });
-  const book = bookStore[0] !== undefined ? bookStore[0] : { name: '', body: '' };
-
-  CreateNoteContent(page, { book });
+  app.render(page);
+  pa.render(page);
 
   node.appendChild(page);
-
-  const logout = document.getElementById('logout');
-  logout.dataset.section = 'logout';
 };
