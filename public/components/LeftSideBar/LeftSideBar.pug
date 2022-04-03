@@ -5,6 +5,6 @@
     .page__sidebar__bio__name
       |#{name}&apos;s Notion
   .page__sidebar__holder
-  .page__sidebar__notes
+  .page__sidebar__notes 
     each book in bookStore
       div(id=book.name onclick='render(\'' + book.name + '\')' )= "> " + book.name
