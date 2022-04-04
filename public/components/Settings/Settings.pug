@@ -9,7 +9,7 @@
           img.sidebar__tab_icon(src='../../img/settings__members-icon.svg')
       .menu-content__settings.settings
         .settings__title Personal info
-        form.settings__form
+        form.settings__form(name='profile-save')
           .settings__avatar(id='avatar' dataset-name= userInfo.avatar)
             label.settings__avatar_hover +
           for input in inputForms
@@ -25,7 +25,7 @@
                 )
                 .bad-input.setting-field__bad-input(id= 'bad-' + input.name)
           .settings__buttons.setting-field
-            input.submit-btn.close-popup.settings__buttons_save(type='submit' id='save-btn' value= 'Save')
-            input.submit-btn.close-popup.settings__buttons_logout(type='submit' id='logout-btn' value= 'Logout')
-input(type='file' id= 'mediaFile')
+            input.submit-btn.settings__buttons_save(type='submit' id='save-btn' value= 'Save')
+            input.submit-btn.close-popup.settings__buttons_logout(type='submit' id='logout-btn' value= 'Logout' data-section='logout')
+      input(type='file' id= 'mediaFile' name='avatar' accept='image/*')
 

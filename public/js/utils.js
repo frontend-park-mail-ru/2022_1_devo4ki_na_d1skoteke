@@ -95,7 +95,7 @@ const addValidationNickname = () => {
   });
 };
 
-const validatePasswordPrimary = (password) => {
+const validatePassword = (password) => {
   if (password === '') {
     return InvalidStatusType.EMPTY;
   }
@@ -115,7 +115,7 @@ const addValidationPrimaryPassword = () => {
 
   passwordForm.querySelector('#bad-primaryPassword').style.display = 'none';
   passwordInput.addEventListener('focusout', (e) => {
-    switch (validatePasswordPrimary(e.target.value)) {
+    switch (validatePassword(e.target.value)) {
       case InvalidStatusType.WRONG_SYMBOLS:
         passwordForm.querySelector('#bad-primaryPassword').style.display = 'block';
         passwordForm.querySelector('#bad-primaryPassword').innerHTML = 'Password must have at least '
@@ -195,23 +195,40 @@ export const addValidationForSignupForms = () => {
   addValidationConfirmPassword();
 };
 
-const validatePassword = (password) => {
-  if (password === '') {
-    return InvalidStatusType.EMPTY;
-  }
-  return InvalidStatusType.VALID;
-};
-
+// const validatePassword = (password) => {
+//   if (password === '') {
+//     return InvalidStatusType.EMPTY;
+//   }
+//   return InvalidStatusType.VALID;
+// };
 
 const addValidationPassword = () => {
   const passwordInput = document.getElementById('password-input');
   const passwordForm = document.querySelector('form');
 
-  console.log(passwordForm);
   passwordForm.querySelector('#bad-password').style.display = 'none';
   passwordInput.addEventListener('focusout', (e) => {
     switch (validatePassword(e.target.value)) {
+      case InvalidStatusType.WRONG_SYMBOLS:
+        if (!passwordInput.closest('.setting-field__input')) {
+          break;
+        }
+        passwordForm.querySelector('#bad-password').style.display = 'block';
+        passwordForm.querySelector('#bad-password').innerHTML = 'Password must have at least '
+          + 'one letter and digit';
+        break;
+      case InvalidStatusType.PASS_WRONG_LENGTH:
+        if (!passwordInput.closest('.setting-field__input')) {
+          break;
+        }
+        passwordForm.querySelector('#bad-password').style.display = 'block';
+        passwordForm.querySelector('#bad-password').innerHTML = 'Password must be 7-30 characters long'
+          + 'is unsafe!';
+        break;
       case InvalidStatusType.EMPTY:
+        if (passwordInput.closest('.setting-field__input')) {
+          break;
+        }
         passwordForm.querySelector('#bad-password').style.display = 'block';
         passwordForm.querySelector('#bad-password').innerHTML = 'You forgot to enter password';
         break;
@@ -226,7 +243,7 @@ const addValidationPassword = () => {
   passwordInput.addEventListener('input', () => {
     passwordForm.querySelector('#bad-password').style.display = 'none';
   });
-}
+};
 /**
  * Add event listeners to all inputs in form.
  * Event listeners check if user entered wrong data and display errors
@@ -236,12 +253,11 @@ export const addValidationForLoginForms = () => {
   addValidationPassword();
 };
 
-
 export const addValidationForProfileEditForm = () => {
   addValidationEmail();
   addValidationNickname();
   addValidationPassword();
-}
+};
 /**
  * Checks if user somewhere entered wrong data.
  * Used to prevent sending request with wrong data
@@ -280,6 +296,9 @@ export const haveWrongInput = (form) => {
   }
 
   for (const input of inputFields) {
+    if (input.closest('.setting-field__input')) {
+      return false;
+    }
     if (input.value === '') {
       const err = input.nextElementSibling;
       err.style.display = 'block';
@@ -323,6 +342,12 @@ export const addPopupOpenCloseAbility = () => {
       popupClose(link.closest('.popup'));
     });
   });
+
+  document.addEventListener('keydown', (e) => {
+    if (e.which === 27) {
+      popupClose(document.querySelector('.popup.open'));
+    }
+  });
 };
 
 const popupOpen = (currentPopup) => {
@@ -342,8 +367,10 @@ const popupOpen = (currentPopup) => {
 };
 
 const popupClose = (popupActive) => {
-  popupActive.classList.remove('open');
-  bodyUnlock();
+  if (popupActive) {
+    popupActive.classList.remove('open');
+    bodyUnlock();
+  }
 };
 
 const body = document.querySelector('body');
@@ -356,4 +383,59 @@ const bodyLock = () => {
 const bodyUnlock = () => {
   body.style.paddingRight = '0px';
   body.classList.remove('lock');
-}
+};
+
+export const avatarHandler = () => {
+  const avatar = document.getElementById('avatar');
+  const mediaFile = document.getElementById('mediaFile');
+  if (avatar.getAttribute('dataset-name') !== '') {
+    avatar.style.backgroundImage = `url(${avatar.getAttribute('dataset-name')})`;
+    avatar.classList.add('hasImage');
+  }
+
+  avatar.addEventListener('dragover', () => {
+    avatar.classList.add('dragging');
+  });
+  avatar.addEventListener('dragleave', () => {
+    avatar.classList.remove('dragging');
+  });
+  avatar.addEventListener('drop', (event) => {
+    avatar.classList.remove('dragging');
+    avatar.classList.remove('hasImage');
+    if (event) {
+      const file = event.dataTransfer.files[0];
+
+      const reader = new FileReader();
+      reader.readAsDataURL(file);
+      reader.onload = () => {
+        avatar.style.backgroundImage = `url(${reader.result})`;
+        avatar.classList.add('hasImage');
+      };
+    }
+  });
+
+  avatar.addEventListener('click', () => {
+    mediaFile.click();
+  });
+
+  ['dragover', 'drop'].forEach((type) => (
+    window.addEventListener(type, (e) => {
+      e.preventDefault();
+    })
+  ));
+
+  mediaFile.addEventListener('change', (e) => {
+    const { target } = e;
+    if (target.files && target.files[0]) {
+      const file = target.files[0];
+
+      const reader = new FileReader();
+
+      reader.readAsDataURL(file);
+      reader.onload = () => {
+        avatar.style.backgroundImage = `url(${reader.result})`;
+        avatar.classList.add('hasImage');
+      };
+    }
+  });
+};

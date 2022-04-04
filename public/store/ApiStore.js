@@ -1,6 +1,10 @@
 /* eslint-disable camelcase */
+// eslint-disable-next-line no-unused-vars
+const localUrl = '127.0.0.1';
 
-const baseUrl = '127.0.0.1';
+const deployUrl = '95.163.212.32';
+
+const baseUrl = deployUrl;
 
 /**
  * Class represents storage for API requests
@@ -24,6 +28,16 @@ export class ApiStore {
     });
     return response;
   };
+
+  static putData = async (url = '', data = {}) => fetch(url, {
+    method: 'PUT',
+    mode: 'cors',
+    credentials: 'include',
+    headers: {
+      'Content-Type': 'multipart/form-data',
+    },
+    body: JSON.stringify(data),
+  });
 
   /**
    * Sends signup request to API
@@ -121,4 +135,13 @@ export class ApiStore {
 
     return 200;
   };
+
+  static ProfileChange = async ({
+    avatar, email, username, password,
+  }) => this.putData(`http://${baseUrl}:3001/api/v1/user`, {
+    avatar,
+    username,
+    email,
+    password,
+  });
 }
