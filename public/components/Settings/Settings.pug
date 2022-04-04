@@ -10,9 +10,8 @@
       .menu-content__settings.settings
         .settings__title Personal info
         form.settings__form
-          .settings__avatar
-            img.avatar(src='../../img/avatar-example.jpg')
-            input(type='file')
+          .settings__avatar(id='avatar' dataset-name= userInfo.avatar)
+            label.settings__avatar_hover +
           for input in inputForms
             .setting-field
               label.my-label.setting-field__label #{input.labelname}
@@ -28,4 +27,5 @@
           .settings__buttons.setting-field
             input.submit-btn.close-popup.settings__buttons_save(type='submit' id='save-btn' value= 'Save')
             input.submit-btn.close-popup.settings__buttons_logout(type='submit' id='logout-btn' value= 'Logout')
+input(type='file' id= 'mediaFile')
 

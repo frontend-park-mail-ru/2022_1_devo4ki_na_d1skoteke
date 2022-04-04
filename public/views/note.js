@@ -47,7 +47,7 @@ export const note = async (node) => {
 
   const userEmail = 'idfurnl.ctfg@gmail.com';
   const userName = 'idfurnl';
-  const userAvatar = 'src';
+  const userAvatar = '../../img/avatar-example.jpg';
   renderSettings({
     userInfo: {
       email: `${userEmail}`,

@@ -38,11 +38,13 @@ pug_html = pug_html + "Personal info\u003C\u002Fdiv\u003E";
 ;pug_debug_line = 12;pug_debug_filename = "public\u002Fcomponents\u002FSettings\u002FSettings.pug";
 pug_html = pug_html + "\u003Cform class=\"settings__form\"\u003E";
 ;pug_debug_line = 13;pug_debug_filename = "public\u002Fcomponents\u002FSettings\u002FSettings.pug";
-pug_html = pug_html + "\u003Cdiv class=\"settings__avatar\"\u003E";
+pug_html = pug_html + "\u003Cdiv" + (" class=\"settings__avatar\""+" id=\"avatar\""+pug_attr("dataset-name", userInfo.avatar, true, false)) + "\u003E";
 ;pug_debug_line = 14;pug_debug_filename = "public\u002Fcomponents\u002FSettings\u002FSettings.pug";
-pug_html = pug_html + "\u003Cimg class=\"avatar\" src=\"..\u002F..\u002Fimg\u002Favatar-example.jpg\"\u002F\u003E";
+pug_html = pug_html + "\u003C!--img.avatar(src='..\u002F..\u002Fimg\u002Favatar-example.jpg')--\u003E";
 ;pug_debug_line = 15;pug_debug_filename = "public\u002Fcomponents\u002FSettings\u002FSettings.pug";
-pug_html = pug_html + "\u003Cinput type=\"file\"\u002F\u003E\u003C\u002Fdiv\u003E";
+pug_html = pug_html + "\u003Clabel class=\"settings__avatar_hover\"\u003E";
+;pug_debug_line = 15;pug_debug_filename = "public\u002Fcomponents\u002FSettings\u002FSettings.pug";
+pug_html = pug_html + "+\u003C\u002Flabel\u003E\u003C\u002Fdiv\u003E";
 ;pug_debug_line = 16;pug_debug_filename = "public\u002Fcomponents\u002FSettings\u002FSettings.pug";
 // iterate inputForms
 ;(function(){
@@ -90,6 +92,8 @@ pug_html = pug_html + "\u003Cdiv class=\"settings__buttons setting-field\"\u003E
 pug_html = pug_html + "\u003Cinput class=\"submit-btn close-popup settings__buttons_save\" type=\"submit\" id=\"save-btn\" value=\"Save\"\u002F\u003E";
 ;pug_debug_line = 30;pug_debug_filename = "public\u002Fcomponents\u002FSettings\u002FSettings.pug";
 pug_html = pug_html + "\u003Cinput class=\"submit-btn close-popup settings__buttons_logout\" type=\"submit\" id=\"logout-btn\" value=\"Logout\"\u002F\u003E\u003C\u002Fdiv\u003E\u003C\u002Fform\u003E\u003C\u002Fdiv\u003E\u003C\u002Fdiv\u003E\u003C\u002Fdiv\u003E\u003C\u002Fdiv\u003E";
+;pug_debug_line = 31;pug_debug_filename = "public\u002Fcomponents\u002FSettings\u002FSettings.pug";
+pug_html = pug_html + "\u003Cinput type=\"file\" id=\"mediaFile\"\u002F\u003E";
     }.call(this, "inputForms" in locals_for_with ?
         locals_for_with.inputForms :
         typeof inputForms !== 'undefined' ? inputForms : undefined, "userInfo" in locals_for_with ?
