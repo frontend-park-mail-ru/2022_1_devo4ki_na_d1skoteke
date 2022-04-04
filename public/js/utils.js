@@ -202,16 +202,12 @@ const validatePassword = (password) => {
   return InvalidStatusType.VALID;
 };
 
-/**
- * Add event listeners to all inputs in form.
- * Event listeners check if user entered wrong data and display errors
- */
-export const addValidationForLoginForms = () => {
-  addValidationEmail();
 
+const addValidationPassword = () => {
   const passwordInput = document.getElementById('password-input');
   const passwordForm = document.querySelector('form');
 
+  console.log(passwordForm);
   passwordForm.querySelector('#bad-password').style.display = 'none';
   passwordInput.addEventListener('focusout', (e) => {
     switch (validatePassword(e.target.value)) {
@@ -230,8 +226,22 @@ export const addValidationForLoginForms = () => {
   passwordInput.addEventListener('input', () => {
     passwordForm.querySelector('#bad-password').style.display = 'none';
   });
+}
+/**
+ * Add event listeners to all inputs in form.
+ * Event listeners check if user entered wrong data and display errors
+ */
+export const addValidationForLoginForms = () => {
+  addValidationEmail();
+  addValidationPassword();
 };
 
+
+export const addValidationForProfileEditForm = () => {
+  addValidationEmail();
+  addValidationNickname();
+  addValidationPassword();
+}
 /**
  * Checks if user somewhere entered wrong data.
  * Used to prevent sending request with wrong data
@@ -295,3 +305,55 @@ export const badResponseHandler = () => {
     errorField.innerHTML = 'This email is already in use<br> You can log in or create new account';
   }
 };
+
+export const addPopupOpenCloseAbility = () => {
+  const settingsLinks = document.querySelectorAll('.settings-link');
+  settingsLinks.forEach((link) => {
+    link.addEventListener('click', (event) => {
+      event.preventDefault();
+      popupOpen(document.getElementById('settingsPopup'));
+    });
+  });
+
+  const closePopups = document.querySelectorAll('.close-popup');
+
+  closePopups.forEach((link) => {
+    link.addEventListener('click', (event) => {
+      event.preventDefault();
+      popupClose(link.closest('.popup'));
+    });
+  });
+};
+
+const popupOpen = (currentPopup) => {
+  if (currentPopup) {
+    const popupActive = document.querySelector('.popup.open');
+    if (popupActive) {
+      popupClose(popupActive);
+    }
+    currentPopup.classList.add('open');
+    bodyLock();
+    currentPopup.addEventListener('click', (event) => {
+      if (!event.target.closest('.popup__content')) {
+        popupClose(event.target.closest('.popup'));
+      }
+    });
+  }
+};
+
+const popupClose = (popupActive) => {
+  popupActive.classList.remove('open');
+  bodyUnlock();
+};
+
+const body = document.querySelector('body');
+
+const bodyLock = () => {
+  body.style.paddingRight = `${window.innerWidth - document.querySelector('body').offsetWidth}px`;
+  body.classList.add('lock');
+};
+
+const bodyUnlock = () => {
+  body.style.paddingRight = '0px';
+  body.classList.remove('lock');
+}

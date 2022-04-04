@@ -45,11 +45,11 @@ input {
     margin-top: 3px;
     border: none;
     outline: none;
-    color: rgba(255, 0, 0, 0.8);
+    color: rgba(0, 0, 0, 0.8);
 }
 
 .form > input:focus {
-    opacity: 70%;
+    background-color: rgba(201, 201, 201, 0.3);
 }
 
 .bad-input {

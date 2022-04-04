@@ -1,25 +1,31 @@
-.popup
+.popup(id='settingsPopup')
   .popup__body
-    .menu-content
+    .menu-content.popup__content
       .menu-content__sidebar.sidebar
-        .sidebar__username idfurnl
-
+        .sidebar__username #{userInfo.nickname}
         a.sidebar__tab.sidebar__tab_account-settings Account Settings
+          img.sidebar__tab_icon(src='../../img/settings__account-icon.svg')
         a.sidebar__tab.sidebar__tab_members Members
+          img.sidebar__tab_icon(src='../../img/settings__members-icon.svg')
       .menu-content__settings.settings
         .settings__title Personal info
-        .settings__form
+        form.settings__form
+          .settings__avatar
+            img.avatar(src='../../img/avatar-example.jpg')
+            input(type='file')
           for input in inputForms
             .setting-field
               label.my-label.setting-field__label #{input.labelname}
-              input(
-                type= input.type
-                name=input.name
-                placeholder=input.placeholder
-                value=input.default_value
-                id=input.name + '-input'
-                ).inputField.setting-field__input
+              .setting-field__input
+                input.inputField(
+                  type= input.type
+                  name=input.name
+                  placeholder=input.placeholder
+                  value=input.default_value
+                  id=input.name + '-input'
+                )
+                .bad-input.setting-field__bad-input(id= 'bad-' + input.name)
           .settings__buttons.setting-field
-            input.submit-btn.settings__buttons_save(type='submit' id='save-btn' value= 'Save')
-            input.submit-btn.settings__buttons_logout(type='submit' id='logout-btn' value= 'Logout')
+            input.submit-btn.close-popup.settings__buttons_save(type='submit' id='save-btn' value= 'Save')
+            input.submit-btn.close-popup.settings__buttons_logout(type='submit' id='logout-btn' value= 'Logout')
 

@@ -1,6 +1,7 @@
 import { CreateLeftSide } from '../components/LeftSideBar/LeftSideBar.js';
 import { CreateNoteContent } from '../components/NoteContent/NoteContent.js';
 import { ApiStore } from '../store/ApiStore.js';
+import {renderSettings} from "../components/Settings/Settings.js";
 
 export const render = async (id) => {
   const body = document.getElementById('body');
@@ -43,4 +44,35 @@ export const note = async (node) => {
 
   const logout = document.getElementById('logout');
   logout.dataset.section = 'logout';
+
+  const userEmail = 'idfurnl.ctfg@gmail.com';
+  const userName = 'idfurnl';
+  const userAvatar = 'src';
+  renderSettings({
+    userInfo: {
+      email: `${userEmail}`,
+      nickname: `${userName}`,
+      avatar: `${userAvatar}`,
+    },
+    inputForms: [
+      {
+        labelname: 'Email',
+        name: 'email',
+        placeholder: 'Enter email',
+        default_value: `${userEmail}`,
+      },
+      {
+        labelname: 'Nickname',
+        name: 'nickname',
+        placeholder: 'Enter nickname',
+        default_value: `${userName}`,
+      },
+      {
+        type: 'password',
+        labelname: 'Change password',
+        name: 'password',
+        placeholder: 'New password',
+      },
+    ],
+  });
 };

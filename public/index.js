@@ -91,7 +91,6 @@ const signupPage = () => {
     notesPage();
   });
 
-  renderSettings({});
 };
 
 /**

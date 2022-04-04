@@ -1,32 +1,14 @@
 import { Settings } from './compiled/Settings.js';
-// import {Auth} from "../Auth/compiled/Auth";
+import { addValidationForProfileEditForm, addPopupOpenCloseAbility } from '../../js/utils.js';
 
 export const renderSettings = (context) => {
   const root = document.getElementById('root');
 
   const settingsPage = document.createElement('div');
 
-  settingsPage.innerHTML = Settings({
-    inputForms: [
-      {
-        labelname: 'Email',
-        name: 'email',
-        placeholder: 'Enter email',
-        default_value: 'idfurnl.ctfg@gmail.com',
-      },
-      {
-        labelname: 'Nickname',
-        name: 'nickname',
-        placeholder: 'Enter nickname',
-        default_value: 'idfurnl',
-      },
-      {
-        type: 'password',
-        labelname: 'Change password',
-        name: 'primaryPassword',
-        placeholder: 'New password',
-      },
-    ],
-  });
+  settingsPage.innerHTML = Settings(context);
   root.appendChild(settingsPage);
+
+  addValidationForProfileEditForm();
+  addPopupOpenCloseAbility();
 };
