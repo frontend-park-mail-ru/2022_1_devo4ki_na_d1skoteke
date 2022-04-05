@@ -1,7 +1,4 @@
-/* eslint-disable camelcase */
-
-const baseUrl = '127.0.0.1';
-
+import { urls } from '../consts/urls.js';
 /**
  * Class represents storage for API requests
  */
@@ -33,7 +30,7 @@ export class ApiStore {
   static Signup = async ({
     username, email, password, confirm_password,
   }) => {
-    const data = await this.postData(`http://${baseUrl}:3001/api/v1/users/signup`, {
+    const data = await this.postData(`http://${urls.api.register}`, {
       username,
       email,
       password,
@@ -48,7 +45,7 @@ export class ApiStore {
    * @returns {promise<Object>} - the promise with result of calling Login method
    */
   static Login = async ({ email, password }) => {
-    const data = await this.postData(`http://${baseUrl}:3001/api/v1/users/login`, {
+    const data = await this.postData(`http://${urls.api.login}`, {
       email,
       password,
     });
@@ -60,7 +57,7 @@ export class ApiStore {
    * @returns {promise<Object>} - the promise with result of calling Logout method
    */
   static Logout = async () => {
-    const res = await fetch(`http://${baseUrl}:3001/api/v1/users/logout`, {
+    const res = await fetch(`http://${urls.api.logout}`, {
       method: 'GET',
       credentials: 'include',
     });
@@ -74,7 +71,7 @@ export class ApiStore {
    * @returns {promise<Note>} - the promise with result of calling GetNoteByToken method
    */
   static GetNoteByToken = async (id) => {
-    const res = await fetch(`http://${baseUrl}:3001/api/v1/note/${encodeURI(id)}`);
+    const res = await fetch(`http://${urls.api.getSingleNote}/${encodeURI(id)}`);
     const resp = await res.json();
 
     if (resp.status !== 200) {
@@ -89,7 +86,7 @@ export class ApiStore {
    * @returns {promise<Notes>} - the promise with result of calling GetAllNotes method
    */
   static GetAllNotes = async () => {
-    const res = await fetch(`http://${baseUrl}:3001/api/v1/notes`, {
+    const res = await fetch(`http://${urls.api.getNotes}`, {
       method: 'GET',
       credentials: 'include',
 
@@ -109,7 +106,7 @@ export class ApiStore {
    * @returns HTTP code status, representing the auth status
    */
   static CheckAuth = async () => {
-    const res = await fetch(`http://${baseUrl}:3001/api/v1/users/auth`, {
+    const res = await fetch(`http://${urls.api.checkAuth}`, {
       method: 'GET',
       credentials: 'include',
 
