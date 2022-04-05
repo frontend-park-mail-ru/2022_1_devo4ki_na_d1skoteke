@@ -10,7 +10,6 @@
     font-size: 24px;
     border: 1px solid #fff170;
     height: 100vh;
-    font-style: normal;
     font-weight: 400;
     font-size: 24px;
     line-height: 144%;
@@ -28,7 +27,6 @@
 
 .page__sidebar__bio__name {
     padding-left: 15px;
-    font-family: 'Inter';
 }
 
 .page__sidebar__holder {
