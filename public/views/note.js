@@ -6,11 +6,9 @@ import { LeftSideBarView } from '../app/views/LeftSideBar/LeftSideBar.js';
 import { NoteView } from '../app/views/Note/Note.js';
 import { ApiStore } from '../store/ApiStore.js';
 
-
 const app = new LeftSideController(new LeftSideBarModel(), new LeftSideBarView());
 
 const pa = new NoteController(new NoteModel(), new NoteView());
-
 
 export const render = async (id) => {
   const body = document.getElementById('body');

@@ -1,1 +1,1 @@
-export { LeftSideController} from './LeftSideBar.js'
+export { LeftSideController } from './LeftSideBar.js';

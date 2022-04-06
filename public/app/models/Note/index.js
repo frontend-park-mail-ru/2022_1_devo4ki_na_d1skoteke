@@ -1,1 +1,1 @@
-export { NoteModel } from './Note.js'
+export { NoteModel } from './Note.js';
