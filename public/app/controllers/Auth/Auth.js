@@ -9,7 +9,6 @@ class AuthController {
     }
 
     render(node, view_tag) {
-
         const dataModel = this.#model.getModel(view_tag);
         this.#view.render(node, dataModel);
     }

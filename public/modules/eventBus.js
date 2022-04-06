@@ -23,4 +23,4 @@ class EventBus {
   }
 }
 
-export const eventBus = new EventBus();
+export default new EventBus();
