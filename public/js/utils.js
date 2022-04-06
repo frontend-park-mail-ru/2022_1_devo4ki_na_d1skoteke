@@ -195,13 +195,6 @@ export const addValidationForSignupForms = () => {
   addValidationConfirmPassword();
 };
 
-// const validatePassword = (password) => {
-//   if (password === '') {
-//     return InvalidStatusType.EMPTY;
-//   }
-//   return InvalidStatusType.VALID;
-// };
-
 const addValidationPassword = () => {
   const passwordInput = document.getElementById('password-input');
   const passwordForm = document.querySelector('form');

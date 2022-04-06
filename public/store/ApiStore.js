@@ -4,7 +4,7 @@ const localUrl = '127.0.0.1';
 
 const deployUrl = '95.163.212.32';
 
-const baseUrl = deployUrl;
+const baseUrl = localUrl;
 
 /**
  * Class represents storage for API requests
