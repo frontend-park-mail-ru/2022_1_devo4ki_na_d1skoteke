@@ -359,7 +359,7 @@ const popupOpen = (currentPopup) => {
   }
 };
 
-const popupClose = (popupActive) => {
+export const popupClose = (popupActive) => {
   if (popupActive) {
     popupActive.classList.remove('open');
     bodyUnlock();

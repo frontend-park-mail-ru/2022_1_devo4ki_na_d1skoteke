@@ -48,44 +48,9 @@ export const note = async (node) => {
   logout.dataset.section = 'logout';
 
   // //////////////PROFILE MENU///////////////////////
-  // const userInfo = await ApiStore.GetUserInfo();
-  // будет метод получения данных
-  // const userEmail = userInfo.email;
-  // const userName = userInfo.username;
-
-  const userEmail = 'idfurnl.ctfg@gmail.com';
-  const userName = 'idfurnl';
-  const userAvatar = '../../img/avatar-example.jpg';
-  renderSettings({
-    userInfo: {
-      email: `${userEmail}`,
-      nickname: `${userName}`,
-      avatar: `${userAvatar}`,
-    },
-    inputForms: [
-      {
-        labelname: 'Email',
-        name: 'email',
-        placeholder: 'Enter email',
-        default_value: `${userEmail}`,
-      },
-      {
-        labelname: 'Nickname',
-        name: 'nickname',
-        placeholder: 'Enter nickname',
-        default_value: `${userName}`,
-      },
-      {
-        type: 'password',
-        labelname: 'Change password',
-        name: 'password',
-        placeholder: 'New password',
-      },
-    ],
-  });
+  renderSettings(await ApiStore.GetUser());
 
   const profileForm = document.querySelector('.settings__form');
-
   profileForm.addEventListener('submit', async (e) => {
     e.preventDefault();
 
@@ -102,6 +67,10 @@ export const note = async (node) => {
 
     await ApiStore.ProfileChange({
       avatar, email, username, password,
+    }).then(() => {
+      renderSettings({
+        avatar, email, username,
+      });
     });
   });
 };
