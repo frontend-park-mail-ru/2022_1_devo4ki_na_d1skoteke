@@ -89,7 +89,9 @@ body.lock {
 .sidebar__tab:hover {
     background-color:  var(--settings-tab-hover-color);
 }
-
+.sidebar__tab_account-settings {
+    background-color:  var(--settings-tab-hover-color);
+}
 .sidebar__tab {
     display:flex;
     gap: 20px;
