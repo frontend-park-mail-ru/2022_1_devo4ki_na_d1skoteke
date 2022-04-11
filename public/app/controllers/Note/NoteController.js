@@ -9,26 +9,42 @@ class NoteController {
   constructor(model, view) {
     this.model = model;
     this.view = view;
+
+
+    // EventBus.on('authorized', () => {
+    //   this.re
+    // });
   }
 
-  async init(root) {
-    root.innerHTML = '';
-    // ApiStore
-    const hehe = await ApiStore.CheckAuth();
-    // eventBus
-    if (hehe === 401) {
-      EventBus.emit('unauthorized', { data: '' });
-      return;
-    }
+  // async init(root) {
+    
+  //   root.innerHTML = '';
+  //   EventBus.on('render2', () => {this.render()})
+  //   // ApiStore
+  //   const hehe = await ApiStore.CheckAuth();
+  //   // eventBus
+  //   if (hehe === 401) {
+  //     EventBus.emit('unauthorized', { data: '' });
+  //     return;
+  //   }
 
-    EventBus.emit('authorized', { data: '' });
-  }
+  //   EventBus.emit('authorized', { data: '' });
+  // }
+
+
 
   async render(node) {
-    const book = await this.model.getNote();
-    console.log(book);
+    // node.innerHTML = '';
+    // // const hehe = await ApiStore.CheckAuth();
+    // // // eventBus
+    // // if (hehe === 401) {
+    // //   EventBus.emit('unauthorized', { data: '' });
+    // //   return;
+    // // }
+    // const book = await this.model.getNote();
+    // console.log(book);
 
-    this.view.render(node, { book: { name: '1st note', body: 'Hello everybody. This is Body of the 1st note)' } });
+    // this.view.render(node, { book: { name: '1st note', body: 'Hello everybody. This is Body of the 1st note)' } });
 
     // this.view.render(node, book );
   }

@@ -19,7 +19,8 @@ class EventBus {
     }
     const tmpSet = new Set(this.#listeners[event]);
     tmpSet?.forEach((listener) => listener(...data));
-    // this.#listeners[event]?.forEach((listener) => listener(...data));
+    console.log("calling fofffffffffffffff: ", this.#listeners[event]);
+    this.#listeners[event]?.forEach((listener) => listener(...data));
   }
 }
 

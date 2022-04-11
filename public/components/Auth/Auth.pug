@@ -19,4 +19,4 @@ div(class= ENTER_TYPE)
         )
         .bad-input(id= 'bad-'+input.name)
     input.submit-btn(type='submit' id= ENTER_TYPE+'-submit-btn' value= btn_msg)
-    a.alternative-variant(href=opposite_variant data-section=opposite_variant) #{alter_variant_text}
+    a.alternative-variant(data-href="/"+opposite_variant data-section=opposite_variant) #{alter_variant_text}

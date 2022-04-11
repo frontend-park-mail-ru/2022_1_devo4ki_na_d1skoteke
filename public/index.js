@@ -13,6 +13,11 @@ import { routes } from './consts/routes.js';
 import { NoteController } from './app/controllers/Note/NoteController.js';
 import { NoteModel } from './app/models/Note/Note.js';
 import { NoteView } from './app/views/Note/Note.js';
+import { Router } from './modules/router.js';
+import { MainPage } from './app/controllers/MainPage/MainPage.js';
+
+// import Router from './Router';
+
 
 const root = document.getElementById('root');
 SetFavicon();
@@ -20,92 +25,59 @@ SetFavicon();
 const controllerAuth = new AuthController(new AuthModel(), new AuthView());
 
 const controllerNote = new NoteController(new NoteModel(), new NoteView());
+const fsdf = new MainPage();
+
+const router = new Router(root);
+
+router.register('/login', AuthController);
+router.register('/signup', AuthController);
+router.register('/logout', AuthController);
+
+router.register('/', AuthController);
+
+// router.routes = aewfwef;
 
 /**
  * Creating signup page
  */
-const signupPage = () => {
-  controllerAuth.render(root, 'signup');
-};
 
-const loginPage = () => {
-  controllerAuth.render(root, 'login');
-};
+const initial = async () => {
 
-const logoutPage = async () => {
   root.innerHTML = '';
-  await ApiStore.Logout();
-  loginPage();
-};
 
-const notesPage = async () => {
-  controllerNote.init(root);
-};
-
-notesPage();
-
-/**
- * Config of whole application.
- * Shows dependence of links to our pages and functions that display them
- */
-
-const configApp = {
-  notes: {
-    href: '/notes',
-    openMethod: notesPage,
-  },
-  signup: {
-    href: '/sighup',
-    openMethod: signupPage,
-  },
-  login: {
-    href: '/login',
-    openMethod: loginPage,
-  },
-  logout: {
-    href: '/logout',
-    openMethod: logoutPage,
-  },
-};
-
-EventBus.on('click', (e) => {
-  const { target } = e;
-
-  const { section } = target.dataset;
-  
-  if (section === 'logout') {
-    configApp[section].openMethod();
+  const hehe = await ApiStore.CheckAuth();
+  // eventBus
+  if (hehe === 401) {
+    EventBus.emit('unauthorized', { data: '' });
+    return;
   }
 
-  if (target instanceof HTMLAnchorElement) {
-    e.preventDefault();
+  EventBus.emit('authorized', { data: '' });
 
-    const { section } = target.dataset;
+  // controllerNote.init(root);
+};
 
-    console.log('outside:', section);
-    
-    if (section) {
-      configApp[section].openMethod();
-    }
-  }
-});
+initial();
 
-EventBus.on('unauthorized', () => {
-  controllerAuth.render(root, 'signup');
-});
 
-EventBus.on('authorized', () => {
-  note(root);
-});
+EventBus.on("authorized", () => {
 
-EventBus.on('unsuccessfuly-signup', () => {
-  alert('try one more');
-  notesPage();
-});
+  fsdf.render(root);
+})
 
-EventBus.on('successfuly-signup', async (e) => {
-  const { email, password } = e;
-  console.log(email, password);
-  await ApiStore.Login({ email, password });
-  notesPage();
-});
+// EventBus.on('unsuccessfuly-signup', () => {
+//   alert('try one more');
+//   notesPage();
+// });
+
+// EventBus.on('successfuly-signup', async (e) => {
+//   const { email, password } = e;
+//   console.log(email, password);
+//   await ApiStore.Login({ email, password });
+//   notesPage();
+// });
+
+
+EventBus.on('pathChanged', (data) => {
+  console.log("pathChanged FFFFFFFFFFFFFF: ",data);
+} )
