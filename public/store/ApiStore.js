@@ -1,6 +1,14 @@
 /* eslint-disable camelcase */
+// eslint-disable-next-line no-unused-vars
+const localUrl = 'localhost:3000';
 
-const baseUrl = '95.163.212.32';
+const deployUrl = '95.163.212.32:3001';
+
+const baseUrl = localUrl;
+let contentType = 'multipart/form-data';
+if (baseUrl === localUrl) {
+  contentType = 'application/json';
+}
 
 /**
  * Class represents storage for API requests
@@ -18,12 +26,22 @@ export class ApiStore {
       mode: 'cors',
       credentials: 'include',
       headers: {
-        'Content-Type': 'multipart/form-data',
+        'Content-Type': contentType,
       },
       body: JSON.stringify(data),
     });
     return response;
   };
+
+  static putData = async (url = '', data = {}) => fetch(url, {
+    method: 'PUT',
+    mode: 'cors',
+    credentials: 'include',
+    headers: {
+      'Content-Type': contentType,
+    },
+    body: JSON.stringify(data),
+  });
 
   /**
    * Sends signup request to API
@@ -33,7 +51,7 @@ export class ApiStore {
   static Signup = async ({
     username, email, password, confirm_password,
   }) => {
-    const data = await this.postData(`http://${baseUrl}:3001/api/v1/users/signup`, {
+    const data = await this.postData(`http://${baseUrl}/api/v1/users/signup`, {
       username,
       email,
       password,
@@ -48,7 +66,7 @@ export class ApiStore {
    * @returns {promise<Object>} - the promise with result of calling Login method
    */
   static Login = async ({ email, password }) => {
-    const data = await this.postData(`http://${baseUrl}:3001/api/v1/users/login`, {
+    const data = await this.postData(`http://${baseUrl}/api/v1/users/login`, {
       email,
       password,
     });
@@ -60,7 +78,7 @@ export class ApiStore {
    * @returns {promise<Object>} - the promise with result of calling Logout method
    */
   static Logout = async () => {
-    const res = await fetch(`http://${baseUrl}:3001/api/v1/users/logout`, {
+    const res = await fetch(`http://${baseUrl}/api/v1/users/logout`, {
       method: 'GET',
       credentials: 'include',
     });
@@ -74,7 +92,7 @@ export class ApiStore {
    * @returns {promise<Note>} - the promise with result of calling GetNoteByToken method
    */
   static GetNoteByToken = async (id) => {
-    const res = await fetch(`http://${baseUrl}:3001/api/v1/note/${encodeURI(id)}`);
+    const res = await fetch(`http://${baseUrl}/api/v1/note/${encodeURI(id)}`);
     const resp = await res.json();
 
     if (resp.status !== 200) {
@@ -89,10 +107,9 @@ export class ApiStore {
    * @returns {promise<Notes>} - the promise with result of calling GetAllNotes method
    */
   static GetAllNotes = async () => {
-    const res = await fetch(`http://${baseUrl}:3001/api/v1/notes`, {
+    const res = await fetch(`http://${baseUrl}/api/v1/notes`, {
       method: 'GET',
       credentials: 'include',
-
     });
 
     if (res.status !== 200) {
@@ -109,10 +126,9 @@ export class ApiStore {
    * @returns HTTP code status, representing the auth status
    */
   static CheckAuth = async () => {
-    const res = await fetch(`http://${baseUrl}:3001/api/v1/users/auth`, {
+    const res = await fetch(`http://${baseUrl}/api/v1/users/auth`, {
       method: 'GET',
       credentials: 'include',
-
     });
 
     if (res.status !== 200) {
@@ -121,4 +137,27 @@ export class ApiStore {
 
     return 200;
   };
+
+  static GetUser = async () => {
+    const res = await fetch(`http://${baseUrl}/api/v1/user`, {
+      method: 'GET',
+      credentials: 'include',
+    });
+
+    if (res.status !== 200) {
+      return 401;
+    }
+    const resp = res.json();
+
+    return resp;
+  };
+
+  static ProfileChange = async ({
+    avatar, email, username, password,
+  }) => this.putData(`http://${baseUrl}/api/v1/user`, {
+    avatar,
+    username,
+    email,
+    password,
+  });
 }

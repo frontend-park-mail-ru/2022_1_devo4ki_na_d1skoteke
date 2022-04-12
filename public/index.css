@@ -1,18 +1,8 @@
+@import 'consts/consts.css';
 @import 'components/Auth/Auth.css';
 @import 'components/LeftSideBar/LeftSideBar.css';
 @import 'components/NoteContent/NoteContent.css';
-
-:root {
-    --input-form-fill-color: rgba(201, 201, 201, 0.6);
-    --btn-text-color: rgb(0, 0, 0);
-    --btn-background-color: #FAFFD6;
-    --btn-border-color: #FFF170;
-    --btn-background-hover-color: #F6FFB8;
-    --notion-sidebar-width: 50vh;
-
-    --page-sidebar-border-color : #fff170;
-    --page-sidebar-color: rgba(0, 0, 0, 0.8);
-}
+@import 'components/Settings/Settings.css';
 
 body {
     position: relative;
