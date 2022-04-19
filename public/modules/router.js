@@ -39,6 +39,7 @@ export class Router {
       this.currentController.unsubscribe();
     }
     this.currentController = routeData.controller;
+    console.log('currentController', this.currentController);
     this.currentController.subscribe();
 
     if (!this.currentController) {
@@ -96,6 +97,7 @@ export class Router {
   };
 
   register = (URL, controller) => {
+    console.log(URL);
     this.routes.add({ URL, controller });
     return this;
   };

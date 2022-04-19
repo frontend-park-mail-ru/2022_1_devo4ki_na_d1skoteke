@@ -7,7 +7,7 @@ import { ApiStore } from './store/ApiStore.js';
 import { note } from './views/note.js';
 import { Router } from './modules/router.js'
 import { AuthController } from './app/Controllers/AuthController.js'
-import {routes} from "./consts/routes";
+import {routes} from "./consts/routes.js";
 
 const root = document.getElementById('root');
 
@@ -18,6 +18,7 @@ const router = new Router(root);
 
 router.start();
 router.register(routes.loginPage, authController);
+router.register(routes.notesPage, authController);
 
 // /**
 //  * Create notes page for user, if user is unauthorised create signup page

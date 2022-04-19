@@ -1,7 +1,7 @@
 import { eventBus } from '../../modules/eventBus.js';
-import { ApiStore } from '../../store/ApiStore';
+import { ApiStore } from '../../store/ApiStore.js';
 
-class UserModel {
+export class UserModel {
   #login;
 
   #signup;
@@ -9,57 +9,16 @@ class UserModel {
   constructor() {
     this.emitAuthStatus();
 
-    this.#login = {
-      ENTER_TYPE: 'login',
-      inputForms: [
-        {
-          labelname: 'Email',
-          name: 'email',
-          placeholder: 'Enter email',
-        },
-        {
-          type: 'password',
-          labelname: 'Password',
-          name: 'password',
-          placeholder: 'Enter password',
-        },
-      ],
-    };
+    // this.#login = ;
 
-    this.#signup = {
-      ENTER_TYPE: 'signup',
-      inputForms: [
-        {
-          labelname: 'Email',
-          name: 'email',
-          placeholder: 'Enter email',
-        },
-        {
-          labelname: 'Nickname',
-          name: 'nickname',
-          placeholder: 'Enter your nickname',
-        },
-        {
-          type: 'password',
-          labelname: 'Password',
-          name: 'primaryPassword',
-          placeholder: 'Enter password',
-        },
-        {
-          type: 'password',
-          labelname: 'Confirm password',
-          name: 'confirmPassword',
-          placeholder: 'Enter password again',
-        },
-      ],
-    };
+    // this.#signup = ;
   }
 
   async emitAuthStatus() {
     const hehe = await ApiStore.CheckAuth();
-    // eventBus
+    console.log('user model: authStatus');
     if (hehe === 401) {
-      eventBus.emit('unauthorized', { data: '' });
+      eventBus.emit('unauthorized', { data: this.#signup });
       return;
     }
 
