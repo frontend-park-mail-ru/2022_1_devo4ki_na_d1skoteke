@@ -15,12 +15,22 @@ export class ApiStore {
       mode: 'cors',
       credentials: 'include',
       headers: {
-        'Content-Type': 'multipart/form-data',
+        'Content-Type': contentType,
       },
       body: JSON.stringify(data),
     });
     return response;
   };
+
+  static putData = async (url = '', data = {}) => fetch(url, {
+    method: 'PUT',
+    mode: 'cors',
+    credentials: 'include',
+    headers: {
+      'Content-Type': contentType,
+    },
+    body: JSON.stringify(data),
+  });
 
   /**
    * Sends signup request to API
@@ -89,7 +99,6 @@ export class ApiStore {
     const res = await fetch(`http://${urls.api.getNotes}`, {
       method: 'GET',
       credentials: 'include',
-
     });
 
     if (res.status !== 200) {
@@ -109,7 +118,6 @@ export class ApiStore {
     const res = await fetch(`http://${urls.api.checkAuth}`, {
       method: 'GET',
       credentials: 'include',
-
     });
 
     if (res.status !== 200) {
@@ -118,4 +126,27 @@ export class ApiStore {
 
     return 200;
   };
+
+  static GetUser = async () => {
+    const res = await fetch(`http://${baseUrl}/api/v1/user`, {
+      method: 'GET',
+      credentials: 'include',
+    });
+
+    if (res.status !== 200) {
+      return 401;
+    }
+    const resp = res.json();
+
+    return resp;
+  };
+
+  static ProfileChange = async ({
+    avatar, email, username, password,
+  }) => this.putData(`http://${baseUrl}/api/v1/user`, {
+    avatar,
+    username,
+    email,
+    password,
+  });
 }

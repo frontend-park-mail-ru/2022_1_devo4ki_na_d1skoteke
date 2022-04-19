@@ -1,0 +1,23 @@
+:root {
+    --input-form-fill-color: rgba(201, 201, 201, 0.42);
+
+    --btn-text-color: rgb(0, 0, 0);
+    --btn-background-color: #FAFFD6;
+    --btn-border-color: #FFF170;
+    --btn-background-hover-color: #F6FFB8;
+    --btn-negative-background-hover-color: rgba(234, 202, 196, 0.9);
+    --btn-negative-background-color: rgba(234, 202, 196, 0.78);
+    --btn-negative-border-color: #eacac4;
+
+    --notion-sidebar-width: 50vh;
+    --page-sidebar-border-color : #fff170;
+    --page-sidebar-color: rgba(0, 0, 0, 0.8);
+
+    --popup-background-color: rgba(0, 0, 0, 0.7);
+    --popup-animation-time: 0.4s;
+    --settings-sidebar-color: rgba(0, 0, 0, 0.12);
+    --settings-tab-hover-color: rgba(0, 0, 0, 0.25);
+    --settings-avatar-shadow-color: rgba(0,0,0, 0.35);
+    --settings-noavatar-background-color: #f4f4f4;
+    --settings-avatar-hover-filter: grayscale(30%) brightness(90%);
+}
