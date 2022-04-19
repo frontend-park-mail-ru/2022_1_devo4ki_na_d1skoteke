@@ -1,4 +1,10 @@
-import { urls } from '../consts/urls.js';
+import {baseUrl, urls} from '../consts/urls.js';
+
+let contentType = 'multipart/form-data';
+if (baseUrl === '127.0.0.1:3001') {
+  contentType = 'application/json';
+}
+
 /**
  * Class represents storage for API requests
  */
@@ -127,26 +133,26 @@ export class ApiStore {
     return 200;
   };
 
-  static GetUser = async () => {
-    const res = await fetch(`http://${baseUrl}/api/v1/user`, {
-      method: 'GET',
-      credentials: 'include',
-    });
-
-    if (res.status !== 200) {
-      return 401;
-    }
-    const resp = res.json();
-
-    return resp;
-  };
-
-  static ProfileChange = async ({
-    avatar, email, username, password,
-  }) => this.putData(`http://${baseUrl}/api/v1/user`, {
-    avatar,
-    username,
-    email,
-    password,
-  });
+  // static GetUser = async () => {
+  //   const res = await fetch(`http://${baseUrl}/api/v1/user`, {
+  //     method: 'GET',
+  //     credentials: 'include',
+  //   });
+  //
+  //   if (res.status !== 200) {
+  //     return 401;
+  //   }
+  //   const resp = res.json();
+  //
+  //   return resp;
+  // };
+  //
+  // static ProfileChange = async ({
+  //   avatar, email, username, password,
+  // }) => this.putData(`http://${baseUrl}/api/v1/user`, {
+  //   avatar,
+  //   username,
+  //   email,
+  //   password,
+  // });
 }

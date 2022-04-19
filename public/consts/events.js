@@ -7,4 +7,7 @@ export const events = {
     go: 'router:go',
   },
 
+  authPage: {
+    unauthorised: 'auth:unauthorised',
+  }
 };

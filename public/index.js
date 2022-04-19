@@ -5,15 +5,19 @@ import { renderAuthPage } from './components/Auth/Auth.js';
 import { SetFavicon, haveWrongInput, badResponseHandler } from './js/utils.js';
 import { ApiStore } from './store/ApiStore.js';
 import { note } from './views/note.js';
+import { Router } from './modules/router.js'
+import { AuthController } from './app/Controllers/AuthController.js'
+import {routes} from "./consts/routes";
 
 const root = document.getElementById('root');
+
 SetFavicon();
 
+const authController = new AuthController();
 const router = new Router(root);
 
 router.start();
-// router.register(routes.loginPage, loginController);
-
+router.register(routes.loginPage, authController);
 
 // /**
 //  * Create notes page for user, if user is unauthorised create signup page
