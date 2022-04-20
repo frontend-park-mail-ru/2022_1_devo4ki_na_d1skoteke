@@ -1,33 +1,15 @@
+/* eslint-disable */
 import { BaseView } from './BaseView.js';
 import { events } from '../../consts/events.js';
 import {renderAuthPage} from '../../components/Auth/Auth.js';
+import {badResponseHandler, haveWrongInput} from '../../js/utils.js';
 
 export class AuthView extends BaseView {
   constructor(eventBus, { data = {} } = {}) {
     super(eventBus, data);
   }
-
-  // emitGetContent = () => {
-  //   this.eventBus.emit(events.authPage.getContent, this.routeData);
-  // };
-
-  /**
-   * @description Отрисовывает контент страницы авторизации / регистрации.
-   * @param { Object } data Данные для формы авторизации / регистрации:
-   * количество полей ввода и их названия
-   */
-  render = (data) => {
-    // this._data = data;
-    // const template = authContent(this._data);
-    // const content = document.querySelector('.content');
-    // if (content) {
-    //   content.innerHTML = template;
-    //   this.addValidateListeners();
-    //   this.addSubmitListener();
-    // } else {
-    //   this.eventBus.emit(events.app.errorPage);
-    // }
-    if (data === 'signup') {
+  render = (context) => {
+    if (context.data === 'signup') {
       renderAuthPage({
         ENTER_TYPE: 'signup',
         inputForms: [
@@ -55,8 +37,9 @@ export class AuthView extends BaseView {
           },
         ],
       });
+      this.signupHandler();
+      return;
     }
-    console.log('AuthView data:', data);
     renderAuthPage({
       ENTER_TYPE: 'login',
       inputForms: [
@@ -73,5 +56,36 @@ export class AuthView extends BaseView {
         },
       ],
     });
+    this.loginHandler();
   };
+
+  loginHandler() {
+    const loginForm = document.forms.namedItem('login-form');
+    loginForm.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      if (haveWrongInput(loginForm)) {
+        return;
+      }
+      this.eventBus.emit(events.authPage.submitLogin, { loginForm });
+
+      // EventBus.emit('authorized');
+    });
+  }
+
+  signupHandler() {
+    const signupForm = document.forms.namedItem('signup-form');
+    signupForm.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      if (haveWrongInput(signupForm)) {
+        return;
+      }
+      this.eventBus.emit(events.authPage.submitSignup, { signupForm });
+
+      // EventBus.emit('authorized');
+    });
+  }
+
+  showRequestErrors() {
+    badResponseHandler();
+  }
 }

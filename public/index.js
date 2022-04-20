@@ -16,10 +16,12 @@ SetFavicon();
 const authController = new AuthController();
 const router = new Router(root);
 
-router.start();
 router.register(routes.loginPage, authController);
+router.register(routes.signupPage, authController);
 router.register(routes.notesPage, authController);
-
+router.start();
+// router.go('/signup');
+// console.log('from index', router, routes.loginPage, authController);
 // /**
 //  * Create notes page for user, if user is unauthorised create signup page
 //  */
@@ -181,33 +183,33 @@ router.register(routes.notesPage, authController);
 //   }
 // });
 
-root.addEventListener('click', async (e) => {
-  const { target } = e;
-  switch (target.dataset.section) {
-    case 'signup': {
-      signupPage();
-      break;
-    }
-
-    case 'login': {
-      loginPage();
-      break;
-    }
-
-    case 'note': {
-      note(root);
-      break;
-    }
-
-    case 'logout': {
-      root.innerHTML = '';
-      await ApiStore.Logout();
-      loginPage();
-      break;
-    }
-
-    default: {
-      break;
-    }
-  }
-});
+// root.addEventListener('click', async (e) => {
+//   const { target } = e;
+//   switch (target.dataset.section) {
+//     case 'signup': {
+//       signupPage();
+//       break;
+//     }
+//
+//     case 'login': {
+//       loginPage();
+//       break;
+//     }
+//
+//     case 'note': {
+//       note(root);
+//       break;
+//     }
+//
+//     case 'logout': {
+//       root.innerHTML = '';
+//       await ApiStore.Logout();
+//       loginPage();
+//       break;
+//     }
+//
+//     default: {
+//       break;
+//     }
+//   }
+// });

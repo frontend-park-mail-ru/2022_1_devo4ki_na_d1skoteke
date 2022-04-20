@@ -9,7 +9,23 @@ export class AuthController extends BaseController {
     this.events.push(
       {
         event: events.authPage.unauthorised,
-        handler: this.view.render('signup'),
+        handler: this.view.render,
+      },
+      {
+        event: events.authPage.authorised,
+        handler: this.view.render,
+      },
+      {
+        event: events.authPage.submitLogin,
+        handler: this.model.userLogin,
+      },
+      {
+        event: events.authPage.submitSignup,
+        handler: this.model.userSignup,
+      },
+      {
+        event: events.authPage.badResponse,
+        handler: this.view.showRequestErrors,
       },
     );
     this.subscribe();

@@ -14,7 +14,7 @@ export class Router {
 
     if (page) {
       this.page.addEventListener('click', (e) => {
-        const { target } = e.target;
+        const { target } = e;
         const closestLink = target.closest('a');
         if (!closestLink || target.matches('not-route')
           || closestLink?.matches('not-route')) {
@@ -29,7 +29,7 @@ export class Router {
   }
 
   onPathChanged = (data) => {
-    this.go(data.URL);
+    this.go(`/${data.URL}`);
   };
 
   go = (URL = '/') => {
@@ -39,17 +39,17 @@ export class Router {
       this.currentController.unsubscribe();
     }
     this.currentController = routeData.controller;
-    console.log('currentController', this.currentController);
     this.currentController.subscribe();
 
     if (!this.currentController) {
-      this.currentController = this.getURLData(routes.notesPage).controller;
+      URL = routes.notesPage;
+      this.currentController = this.getURLData(URL).controller;
     }
     if (window.location.pathname !== URL) {
       window.history.pushState(null, null, URL);
     }
     this.currentController.view.render(data);
-    eventBus.emit(events.router.go);
+    eventBus.emit(events.router.go, URL);
   };
 
   getURLData = (URL) => {
@@ -77,6 +77,7 @@ export class Router {
     const resultURL = parsedURL.pathname;
     return {
       URL: resultURL,
+      data: currentURL.substring(1),
       URLParameters,
     };
   };
@@ -97,7 +98,6 @@ export class Router {
   };
 
   register = (URL, controller) => {
-    console.log(URL);
     this.routes.add({ URL, controller });
     return this;
   };

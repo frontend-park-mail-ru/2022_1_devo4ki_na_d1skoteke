@@ -9,5 +9,9 @@ export const events = {
 
   authPage: {
     unauthorised: 'auth:unauthorised',
+    authorised: 'auth:authorised',
+    submitSignup: 'auth:submitSignup',
+    submitLogin: 'auth:submitLogin',
+    badResponse: 'auth:badResponse',
   }
 };

@@ -1,9 +1,9 @@
 import {baseUrl, urls} from '../consts/urls.js';
 
 let contentType = 'multipart/form-data';
-if (baseUrl === '127.0.0.1:3001') {
-  contentType = 'application/json';
-}
+// if (baseUrl === '127.0.0.1:3001') {
+//   contentType = 'application/json';
+// }
 
 /**
  * Class represents storage for API requests
