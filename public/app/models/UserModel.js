@@ -10,7 +10,6 @@ export class UserModel {
 
   async emitAuthStatus() {
     const authStatus = await ApiStore.CheckAuth();
-    console.log('user model: authStatus');
     if (authStatus === 401) {
       eventBus.emit(events.authPage.unauthorised, { data: 'signup' });
       return;
@@ -47,6 +46,7 @@ export class UserModel {
       eventBus.emit(events.authPage.badResponse);
       return;
     }
+    await ApiStore.Login({ email, password });
     console.log('authorised');
     eventBus.emit(events.authPage.authorised);
   };

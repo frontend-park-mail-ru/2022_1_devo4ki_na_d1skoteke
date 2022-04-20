@@ -1,6 +1,7 @@
-import {baseUrl, urls} from '../consts/urls.js';
+/* eslint-disable camelcase */
+import {urls} from '../consts/urls.js';
 
-let contentType = 'multipart/form-data';
+const contentType = 'multipart/form-data';
 // if (baseUrl === '127.0.0.1:3001') {
 //   contentType = 'application/json';
 // }
@@ -111,9 +112,7 @@ export class ApiStore {
       return 401;
     }
 
-    const resp = await res.json();
-
-    return resp;
+    return res.json();
   };
 
   /**

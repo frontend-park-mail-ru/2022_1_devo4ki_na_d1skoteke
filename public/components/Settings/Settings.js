@@ -1,5 +1,7 @@
 import { Settings } from './compiled/Settings.js';
-import { addValidationForProfileEditForm, addPopupOpenCloseAbility, avatarHandler, popupClose } from '../../js/utils.js';
+import {
+  addValidationForProfileEditForm, addPopupOpenCloseAbility, avatarHandler, popupClose,
+} from '../../js/utils.js';
 
 export const renderSettings = (context) => {
   const root = document.getElementById('root');

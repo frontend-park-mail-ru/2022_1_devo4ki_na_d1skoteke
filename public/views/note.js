@@ -24,7 +24,6 @@ window.render = render;
 
 /* eslint no-param-reassign: ["error", { "props": false }] */
 export const note = async (node) => {
-
   node.innerHTML = '';
 
   const page = document.createElement('div');

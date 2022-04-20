@@ -111,7 +111,6 @@ app.post('/api/v1/users/login', (req, res) => {
 });
 
 app.get('/api/v1/users/auth', (req, res) => {
-
   if (req.cookies !== undefined && req.cookies.zavorot) {
     const id = req.cookies.zavorot;
     const email = ids[id];

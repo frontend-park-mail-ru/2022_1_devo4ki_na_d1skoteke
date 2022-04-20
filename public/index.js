@@ -1,23 +1,23 @@
 /* eslint-disable no-undef */
 /* eslint-disable camelcase */
 
-import { renderAuthPage } from './components/Auth/Auth.js';
-import { SetFavicon, haveWrongInput, badResponseHandler } from './js/utils.js';
-import { ApiStore } from './store/ApiStore.js';
-import { note } from './views/note.js';
-import { Router } from './modules/router.js'
-import { AuthController } from './app/Controllers/AuthController.js'
-import {routes} from "./consts/routes.js";
+import { SetFavicon } from './js/utils.js';
+import { Router } from './modules/router.js';
+import { AuthController } from './app/Controllers/AuthController.js';
+import { NotesController } from './app/Controllers/NotesController.js';
+import { routes } from './consts/routes.js';
 
 const root = document.getElementById('root');
 
 SetFavicon();
 
 const authController = new AuthController();
+const notesController = new NotesController();
 const router = new Router(root);
 
 router.register(routes.loginPage, authController);
 router.register(routes.signupPage, authController);
+router.register(routes.notesPage, notesController);
 router.register(routes.notesPage, authController);
 router.start();
 // router.go('/signup');

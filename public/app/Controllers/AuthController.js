@@ -11,10 +11,10 @@ export class AuthController extends BaseController {
         event: events.authPage.unauthorised,
         handler: this.view.render,
       },
-      {
-        event: events.authPage.authorised,
-        handler: this.view.render,
-      },
+      // {
+      //   event: events.authPage.authorised,
+      //   handler: this.view.render,
+      // },
       {
         event: events.authPage.submitLogin,
         handler: this.model.userLogin,

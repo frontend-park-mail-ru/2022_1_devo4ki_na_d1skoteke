@@ -13,5 +13,8 @@ export const events = {
     submitSignup: 'auth:submitSignup',
     submitLogin: 'auth:submitLogin',
     badResponse: 'auth:badResponse',
-  }
+  },
+  notesPage: {
+    notesReady: 'notesPage:notesReady',
+  },
 };
