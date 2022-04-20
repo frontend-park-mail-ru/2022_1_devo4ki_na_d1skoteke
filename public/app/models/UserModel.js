@@ -6,7 +6,7 @@ import { checkAuth } from '../../js/utils.js';
 
 export class UserModel {
   emitAuthStatus = async () => {
-    if (checkAuth()) {
+    if (await checkAuth() === 200) {
       eventBus.emit(events.authPage.authorised);
       eventBus.emit(events.pathChanged, { URL: '' });
       return;
