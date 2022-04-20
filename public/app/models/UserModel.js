@@ -2,20 +2,18 @@
 import { eventBus } from '../../modules/eventBus.js';
 import { ApiStore } from '../../store/ApiStore.js';
 import { events } from '../../consts/events.js';
+import { checkAuth } from '../../js/utils.js';
 
 export class UserModel {
-  constructor() {
-    this.emitAuthStatus();
-  }
-
-  async emitAuthStatus() {
-    const authStatus = await ApiStore.CheckAuth();
-    if (authStatus === 401) {
-      eventBus.emit(events.authPage.unauthorised, { data: 'signup' });
+  emitAuthStatus = async () => {
+    if (checkAuth()) {
+      eventBus.emit(events.authPage.authorised);
+      eventBus.emit(events.pathChanged, { URL: '' });
       return;
     }
-    eventBus.emit(events.authPage.authorised, { data: 'login' });
-  }
+    eventBus.emit(events.pathChanged, { URL: 'signup' });
+    eventBus.emit(events.authPage.unauthorised, { data: 'signup' });
+  };
 
   userLogin = async (data) => {
     const email = data.loginForm.email.value.trim();
@@ -27,6 +25,7 @@ export class UserModel {
       return;
     }
     eventBus.emit(events.authPage.authorised);
+    eventBus.emit(events.pathChanged, { URL: '' });
   };
 
   userSignup = async (data) => {
@@ -47,7 +46,12 @@ export class UserModel {
       return;
     }
     await ApiStore.Login({ email, password });
-    console.log('authorised');
-    eventBus.emit(events.authPage.authorised);
+    eventBus.emit(events.pathChanged, { URL: '' });
+  };
+
+  userLogout = async () => {
+    await ApiStore.Logout();
+    // eventBus.emit(events.authPage.unauthorised, { data: 'login' });
+    eventBus.emit(events.pathChanged, { URL: 'login' });
   };
 }

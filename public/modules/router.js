@@ -1,4 +1,4 @@
-/* eslint-disable class-methods-use-this */
+/* eslint-disable class-methods-use-this,no-param-reassign */
 import { eventBus } from './eventBus.js';
 import { routes } from '../consts/routes.js';
 import { events } from '../consts/events.js';
@@ -33,14 +33,18 @@ export class Router {
   };
 
   go = (URL = '/') => {
+    // console.log('current URL: ', URL);
     const routeData = this.getURLData(URL);
     const data = { ...routeData };
     if (this.currentController) {
       this.currentController.unsubscribe();
     }
     this.currentController = routeData.controller;
+    if (!this.currentController) {
+      return;
+    }
+    // console.log('current Controller: ', this.currentController);
     this.currentController.subscribe();
-
     if (!this.currentController) {
       URL = routes.notesPage;
       this.currentController = this.getURLData(URL).controller;
@@ -92,7 +96,7 @@ export class Router {
 
   start = () => {
     window.addEventListener('popstate', () => {
-      this.go(window.location.pathname + window.location.search);
+      this.go(window.location.pathname);
     });
     this.go(window.location.pathname + window.location.search);
   };

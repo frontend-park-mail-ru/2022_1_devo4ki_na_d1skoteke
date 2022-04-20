@@ -4,9 +4,6 @@ import { ApiStore } from '../../store/ApiStore.js';
 import { events } from '../../consts/events.js';
 
 export class NotesModel {
-  constructor() {
-  }
-
   async getAllNotes() {
     const fetchNotesRes = await ApiStore.GetAllNotes();
     const { notes } = fetchNotesRes;

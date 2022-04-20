@@ -1,3 +1,5 @@
+import { ApiStore } from '../store/ApiStore.js';
+
 const InvalidStatusType = {
   WRONG_SYMBOLS: 'invalid',
   PASS_WRONG_LENGTH: 'wrong length',
@@ -432,3 +434,5 @@ export const avatarHandler = () => {
     }
   });
 };
+
+export const checkAuth = async () => ApiStore.CheckAuth();

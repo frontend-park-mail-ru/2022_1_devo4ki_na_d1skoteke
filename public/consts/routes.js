@@ -1,6 +1,6 @@
 export const routes = {
-  loginPage: '/login',
-  signupPage: '/signup',
-  notesPage: '/',
+  loginPage: '^/login',
+  signupPage: '^/signup',
+  notesPage: '^/$',
   // userProfilePage: '/user',
 };

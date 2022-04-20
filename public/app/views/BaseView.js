@@ -1,3 +1,5 @@
+/* eslint-disable class-methods-use-this */
+
 // import { events } from '../../consts/events.js';
 
 export class BaseView {
@@ -6,9 +8,6 @@ export class BaseView {
     this.eventBus = eventBus;
   }
 
-  emitGetContent = () => {};
-
   render = () => {
-    this.emitGetContent();
   };
 }

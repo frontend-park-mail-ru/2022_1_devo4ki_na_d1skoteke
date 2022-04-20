@@ -8,7 +8,7 @@ export class NotesController extends BaseController {
     super(NotesView, NotesModel);
     this.events.push(
       {
-        event: events.authPage.authorised,
+        event: events.notesPage.requestNotes,
         handler: this.model.getAllNotes,
       },
       {

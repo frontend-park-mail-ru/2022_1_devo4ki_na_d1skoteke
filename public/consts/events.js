@@ -15,6 +15,9 @@ export const events = {
     badResponse: 'auth:badResponse',
   },
   notesPage: {
+    requestNotes: 'notesPage:requestNotes',
     notesReady: 'notesPage:notesReady',
+    authCheckRequest: 'notesPage:authCheckRequest',
+    logout: 'notesPage:logout',
   },
 };

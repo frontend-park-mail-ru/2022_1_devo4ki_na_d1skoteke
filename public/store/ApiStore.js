@@ -1,5 +1,5 @@
 /* eslint-disable camelcase */
-import {urls} from '../consts/urls.js';
+import { urls } from '../consts/urls.js';
 
 const contentType = 'multipart/form-data';
 // if (baseUrl === '127.0.0.1:3001') {
