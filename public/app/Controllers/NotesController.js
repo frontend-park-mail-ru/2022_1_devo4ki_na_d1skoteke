@@ -9,11 +9,23 @@ export class NotesController extends BaseController {
     this.events.push(
       {
         event: events.notesPage.requestNotes,
-        handler: this.model.getAllNotes,
+        handler: this.model.getDataForNotes,
       },
       {
         event: events.notesPage.notesReady,
         handler: this.view.render,
+      },
+      {
+        event: events.notesPage.logout,
+        handler: this.model.logoutHandler,
+      },
+      {
+        event: events.notesPage.submitUserChange,
+        handler: this.model.userChangeHandler,
+      },
+      {
+        event: events.notesPage.reRenderNewData,
+        handler: this.view.renderSettings,
       },
     );
     this.subscribe();

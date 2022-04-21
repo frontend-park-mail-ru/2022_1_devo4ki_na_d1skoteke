@@ -5,19 +5,20 @@ import {renderAuthPage} from '../../components/Auth/Auth.js';
 import {badResponseHandler, checkAuth, haveWrongInput} from '../../js/utils.js';
 import {CreateLeftSide} from "../../components/LeftSideBar/LeftSideBar.js";
 import {CreateNoteContent} from "../../components/NoteContent/NoteContent.js";
+import {renderSettings} from "../../components/Settings/Settings.js";
 
 export class NotesView extends BaseView {
-  constructor(eventBus, { data = {} } = {}) {
+  constructor(eventBus, {data = {}} = {}) {
     super(eventBus, data);
 
   }
 
-  render = async (data) => {
+  render = async (context) => {
     if (await checkAuth() === 401) {
       this.eventBus.emit(events.pathChanged, {URL: 'signup'});
       return;
     }
-    if (data.data === '') {
+    if (context.data === '') {
       this.eventBus.emit(events.notesPage.requestNotes);
       return;
     }
@@ -28,24 +29,27 @@ export class NotesView extends BaseView {
     const page = document.createElement('div');
     page.classList.add('notion__whole__page');
 
-    CreateLeftSide(page, {name: 'Henry', notes: data.notes});
-
-    CreateNoteContent(page, {note: data.note});
-
+    CreateLeftSide(page, {name: context.userData.username, notes: context.notes});
+    CreateNoteContent(page, {note: context.note});
     root.appendChild(page);
 
-    this.logoutHandler();
+    console.log('data: ', context, context.userData);
+    this.renderSettings(context.userData);
+    this.submitUserChangeHandler();
   };
 
-  logoutHandler = () => {
-    const logout = document.getElementById('logout');
-    console.log('logout btn ', logout);
-    if (logout) {
-      logout.dataset.section = 'logout';
-      logout.addEventListener('click', (e) => {
-        e.preventDefault();
-        this.eventBus.emit(events.notesPage.logout);
-      })
-    }
+  renderSettings = (context) => {
+    renderSettings(context);
+  };
+
+  submitUserChangeHandler = () => {
+    const profileForm = document.querySelector('.settings__form');
+    profileForm.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      if (haveWrongInput(profileForm)) {
+        return;
+      }
+      this.eventBus.emit(events.notesPage.submitUserChange, { profileForm });
+    });
   }
 }

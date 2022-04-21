@@ -48,10 +48,4 @@ export class UserModel {
     await ApiStore.Login({ email, password });
     eventBus.emit(events.pathChanged, { URL: '' });
   };
-
-  userLogout = async () => {
-    await ApiStore.Logout();
-    // eventBus.emit(events.authPage.unauthorised, { data: 'login' });
-    eventBus.emit(events.pathChanged, { URL: 'login' });
-  };
 }

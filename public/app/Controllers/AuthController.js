@@ -27,10 +27,6 @@ export class AuthController extends BaseController {
         event: events.authPage.badResponse,
         handler: this.view.showRequestErrors,
       },
-      {
-        event: events.notesPage.logout,
-        handler: this.model.userLogout,
-      },
     );
     this.subscribe();
   }

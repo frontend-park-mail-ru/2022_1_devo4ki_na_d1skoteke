@@ -19,5 +19,7 @@ export const events = {
     notesReady: 'notesPage:notesReady',
     authCheckRequest: 'notesPage:authCheckRequest',
     logout: 'notesPage:logout',
+    submitUserChange: 'notesPage:submitUserChange',
+    reRenderNewData: 'notesPage:reRenderNewData',
   },
 };
