@@ -67,8 +67,6 @@ export class AuthView extends BaseView {
         return;
       }
       this.eventBus.emit(events.authPage.submitLogin, { loginForm });
-
-      // EventBus.emit('authorized');
     });
   }
 
@@ -80,8 +78,6 @@ export class AuthView extends BaseView {
         return;
       }
       this.eventBus.emit(events.authPage.submitSignup, { signupForm });
-
-      // EventBus.emit('authorized');
     });
   }
 

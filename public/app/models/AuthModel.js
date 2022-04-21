@@ -4,7 +4,7 @@ import { ApiStore } from '../../store/ApiStore.js';
 import { events } from '../../consts/events.js';
 import { checkAuth } from '../../js/utils.js';
 
-export class UserModel {
+export class AuthModel {
   emitAuthStatus = async () => {
     if (await checkAuth() === 200) {
       eventBus.emit(events.authPage.authorised);

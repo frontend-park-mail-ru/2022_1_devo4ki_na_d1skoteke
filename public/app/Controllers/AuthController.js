@@ -1,11 +1,11 @@
 import { events } from '../../consts/events.js';
-import { UserModel } from '../models/UserModel.js';
+import { AuthModel } from '../models/AuthModel.js';
 import { AuthView } from '../views/AuthView.js';
 import { BaseController } from './BaseController.js';
 
 export class AuthController extends BaseController {
   constructor() {
-    super(AuthView, UserModel);
+    super(AuthView, AuthModel);
     this.events.push(
       {
         event: events.authPage.unauthorised,
