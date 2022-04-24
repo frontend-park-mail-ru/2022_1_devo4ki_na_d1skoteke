@@ -1,4 +1,4 @@
-import { ApiStore } from '../store/ApiStore.js';
+import { ApiStore } from '../modules/apiStore.js';
 
 const InvalidStatusType = {
   WRONG_SYMBOLS: 'invalid',
