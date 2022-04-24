@@ -9,8 +9,6 @@ export class Router {
     this.page = page;
     this.currentController = null;
     eventBus.on(events.pathChanged, this.onPathChanged);
-    eventBus.on(events.redirectBack, this.onRedirectBack);
-    eventBus.on(events.redirectForward, this.onRedirectForward);
 
     if (page) {
       this.page.addEventListener('click', (e) => {
@@ -84,14 +82,6 @@ export class Router {
       data: currentURL.substring(1),
       URLParameters,
     };
-  };
-
-  onRedirectBack = () => {
-    window.history.back();
-  };
-
-  onRedirectForward = () => {
-    window.history.forward();
   };
 
   start = () => {

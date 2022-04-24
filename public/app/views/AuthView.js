@@ -3,6 +3,7 @@ import { BaseView } from './BaseView.js';
 import { events } from '../../consts/events.js';
 import {renderAuthPage} from '../../components/Auth/Auth.js';
 import {badResponseHandler, haveWrongInput} from '../../js/utils.js';
+import { loginFormStructure, signupFormStructure } from '../../consts/formData.js';
 
 export class AuthView extends BaseView {
   constructor(eventBus, { data = {} } = {}) {
@@ -10,52 +11,11 @@ export class AuthView extends BaseView {
   }
   render = (context) => {
     if (context.data === 'signup') {
-      renderAuthPage({
-        ENTER_TYPE: 'signup',
-        inputForms: [
-          {
-            labelname: 'Email',
-            name: 'email',
-            placeholder: 'Enter email',
-          },
-          {
-            labelname: 'Nickname',
-            name: 'nickname',
-            placeholder: 'Enter your nickname',
-          },
-          {
-            type: 'password',
-            labelname: 'Password',
-            name: 'primaryPassword',
-            placeholder: 'Enter password',
-          },
-          {
-            type: 'password',
-            labelname: 'Confirm password',
-            name: 'confirmPassword',
-            placeholder: 'Enter password again',
-          },
-        ],
-      });
+      renderAuthPage(signupFormStructure);
       this.signupHandler();
       return;
     }
-    renderAuthPage({
-      ENTER_TYPE: 'login',
-      inputForms: [
-        {
-          labelname: 'Email',
-          name: 'email',
-          placeholder: 'Enter email',
-        },
-        {
-          type: 'password',
-          labelname: 'Password',
-          name: 'password',
-          placeholder: 'Enter password',
-        },
-      ],
-    });
+    renderAuthPage(loginFormStructure);
     this.loginHandler();
   };
 
