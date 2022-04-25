@@ -4,7 +4,7 @@
   const opposite_variant = (ENTER_TYPE==='login') ? 'signup' : 'login'
 
 div(class= ENTER_TYPE)
-  img.logo(src='./img/signup_login_logo.png')
+  img.logo(src='./assets/signup_login_logo.png')
   .title #{btn_msg}
   form(class= ENTER_TYPE+'-form' name= ENTER_TYPE+'-form')
     for input in inputForms

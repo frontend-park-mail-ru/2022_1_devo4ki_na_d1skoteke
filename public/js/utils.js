@@ -12,7 +12,7 @@ const InvalidStatusType = {
 export const SetFavicon = () => {
   const addFavicon = document.createElement('link');
   addFavicon.setAttribute('rel', 'icon');
-  addFavicon.setAttribute('href', './img/favicon.ico');
+  addFavicon.setAttribute('href', './assets/favicon.ico');
 
   document.querySelector('head').insertBefore(addFavicon, document.querySelector('title').nextSibling);
 };

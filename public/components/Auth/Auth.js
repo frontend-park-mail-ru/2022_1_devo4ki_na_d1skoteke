@@ -1,6 +1,7 @@
 // eslint-disable-next-line import/no-unresolved
 import { Auth } from './compiled/Auth.js';
 import { addValidationForLoginForms, addValidationForSignupForms } from '../../js/utils.js';
+import '../../img/signup_login_logo.png';
 
 /**
  * Renders Login or Signup page from template

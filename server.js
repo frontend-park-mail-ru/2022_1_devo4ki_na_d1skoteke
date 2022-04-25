@@ -1,36 +1,14 @@
 /* eslint-disable camelcase */
 const express = require('express');
 const path = require('path');
-const pug = require('pug');
-const fs = require('fs');
 const cookie = require('cookie-parser');
 const uuid = require('uuid');
 
 const app = express();
 app.use(express.json());
-app.use(express.static(path.resolve(__dirname, 'public')));
+app.use(express.static(path.resolve(__dirname, 'dist')));
 app.use(cookie());
 app.set('view engine', 'pug');
-
-const templateNames = ['NoteContent', 'Settings', 'LeftSideBar', 'Auth'];
-
-const compileTemplate = (tmplName) => {
-  const componentPath = `public/components/${tmplName}`;
-  const comp = pug.compileFileClient(`${componentPath}/${tmplName}.pug`, {
-    name: `${tmplName}`,
-  });
-  const templates = [];
-  templates.push(comp);
-
-  if (!fs.existsSync(`${componentPath}/compiled`)) {
-    fs.mkdirSync(`${componentPath}/compiled`);
-  }
-  fs.writeFileSync(`${componentPath}/compiled/${tmplName}.js`, `${templates.pop()} export {${tmplName}}`);
-};
-
-templateNames.forEach((el) => {
-  compileTemplate(el);
-});
 
 // _____________MOCKS__________________
 

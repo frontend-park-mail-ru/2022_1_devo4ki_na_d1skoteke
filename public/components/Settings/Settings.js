@@ -2,6 +2,8 @@ import { Settings } from './compiled/Settings.js';
 import {
   addValidationForProfileEditForm, addPopupOpenCloseAbility, avatarHandler, popupClose,
 } from '../../js/utils.js';
+import '../../img/avatar-example.jpg';
+import '../../img/settings__account-icon.svg';
 
 export const renderSettings = (context) => {
   const root = document.getElementById('root');
@@ -18,7 +20,7 @@ export const renderSettings = (context) => {
 
   const settingsPage = document.createElement('div');
 
-  const userAvatar = '../../img/avatar-example.jpg';
+  const userAvatar = './assets/avatar-example.jpg';
   settingsPage.innerHTML = Settings({
     userInfo: {
       email: `${context.email}`,

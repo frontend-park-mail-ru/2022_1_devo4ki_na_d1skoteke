@@ -1,6 +1,7 @@
 /* eslint-disable no-undef */
 /* eslint-disable camelcase */
-
+import './index.css';
+import './img/favicon.ico';
 import { SetFavicon } from './js/utils.js';
 import { Router } from './modules/router.js';
 import { AuthController } from './app/controllers/AuthController.js';
