@@ -29,6 +29,7 @@
 
 .bio__name {
     padding-left: 15px;
+    cursor: pointer;
 }
 
 .left-sidebar__holder {

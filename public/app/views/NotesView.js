@@ -3,14 +3,13 @@ import { BaseView } from './BaseView.js';
 import { events } from '../../consts/events.js';
 import {renderAuthPage} from '../../components/Auth/Auth.js';
 import {badResponseHandler, checkAuth, haveWrongInput} from '../../js/utils.js';
-import {CreateLeftSide} from "../../components/LeftSideBar/LeftSideBar.js";
-import {CreateNoteContent} from "../../components/NoteContent/NoteContent.js";
+import {createLeftSide} from "../../components/LeftSideBar/LeftSideBar.js";
+import {createNoteContent} from "../../components/NoteContent/NoteContent.js";
 import {renderSettings} from "../../components/Settings/Settings.js";
 
 export class NotesView extends BaseView {
   constructor(eventBus, {data = {}} = {}) {
     super(eventBus, data);
-
   }
 
   render = async (context) => {
@@ -30,7 +29,7 @@ export class NotesView extends BaseView {
     page.classList.add('notion__whole__page');
     root.appendChild(page);
 
-    CreateLeftSide(page,{name: context.userData.username, notes: context.notes});
+    createLeftSide(page,{name: context.userData.username, notes: context.notes});
     this.renderNoteContent({ note: context.note })
 
     this.renderSettings(context.userData);
@@ -42,9 +41,8 @@ export class NotesView extends BaseView {
   };
 
   renderNoteContent = (data) => {
-    CreateNoteContent(data.note);
+    createNoteContent(data.note);
   };
-
 
   submitUserChangeHandler = () => {
     const profileForm = document.querySelector('.settings__form');

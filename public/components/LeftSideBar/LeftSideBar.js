@@ -3,7 +3,7 @@ import { eventBus } from '../../modules/eventBus.js';
 import { events } from '../../consts/events.js';
 import '../../img/logo_icon.svg';
 
-export const CreateLeftSide = (node, context) => {
+export const createLeftSide = (node, context) => {
   const LeftSide = document.createElement('div');
   LeftSide.innerHTML = LeftSideBar(context);
   node.appendChild(LeftSide);

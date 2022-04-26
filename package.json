@@ -5,6 +5,8 @@
   "main": "server.js",
   "scripts": {
     "start": "node compile.js && webpack && node server.js",
+    "server": "node compile.js && node server.js",
+    "bundle": "webpack",
     "lint": "eslint .",
     "lint-fix": "eslint . --fix"
   },

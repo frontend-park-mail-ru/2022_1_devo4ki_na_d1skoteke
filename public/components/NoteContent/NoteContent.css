@@ -1,4 +1,4 @@
-.page__content__navbar {
+.content__navbar {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
@@ -6,8 +6,9 @@
     margin: 10px;
   }
   
-  .page__content__navbar__logout_button {
+  .navbar__logout-btn {
     font-weight: 400;
+    width: 100px;
     border-radius: 4px;
     padding: 5px 15px 5px 15px;
     color: var(--btn-text-color);
@@ -15,7 +16,7 @@
     background: var(--btn-background-color);
     border: 1px solid var(--btn-border-color);
   }
-  .page__content__navbar__title {
+  .navbar__title {
     width: 70vw;
     margin: 27px 0px 50px 62px;
     font-weight: 700;
@@ -24,11 +25,11 @@
     color: var(--page-sidebar-color);
   }
   
-  .page__content__spaceholder {
+  .content__spaceholder {
     height: 30px;
   }
   
-  .page__content__text {
+  .content__text {
     display: flex;
     flex-direction: row;
     margin: 20px;
@@ -40,4 +41,3 @@
     color: var(--page-sidebar-color);
     opacity: 0.7;
   }
-  
