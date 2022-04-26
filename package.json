@@ -4,7 +4,7 @@
   "description": "Репозиторий команды devo4ki na d1skoteke",
   "main": "server.js",
   "scripts": {
-    "start": "node build.js && webpack && node server.js",
+    "start": "node compile.js && webpack && node server.js",
     "lint": "eslint .",
     "lint-fix": "eslint . --fix"
   },

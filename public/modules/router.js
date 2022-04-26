@@ -27,7 +27,7 @@ export class Router {
   }
 
   onPathChanged = (data) => {
-    this.go(`/${data.URL}`);
+    this.go(data.URL);
   };
 
   go = (URL = '/') => {

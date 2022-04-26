@@ -15,7 +15,7 @@ export class NotesView extends BaseView {
 
   render = async (context) => {
     if (await checkAuth() === 401) {
-      this.eventBus.emit(events.pathChanged, {URL: 'signup'});
+      this.eventBus.emit(events.pathChanged, {URL: '/signup'});
       return;
     }
     if (context.data === '') {
@@ -28,12 +28,11 @@ export class NotesView extends BaseView {
 
     const page = document.createElement('div');
     page.classList.add('notion__whole__page');
-
-    CreateLeftSide(page, {name: context.userData.username, notes: context.notes});
-    CreateNoteContent(page, {note: context.note});
     root.appendChild(page);
 
-    console.log('data: ', context, context.userData);
+    CreateLeftSide(page,{name: context.userData.username, notes: context.notes});
+    this.renderNoteContent({ note: context.note })
+
     this.renderSettings(context.userData);
     this.submitUserChangeHandler();
   };
@@ -41,6 +40,11 @@ export class NotesView extends BaseView {
   renderSettings = (context) => {
     renderSettings(context);
   };
+
+  renderNoteContent = (data) => {
+    CreateNoteContent(data.note);
+  };
+
 
   submitUserChangeHandler = () => {
     const profileForm = document.querySelector('.settings__form');

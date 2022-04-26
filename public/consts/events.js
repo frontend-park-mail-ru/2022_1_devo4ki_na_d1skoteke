@@ -21,5 +21,6 @@ export const events = {
     logout: 'notesPage:logout',
     submitUserChange: 'notesPage:submitUserChange',
     reRenderNewData: 'notesPage:reRenderNewData',
+    noteSwitch: 'notesPage:noteSwitch',
   },
 };

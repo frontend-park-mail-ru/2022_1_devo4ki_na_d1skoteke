@@ -11,7 +11,6 @@ app.use(cookie());
 app.set('view engine', 'pug');
 
 // _____________MOCKS__________________
-
 const users = {
   'mr.erik770@mail.ru': {
     username: 'erik770',

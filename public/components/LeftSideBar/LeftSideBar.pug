@@ -1,10 +1,10 @@
-.page__sidebar
-  .page__sidebar__bio
-    .page__sidebar__bio__img
+.sidebars.left-sidebar
+  .left-sidebar__bio.bio
+    .bio__img
       img(src='./assets/logo_icon.svg' alt='cat logo')
-    .page__sidebar__bio__name.settings-link(dataset-name= 'settingsPopup')
+    .bio__name.settings-link(dataset-name= 'settingsPopup')
       |#{name}&apos;s Notion
-  .page__sidebar__holder
-  .page__sidebar__notes
+  .left-sidebar__holder
+  .left-sidebar__notes
     each note in notes
-      div(id=note.name onclick='render(\'' + note.name + '\')' )= "> " + note.name
+      .left-sidebar__note-title(id=note.name)= "> " + note.name

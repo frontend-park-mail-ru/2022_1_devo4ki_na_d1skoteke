@@ -8,10 +8,10 @@ export class AuthModel {
   emitAuthStatus = async () => {
     if (await checkAuth() === 200) {
       eventBus.emit(events.authPage.authorised);
-      eventBus.emit(events.pathChanged, { URL: '' });
+      eventBus.emit(events.pathChanged, { URL: '/' });
       return;
     }
-    eventBus.emit(events.pathChanged, { URL: 'signup' });
+    eventBus.emit(events.pathChanged, { URL: '/signup' });
     eventBus.emit(events.authPage.unauthorised, { data: 'signup' });
   };
 
@@ -25,7 +25,7 @@ export class AuthModel {
       return;
     }
     eventBus.emit(events.authPage.authorised);
-    eventBus.emit(events.pathChanged, { URL: '' });
+    eventBus.emit(events.pathChanged, { URL: '/' });
   };
 
   userSignup = async (data) => {
@@ -46,6 +46,6 @@ export class AuthModel {
       return;
     }
     await ApiStore.Login({ email, password });
-    eventBus.emit(events.pathChanged, { URL: '' });
+    eventBus.emit(events.pathChanged, { URL: '/' });
   };
 }

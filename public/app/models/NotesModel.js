@@ -17,7 +17,7 @@ export class NotesModel {
   logoutHandler = async () => {
     await ApiStore.Logout();
     // eventBus.emit(events.authPage.unauthorised, { data: 'login' });
-    eventBus.emit(events.pathChanged, { URL: 'login' });
+    eventBus.emit(events.pathChanged, { URL: '/login' });
   };
 
   userChangeHandler = async (data) => {
