@@ -1,11 +1,11 @@
 /* eslint-disable */
 import { BaseView } from './BaseView.js';
-import { events } from '../../consts/events.js';
-import {renderAuthPage} from '../../components/Auth/Auth.js';
-import {badResponseHandler, checkAuth, haveWrongInput} from '../../js/utils.js';
-import {createLeftSide} from "../../components/LeftSideBar/LeftSideBar.js";
-import {createNoteContent} from "../../components/NoteContent/NoteContent.js";
-import {renderSettings} from "../../components/Settings/Settings.js";
+import { events } from '../consts/events.js';
+import {renderAuthPage} from '../components/Auth/Auth.js';
+import {badResponseHandler, checkAuth, haveWrongInput} from '../js/utils.js';
+import {createLeftSide} from "../components/LeftSideBar/LeftSideBar.js";
+import {createNoteContent} from "../components/NoteContent/NoteContent.js";
+import {renderSettings} from "../components/Settings/Settings.js";
 
 export class NotesView extends BaseView {
   constructor(eventBus, {data = {}} = {}) {

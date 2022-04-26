@@ -1,4 +1,4 @@
-import { events } from '../../consts/events.js';
+import { events } from '../consts/events.js';
 import { AuthModel } from '../models/AuthModel.js';
 import { AuthView } from '../views/AuthView.js';
 import { BaseController } from './BaseController.js';

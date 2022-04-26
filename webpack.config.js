@@ -5,7 +5,7 @@ const path = require('path');
 module.exports = {
   mode: 'development',
   devtool: 'source-map',
-  entry: './public/index.js',
+  entry: './src/index.js',
   output: {
     path: path.resolve(__dirname, 'dist'),
     filename: 'bundle.js',
@@ -14,7 +14,7 @@ module.exports = {
   },
   plugins: [
     new HtmlWebpackPlugin({
-      template: './public/index.html',
+      template: './src/index.html',
     }),
     new MiniCssExtractPlugin({
       filename: '[name].[contenthash].css',
@@ -41,7 +41,6 @@ module.exports = {
         test: /\.(sa|sc|c)ss$/,
         use: [
           MiniCssExtractPlugin.loader,
-          'style-loader',
           'css-loader',
           'sass-loader',
         ],

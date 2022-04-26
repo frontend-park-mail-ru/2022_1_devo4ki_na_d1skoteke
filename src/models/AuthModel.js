@@ -1,8 +1,8 @@
 /* eslint-disable camelcase,class-methods-use-this */
-import { eventBus } from '../../modules/eventBus.js';
-import { ApiStore } from '../../modules/apiStore.js';
-import { events } from '../../consts/events.js';
-import { checkAuth } from '../../js/utils.js';
+import { eventBus } from '../modules/eventBus.js';
+import { ApiStore } from '../modules/apiStore.js';
+import { events } from '../consts/events.js';
+import { checkAuth } from '../js/utils.js';
 
 export class AuthModel {
   emitAuthStatus = async () => {

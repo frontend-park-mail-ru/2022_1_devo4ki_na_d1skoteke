@@ -1,9 +1,9 @@
 /* eslint-disable */
 import { BaseView } from './BaseView.js';
-import { events } from '../../consts/events.js';
-import {renderAuthPage} from '../../components/Auth/Auth.js';
-import {badResponseHandler, haveWrongInput} from '../../js/utils.js';
-import { loginFormStructure, signupFormStructure } from '../../consts/formData.js';
+import { events } from '../consts/events.js';
+import {renderAuthPage} from '../components/Auth/Auth.js';
+import {badResponseHandler, haveWrongInput} from '../js/utils.js';
+import { loginFormStructure, signupFormStructure } from '../consts/formData.js';
 
 export class AuthView extends BaseView {
   constructor(eventBus, { data = {} } = {}) {

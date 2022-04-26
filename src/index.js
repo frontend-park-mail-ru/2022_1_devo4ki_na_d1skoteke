@@ -4,8 +4,8 @@ import './index.scss';
 import './img/favicon.ico';
 import { SetFavicon } from './js/utils.js';
 import { Router } from './modules/router.js';
-import { AuthController } from './app/controllers/AuthController.js';
-import { NotesController } from './app/controllers/NotesController.js';
+import { AuthController } from './controllers/AuthController.js';
+import { NotesController } from './controllers/NotesController.js';
 import { routes } from './consts/routes.js';
 
 const root = document.getElementById('root');

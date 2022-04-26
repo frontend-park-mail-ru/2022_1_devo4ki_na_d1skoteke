@@ -4,7 +4,7 @@ const pug = require('pug');
 const templateNames = ['NoteContent', 'Settings', 'LeftSideBar', 'Auth'];
 
 const compileTemplate = (tmplName) => {
-  const componentPath = `public/components/${tmplName}`;
+  const componentPath = `src/components/${tmplName}`;
   const comp = pug.compileFileClient(`${componentPath}/${tmplName}.pug`, {
     name: `${tmplName}`,
   });

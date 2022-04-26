@@ -1,9 +1,9 @@
 node_modules/
 js/
 .idea/
-public/components/Auth/compiled/
-public/components/NoteContent/compiled/
-public/components/Enter/compiled/
-public/components/LeftSideBar/compiled/
-public/components/Settings/compiled/
+src/components/Auth/compiled/
+src/components/NoteContent/compiled/
+src/components/Enter/compiled/
+src/components/LeftSideBar/compiled/
+src/components/Settings/compiled/
 dist

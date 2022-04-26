@@ -1,4 +1,4 @@
-import { eventBus } from '../../modules/eventBus.js';
+import { eventBus } from '../modules/eventBus.js';
 
 export class BaseController {
   constructor(View, Model) {
