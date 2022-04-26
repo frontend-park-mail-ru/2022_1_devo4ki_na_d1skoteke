@@ -4,19 +4,19 @@
   const opposite_variant = (ENTER_TYPE==='login') ? 'signup' : 'login'
 
 div(class= ENTER_TYPE)
-  img.logo(src='./assets/signup_login_logo.png')
-  .title #{btn_msg}
-  form(class= ENTER_TYPE+'-form' name= ENTER_TYPE+'-form')
+  img.logo(class= ENTER_TYPE+'__logo' src='./assets/signup_login_logo.png')
+  div(class= ENTER_TYPE+'__title').title #{btn_msg}
+  form(class= ENTER_TYPE+'__form' name= ENTER_TYPE+'-form').auth-form
     for input in inputForms
-      .form
-        label.my-label #{input.labelname}
-        input(
+      .auth-form__field.field
+        label.field__label #{input.labelname}
+        input.field__input(
           type= input.type
           name=input.name
           placeholder=input.placeholder
           id=input.name+'-input'
           class= 'inputField'
         )
-        .bad-input(id= 'bad-'+input.name)
-    input.submit-btn(type='submit' id= ENTER_TYPE+'-submit-btn' value= btn_msg)
-    a.alternative-variant(href='/'+opposite_variant data-section=opposite_variant) #{alter_variant_text}
+        .field__bad-input.bad-input(id= 'bad-'+input.name)
+    input.auth-form__btn.submit-btn(type='submit' id= ENTER_TYPE+'-submit-btn' value= btn_msg)
+    a.auth-form__alt-href.alternative-variant(href='/'+opposite_variant data-section=opposite_variant) #{alter_variant_text}

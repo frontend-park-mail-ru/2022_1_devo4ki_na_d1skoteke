@@ -14,9 +14,9 @@
             label.settings__avatar_hover +
           for input in inputForms
             .setting-field
-              label.my-label.setting-field__label #{input.labelname}
-              .setting-field__input
-                input.inputField(
+              label.field__label.setting-field__label #{input.labelname}
+              .setting-field__input.field
+                input.inputField.field__input(
                   type= input.type
                   name=input.name
                   placeholder=input.placeholder
