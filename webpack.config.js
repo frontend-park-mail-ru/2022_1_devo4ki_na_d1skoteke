@@ -37,16 +37,11 @@ module.exports = {
         test: /\.(woff|woff2|ttf|eot)$/,
         use: 'file-loader?name=fonts/[name].[ext]',
       },
-      // {
-      //   test: /\.css$/i,
-      //   use: [MiniCssExtructPlugin, 'css-loader'],
-      //   exclude: /node_modules/,
-      // },
       {
         test: /\.(sa|sc|c)ss$/,
         use: [
           MiniCssExtractPlugin.loader,
-          // 'style-loader',
+          'style-loader',
           'css-loader',
           'sass-loader',
         ],
