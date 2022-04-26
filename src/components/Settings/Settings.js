@@ -4,8 +4,8 @@ import {
 } from '../../js/utils.js';
 import '../../img/avatar-example.jpg';
 import '../../img/settings__account-icon.svg';
-import {eventBus} from "../../modules/eventBus";
-import {events} from "../../consts/events";
+import { eventBus } from '../../modules/eventBus';
+import { events } from '../../consts/events';
 
 export const renderSettings = (context) => {
   const root = document.getElementById('root');

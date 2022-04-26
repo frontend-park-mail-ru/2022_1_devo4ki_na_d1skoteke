@@ -1,5 +1,5 @@
-/public/components/Auth/compiled
-/public/components/NoteContent/compiled
-/public/components/LeftSideBar/compiled
-/public/components/Settings/compiled
+/src/components/Auth/compiled
+/src/components/NoteContent/compiled
+/src/components/LeftSideBar/compiled
+/src/components/Settings/compiled
 /dist/
