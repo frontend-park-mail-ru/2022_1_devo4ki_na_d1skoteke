@@ -3,6 +3,8 @@ const express = require('express');
 const path = require('path');
 const cookie = require('cookie-parser');
 const uuid = require('uuid');
+const fs = require('fs');
+const multer = require('multer');
 
 const app = express();
 app.use(express.json());
@@ -16,6 +18,7 @@ const users = {
     username: 'erik770',
     email: 'mr.erik770@mail.ru',
     password: 'password123',
+    avatar: 'signup_login_logo.png',
   },
 };
 
@@ -83,7 +86,7 @@ app.post('/api/v1/users/login', (req, res) => {
   const id = uuid.v1();
   ids[id] = email;
 
-  res.cookie('zavorot', id, { expires: new Date(Date.now() + 1000 * 60 * 10) });
+  res.cookie('zavorot', id, { expires: new Date(Date.now() + 1000 * 60 * 100) });
   return res.status(200).json({ id });
 });
 
@@ -130,6 +133,40 @@ app.get('/api/v1/user', (req, res) => {
   return res.status(200).json({
     username: user.username,
     email: user.email,
+  });
+});
+
+app.get('/api/v1/user/avatar', (req, res) => {
+  const id = req.cookies.zavorot;
+  const userEmail = ids[id];
+  const user = users[userEmail];
+
+  if (!userEmail || !user) {
+    return res.status(401).end();
+  }
+
+  res.sendFile(path.join(__dirname, 'src/img/', user.avatar));
+});
+
+const storage = multer.diskStorage({
+  destination(req, file, cb) {
+    cb(null, 'uploads/');
+  },
+
+  // By default, multer removes file extensions so let's add them back
+  filename(req, file, cb) {
+    cb(null, `${file.fieldname}-${Date.now()}${path.extname(file.originalname)}`);
+  },
+});
+
+app.post('/api/v1/user/avatar', (req, res) => {
+  const upload = multer({ storage }).single('avatar');
+  // тут не стал делать норм аплоадинг на серввак все равно это моки, экономлю время
+  upload(req, res, (err) => {
+    if (err) {
+      return res.send(err);
+    }
+    return res.status(200);
   });
 });
 

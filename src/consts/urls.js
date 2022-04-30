@@ -1,5 +1,6 @@
 // eslint-disable-next-line no-unused-vars
 const localUrl = 'localhost:3000';
+const localWithBackendUrl = '127.0.0.1:3001';
 
 // eslint-disable-next-line no-unused-vars
 const deployUrl = '95.163.212.32:3001';

@@ -1,5 +1,5 @@
 /* eslint-disable camelcase */
-import { baseUrl, urls } from '../consts/urls.js';
+import {baseUrl, urls} from '../consts/urls.js';
 
 let contentType = 'multipart/form-data';
 if (baseUrl === 'localhost:3000') {
@@ -133,23 +133,64 @@ export class ApiStore {
   };
 
   static GetUser = async () => {
-    const res = await fetch(`http://${baseUrl}/api/v1/user`, {
+    const resData = await fetch(`http://${baseUrl}/api/v1/user`, {
       method: 'GET',
       credentials: 'include',
     });
 
-    if (res.status !== 200) {
+    const avatarUrl = await fetch(`http://${baseUrl}/api/v1/user/avatar`, {
+      method: 'GET',
+      credentials: 'include',
+    })
+      .then((response) => {
+        const reader = response.body.getReader();
+        return new ReadableStream({
+          start(controller) {
+            return pump();
+            function pump() {
+              return reader.read().then(({ done, value }) => {
+                // When no more data needs to be consumed, close the stream
+                if (done) {
+                  controller.close();
+                  return;
+                }
+                // Enqueue the next data chunk into our target stream
+                controller.enqueue(value);
+                return pump();
+              });
+            }
+          },
+        });
+      })
+      .then((stream) => new Response(stream))
+      .then((response) => response.blob())
+      .then((blob) => URL.createObjectURL(blob))
+      .catch((err) => console.error(err));
+
+    if (resData.status !== 200) {
       return 401;
     }
-    const resp = res.json();
+    const userData = resData.json();
+    return { userData: await userData, avatarUrl: await avatarUrl };
+  };
 
-    return resp;
+  static PostAvatar = async (avatar) => {
+    const formData = new FormData();
+    formData.append('avatar', avatar);
+    return fetch(`http://${baseUrl}/api/v1/user/avatar`, {
+      method: 'POST',
+      mode: 'cors',
+      credentials: 'include',
+      // headers: {
+      //   'Content-Type': 'multipart/form-data',
+      // },
+      body: avatar,
+    });
   };
 
   static ProfileChange = async ({
-    avatar, email, username, password,
+    email, username, password,
   }) => this.putData(`http://${baseUrl}/api/v1/user`, {
-    avatar,
     username,
     email,
     password,

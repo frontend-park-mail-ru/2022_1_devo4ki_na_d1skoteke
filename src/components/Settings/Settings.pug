@@ -24,8 +24,9 @@
                   id=input.name + '-input'
                 )
                 .bad-input.setting-field__bad-input(id= 'bad-' + input.name)
+          input(type='file' id= 'mediaFile' name='avatar' accept='image/*')
           .settings__buttons.setting-field
             input.submit-btn.settings__buttons_save(type='submit' id='save-btn' value= 'Save')
             input.submit-btn.close-popup.settings__buttons_logout.logout(type='submit' value= 'Logout' data-section='logout')
-      input(type='file' id= 'mediaFile' name='avatar' accept='image/*')
+
 

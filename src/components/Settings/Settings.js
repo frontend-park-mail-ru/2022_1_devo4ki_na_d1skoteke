@@ -12,9 +12,10 @@ export const renderSettings = (context) => {
 
   const settingsPopup = document.getElementById('settingsPopup');
   if (settingsPopup) {
-    document.querySelector('.sidebar__username').innerHTML = context.username;
-    document.getElementById('email-input').value = context.email;
-    document.getElementById('nickname-input').value = context.username;
+    document.querySelector('.sidebar__username').innerHTML = context.userData.username;
+    document.querySelector('.bio__name').innerHTML = `${context.userData.username}'s Cotion`;
+    document.getElementById('email-input').value = context.userData.email;
+    document.getElementById('nickname-input').value = context.userData.username;
     document.getElementById('password-input').value = '';
     popupClose(document.querySelector('.popup.open'));
     return;
@@ -22,25 +23,25 @@ export const renderSettings = (context) => {
 
   const settingsPage = document.createElement('div');
 
-  const userAvatar = './assets/avatar-example.jpg';
+  // const userAvatar = './assets/avatar-example.jpg';
   settingsPage.innerHTML = Settings({
     userInfo: {
-      email: `${context.email}`,
-      nickname: `${context.username}`,
-      avatar: `${userAvatar}`,
+      email: `${context.userData.email}`,
+      nickname: `${context.userData.username}`,
+      avatar: `${context.avatarUrl}`,
     },
     inputForms: [
       {
         labelname: 'Email',
         name: 'email',
         placeholder: 'Enter email',
-        default_value: `${context.email}`,
+        default_value: `${context.userData.email}`,
       },
       {
         labelname: 'Nickname',
         name: 'nickname',
         placeholder: 'Enter nickname',
-        default_value: `${context.username}`,
+        default_value: `${context.userData.username}`,
       },
       {
         type: 'password',

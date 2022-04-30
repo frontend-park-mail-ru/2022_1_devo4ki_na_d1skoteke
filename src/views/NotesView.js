@@ -29,10 +29,11 @@ export class NotesView extends BaseView {
     page.classList.add('notion__whole__page');
     root.appendChild(page);
 
-    createLeftSide(page,{name: context.userData.username, notes: context.notes});
+    // createLeftSide(page,{name: context.userData.username, notes: context.notes});
+    this.renderLeftSide({name: context.user.userData.username, notes: context.notes});
     this.renderNoteContent({ note: context.note })
 
-    this.renderSettings(context.userData);
+    this.renderSettings(context.user);
     this.submitUserChangeHandler();
   };
 
@@ -44,8 +45,14 @@ export class NotesView extends BaseView {
     createNoteContent(data.note);
   };
 
+  renderLeftSide = (data) => {
+    createLeftSide({name: data.name, notes: data.notes});
+  }
+
   submitUserChangeHandler = () => {
     const profileForm = document.querySelector('.settings__form');
+    const mediaFile = document.getElementById('mediaFile');
+
     profileForm.addEventListener('submit', async (e) => {
       e.preventDefault();
       if (haveWrongInput(profileForm)) {
