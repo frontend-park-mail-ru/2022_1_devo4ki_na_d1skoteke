@@ -1,7 +1,8 @@
 .content
   .content__navbar.navbar
-    #title.navbar__title #{name}
-    input.submit-btn.navbar__logout-btn.logout(type='submit' value= 'Logout' data-section='logout')
+    input.navbar__title#title( value= name)
+    input.submit-btn.navbar__button.save(type='submit' value= 'Save' data-section='save')
+    input.submit-btn.navbar__button.logout(type='submit' value= 'Logout' data-section='logout')
   .content__spaceholder
   .content__text.note-content
-    div(id="body")= body
+    textarea.note-content__input(id="body") #{body}

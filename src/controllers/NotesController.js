@@ -31,6 +31,14 @@ export class NotesController extends BaseController {
         event: events.notesPage.noteSwitch,
         handler: this.view.renderNoteContent,
       },
+      {
+        event: events.notesPage.noteSave,
+        handler: this.model.noteSaveSubmit,
+      },
+      {
+        event: events.notesPage.notesUpdate,
+        handler: this.view.renderNotesChange,
+      },
     );
     this.subscribe();
   }

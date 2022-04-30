@@ -22,19 +22,30 @@ export class NotesModel {
   };
 
   userChangeHandler = async (data) => {
-    // const avatar = document.getElementById('mediaFile').value;
     const email = data.profileForm.email.value.trim();
     const password = data.profileForm.password.value.trim();
     const username = data.profileForm.nickname.value.trim();
     const avatar = data.profileForm.avatar.files[0];
-    console.log('avatar: ', avatar);
 
     await ApiStore.PostAvatar(avatar);
     // мб надо тут снова при помощи ридера файл в урл преобразовать
     await ApiStore.ProfileChange({
       email, username, password,
     }).then(() => {
-      eventBus.emit(events.notesPage.reRenderNewData, { userData: { email, username }, avatarUrl: avatar });
+      eventBus.emit(events.notesPage.reRenderNewData, {
+        userData: { email, username },
+        avatarUrl: avatar,
+      });
+    });
+  };
+
+  noteSaveSubmit = async (data) => {
+    await ApiStore.NoteChange(data.note.token, data.newBody, data.newTitle).then(() => {
+      eventBus.emit(events.notesPage.notesUpdate, {
+        oldName: data.note.name,
+        name: data.newTitle,
+        body: data.newBody,
+      });
     });
   };
 }

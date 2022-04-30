@@ -6,6 +6,7 @@ import {badResponseHandler, checkAuth, haveWrongInput} from '../js/utils.js';
 import {createLeftSide} from "../components/LeftSideBar/LeftSideBar.js";
 import {createNoteContent} from "../components/NoteContent/NoteContent.js";
 import {renderSettings} from "../components/Settings/Settings.js";
+import {eventBus} from "../modules/eventBus";
 
 export class NotesView extends BaseView {
   constructor(eventBus, {data = {}} = {}) {
@@ -43,10 +44,17 @@ export class NotesView extends BaseView {
 
   renderNoteContent = (data) => {
     createNoteContent(data.note);
+    this.noteSaveHandler(data.note);
   };
 
   renderLeftSide = (data) => {
     createLeftSide({name: data.name, notes: data.notes});
+  }
+
+  renderNotesChange = (data) => {
+    document.getElementById(`${data.oldName}`).innerHTML = `> ${data.name}`;
+    document.querySelector('.navbar__title').value = `${data.name}`;
+    document.querySelector('.note-content__input').innerHTML = `${data.body}`;
   }
 
   submitUserChangeHandler = () => {
@@ -61,4 +69,15 @@ export class NotesView extends BaseView {
       this.eventBus.emit(events.notesPage.submitUserChange, { profileForm });
     });
   }
+
+  noteSaveHandler = (note) => {
+    const saveBtn = document.querySelector('.save');
+    saveBtn.addEventListener('click', (e) => {
+      const newBody = document.querySelector('.note-content__input').value;
+      const newTitle = document.querySelector('.navbar__title').value;
+      eventBus.emit(events.notesPage.noteSave, {note, newBody, newTitle });
+      // textArea.innerHTML = textArea.value;
+      // alert(textArea.value);
+    });
+  };
 }

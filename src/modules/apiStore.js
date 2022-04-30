@@ -195,4 +195,9 @@ export class ApiStore {
     email,
     password,
   });
+
+  static NoteChange = async (token, body, name) => this.putData(`http://${baseUrl}/api/v1/note/${token}`, {
+    name,
+    body,
+  });
 }

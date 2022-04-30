@@ -16,6 +16,7 @@ export const createNoteContent = (context) => {
   } else {
     page.appendChild(content);
   }
+  contentInputAutoResize(content);
   logoutHandler(page);
 };
 
@@ -28,3 +29,14 @@ const logoutHandler = (node) => {
     });
   }
 };
+
+const contentInputAutoResize = (node) => {
+  const textArea = node.querySelector('.note-content__input');
+  textArea.addEventListener('input', (e) => {
+    const { target } = e;
+    target.style.height = 'auto';
+    target.style.height = `${target.scrollHeight}px`;
+  });
+};
+
+
